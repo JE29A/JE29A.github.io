@@ -1,0 +1,132 @@
+@media print {
+  
+}
+
+body > div {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page {
+  overflow: hidden;
+  width: 7.9in;
+  height: 10.4in;
+  border: 1px solid black;
+}
+
+.page.landscape {
+  width: 10.4in;
+  height: 7.9in;
+}
+
+.flex-row,
+.flex-col {
+  display: flex;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+.flex-2 {
+  flex: 2;
+}
+.flex-3 {
+  flex: 3;
+}
+.flex-4 {
+  flex: 4;
+}
+.flex-5 {
+  flex: 5;
+}
+.flex-6 {
+  flex: 6;
+}
+
+.legend {
+  height: 100%;
+}
+.legend > div:first-child {
+  overflow-y: auto;
+}
+.legend > div {
+  overflow-y: scroll;
+}
+.map {
+  flex: 1;
+  text-align: center;
+}
+
+table {
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+tr > td {
+  font-size: 12px;
+}
+tr > .system-name {
+  width: 85px;
+}
+tr > .system-coord {
+  width: 33px;
+}
+tr > .system-delta {
+  width: 38px;
+}
+tr > td.system-delta,
+tr > td.system-coord {
+  text-align: right;
+}
+
+svg#solar-system-map {
+  height: 545px;
+  width: 485px;
+}
+
+svg#solar-system-map g.master-translate {
+  transform: translate(50%, 50%);
+}
+
+svg#solar-system-map .axis {
+  opacity: 1;
+}
+svg#solar-system-map line {
+  stroke: white;
+  stroke-width: 1px;
+}
+svg#solar-system-map line.tick {
+  stroke-width: 1px;
+}
+
+svg#solar-system-map g#travel-path {
+  opacity: 1;
+}
+svg#solar-system-map g#travel-path line {
+  stroke: #44bb44;
+  stroke-width: 2px;
+}
+
+svg#solar-system-map g.solar-system {
+  cursor: pointer;
+}
+
+svg#solar-system-map g.solar-system circle {
+  r: 3;
+}
+
+svg#solar-system-map g.solar-system.active circle {
+  r: 4;
+}
+
+svg#solar-system-map text.label {
+  font-size: 10px;
+  transform: translate(2px, 0px);
+  alignment-baseline: middle;
+}
