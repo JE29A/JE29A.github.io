@@ -1,0 +1,77 @@
+<html ng-app="myApp" ng-controller="myPlaybooks">
+<head>
+  <meta charset="utf-8" />
+  <title>Star World: Starship Playbooks</title>
+  <link rel="stylesheet" href="starworld_starships.css" />
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+  <script src="angular.min.js"></script>
+  <script src="starworld_starships.js"></script>
+
+<!-----------------------------------------------------------------------------
+  Start of NG-TEMPLATES
+------------------------------------------------------------------------------->
+  
+  <script type="text/ng-template" id="includePicture">
+    <div class="basic-image-class">
+      <img src="{{image.src}}" class="basic-image-class {{image.class}}" style="{{image.style}}"></img>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="textareaInput">
+    <textarea class="basic-input flex-1" rows="{{textarea.rows}}"></textarea>
+  </script>
+
+  <script type="text/ng-template" id="basicInput">
+    <input class="basic-input no-spinner {{input.class}}" />
+  </script>
+
+  <script type="text/ng-template" id="basicInput_number">
+    <input class="basic-input no-spinner {{input.class}}" type="number" min="0" />
+  </script>
+
+  <script type="text/ng-template" id="shipFeature">
+    <div class="flex-row">
+      <div ng-if="parseInt(feat.symbolCount,10) > 0">
+        <span ng-repeat="n in repeatNTimes( parseInt(feat.symbolCount,10) ) track by $index"
+              class="symbol {{feat.symbol}}"></span>
+      </div>
+      <div class="flex-1">
+        <div class="{{feat.header}}"
+             ng-if="String(feat.text1).length > 0 || String(feat.text2).length > 0">
+          <span ng-if="String(feat.text1).length > 0"
+                class="{{feat.text1Class}}" style="{{feat.text1Style}}">{{feat.text1}}</span>
+          <span ng-if="String(feat.text2).length > 0"
+                class="{{feat.text2Class}}" style="{{feat.text2Style}}">{{feat.text2}}</span>
+          <input ng-if="feat.hasInput"
+                 type="{{feat.inputType || 'test'}}"
+                 class="{{feat.inputClass}}" style="{{feat.inputStyle}}" />
+        </div>
+        <div ng-if="feat.children && feat.children.length > 0"
+             class="{{feat.childrenClass}}" style="{{feat.childrenStyle}}">
+          <div ng-repeat="feat in feat.children track by $index"
+               class="{{feat.class}}" style="{{feat.style}}"
+               ng-include="'shipFeature'">
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+<!-----------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+  End of NG-TEMPLATES
+-------------------------------------------------------------------------------
+------------------------------------------------------------------------------->
+
+</head>
+
+<body>
+
+  <div ng-repeat="">
+    <div class="page landscape">
+    </div>
+  </div>
+  
+</body>
+
+</html>

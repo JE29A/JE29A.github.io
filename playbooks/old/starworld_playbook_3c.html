@@ -1,0 +1,793 @@
+<html ng-app="myApp" ng-controller="myPlaybooks">
+<head>
+  <meta charset="utf-8" />
+  <title>{{header.titleTag}}</title>
+  <link rel="stylesheet" href="starworld_playbook_3c.css" />
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+  <script src="angular.min.js"></script>
+  <script src="pb_moves.js"></script>
+  <script src="pb_looks.js"></script>
+  <script src="pb_common_features.js"></script>
+  <script src="playbook_augment.js"></script>
+  <script src="playbook_brick.js"></script>
+  <script src="playbook_engineer.js"></script>
+  <script src="playbook_tramp.js"></script>
+  <script src="playbook_medtech.js"></script>
+  <script src="playbook_mindwalker_biofeedback.js"></script>
+  <script src="playbook_mindwalker_esp.js"></script>
+  <script src="playbook_mindwalker_telekinesis.js"></script>
+  <script src="playbook_mindwalker_telepathy.js"></script>
+  <script src="playbook_show.js"></script>
+  <script src="playbook_spacehand.js"></script>
+  <script src="starworld_playbooks.js"></script>
+  <script src="starworld_solarsystems.js"></script>
+  <script src="starworld_playbook_controller.js"></script>
+
+  <script type="text/ng-template" id="includePicture">
+    <div class="basic-image-class">
+      <img src="{{image.src}}" class="basic-image-class {{image.class}}" style="{{image.style}}"></img>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="textareaInput">
+    <textarea class="basic-input flex-1" rows="{{textarea.rows}}"></textarea>
+  </script>
+
+  <script type="text/ng-template" id="basicInput">
+    <input class="basic-input no-spinner {{input.class}}" />
+  </script>
+
+  <script type="text/ng-template" id="basicInput_number">
+    <input class="basic-input no-spinner {{input.class}}" type="number" min="0" />
+  </script>
+
+<!-----------------------------------------------------------------------------
+  id: featureTree
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="featureTree">
+    <div ng-if="feature.useCommon"
+         ng-init="commonFeatureName = feature.useCommon"
+         class="{{feature.containerClass}}">
+      <div ng-repeat="feature in reusedFeatureCatalog track by $index"
+           ng-if="commonFeatureName == feature.sectionName"
+           ng-include="'featureTree'"
+           class="{{feature.containerClass}}"></div>
+    </div>
+    <div class="{{feature.titleDivClass}}" ng-if="feature.title.length > 0 || feature.divList" style="{{feature.style}}">
+      <span class="{{feature.titleClass}}">{{feature.title}}</span>
+      <span class="{{feature.subtitleClass}}" ng-if="feature.subtitle.length > 0">{{feature.subtitle}}</span>
+      <div class="{{feature.divClass2}}" ng-if="feature.divList2.length > 0">
+        <div class="{{feature.containerClass}} {{feature.containerClass2}}" ng-repeat="feature in feature.divList2 track by $index" ng-include="'featureTree'"></div>
+      </div>
+    </div>
+    
+    <div class="{{feature.paragraphClass}}" ng-repeat="para in feature.paragraphs track by $index">{{para}}</div>
+    <div class="{{feature.divClass}}" ng-if="feature.divList.length > 0">
+      <div class="{{feature.containerClass}} {{feature.containerClass2}}" ng-repeat="feature in feature.divList track by $index" ng-include="'featureTree'"></div>
+    </div>
+    <div class="{{feature.divClass}}" ng-if="feature.includeTextarea">
+      <textarea class="basic-input flex-1" rows="{{feature.textareaRows || 6}}"></textarea>
+    </div>
+    <div ng-repeat="ship in feature.ships track by $index" ng-include="'shipCreation'"></div>
+    <div ng-repeat="image in feature.images track by $index" ng-if="image.src" ng-include="'includePicture'"></div>
+  </script>
+
+<!-----------------------------------------------------------------------------
+  id: characterCreationTree
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="characterCreationTree">
+    <div ng-if="cc.text" class="{{cc.textClass}}">{{cc.text}}</div>
+    <div ng-if="cc.listClass"
+         class="{{cc.listContainerClass}}">
+      <div class="{{cc.listClass}}"
+           ng-repeat="ccL in cc.list track by $index">{{ccL}}</div>
+    </div>
+    <div class="{{cc.containerClass}}"
+         ng-repeat="cc in cc.children track by $index"
+         ng-include="'characterCreationTree'">
+    </div>
+    <div ng-repeat="image in cc.images track by $index" ng-if="image.src" ng-include="'includePicture'"></div>
+  </script>
+<!-----------------------------------------------------------------------------
+  id: referenceTree
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="referenceTree_brief">
+    <div class="title center h4">{{ref.section}}</div>
+    <div><a href="#reference--{{ref.section}}">{{ref.text}}</a></div>
+    <textarea class="underline thick h7"
+              style="padding: 3px; margin-top: 2px;"
+              ng-if="ref.textarea"
+              rows="6"></textarea>
+  </script>
+
+  <script type="text/ng-template" id="referenceTree">
+    <div class="{{ref.titleDivClass}}" ng-if="ref.title.length > 0">
+      <span class="{{ref.titleClass}}">{{ref.title}} </span>
+      <span class="{{ref.subtitleClass}}">{{ref.subtitle}}</span>
+    </div>
+    <div class="{{ref.containerClass}}" ng-if="ref.children.length > 0">
+      <div class="{{ref.containerClass2}}" ng-repeat="ref in ref.children track by $index" ng-include="'referenceTree'">
+      </div>
+    </div>
+    <div class="{{ref.listClass}}" ng-if="ref.list.length > 0">
+      <div class="{{ref.listItemClass}}" ng-repeat="item in ref.list track by $index">{{item}}</div>
+    </div>
+  </script>
+
+<!-----------------------------------------------------------------------------
+  id: shipWide
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="shipRows">
+    <tr class="title h7">
+      <td colspan="3"><span class="border-text top-side">Ship{{ship.shipSuffix}} Name</span>
+        <div>
+          <input class="basic-input no-spinner left" type="text" value="{{ship.shipStr_name}}" />
+        </div>
+      </td>
+      <td colspan="1"><span class="border-text top-side">Frame</span>
+        <div>
+          <input class="basic-input no-spinner center" type="text" value="{{ship.shipStr_frame}}" />
+        </div>
+      </td>
+    </tr>
+    <tr class="title h7">
+      <td colspan="1"><span class="border-text top-side">Massive</span>
+        <div>
+          <input class="basic-input no-spinner center" type="number" min="0" value="{{ship.shipStr_massive}}" />
+        </div>
+      </td>
+      <td colspan="1"><span class="border-text top-side">Ship Handling</span>
+        <div>
+          <input class="basic-input no-spinner center" type="number" min="0" value="{{ship.shipStr_handling}}" />
+        </div>
+      </td>
+      <td colspan="1"><span class="border-text top-side">Ship Speed</span>
+        <div>
+          <input class="basic-input no-spinner center" type="number" min="0" value="{{ship.shipStr_speed}}" />
+        </div>
+      </td>
+      <td colspan="1"><span class="border-text top-side">Ship Armor</span>
+        <div>
+          <input class="basic-input no-spinner center" type="number" min="0" value="{{ship.shipStr_armor}}" />
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="title h7 border-text top-side">Ship Weapons</span>
+        <div>
+          <textarea class="basic-input flex-1" rows="4">{{ship.shipStr_weapons}}</textarea>
+        </div>
+      </td>
+      <td colspan="2">
+        <span class="title h7 border-text top-side">Ship Tags</span>
+        <div>
+          <textarea class="basic-input flex-1" rows="4">{{ship.shipStr_tags}}</textarea>
+        </div>
+      </td>
+    </tr>
+  </script>
+
+  <script type="text/ng-template" id="shipWide">
+    <div class="flex-row">
+      <table class="table-form ship">
+        <tbody ng-include="'shipRows'"></tbody>
+      </table>
+    </div>
+  </script>
+
+<!-----------------------------------------------------------------------------
+  id: crewWide
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="crewRows">
+    <tr>
+      <td colspan="2"><span class="title h7 border-text top-side">{{ship.crewStr}} Size</span>
+        <div><input class="basic-input no-spinner center" type="text" value="{{ship.crewStr_size}}" /></div>
+      </td>
+      <td colspan="2" rowspan="2">
+        <span class="title h7 border-text top-side">Crew Tags</span>
+        <div>
+          <textarea class="basic-input flex-1" rows="3">{{ship.crewStr_tags}}</textarea>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><span class="title h7 border-text top-side">{{ship.crewStr}} Harm</span>
+        <div><input class="basic-input no-spinner  center" type="number" min="0" value="{{ship.crewStr_harm}}" /></div>
+      </td>
+      <td><span class="title h7 border-text top-side">{{ship.crewStr}} Armor</span>
+        <div><input class="basic-input no-spinner  center" type="number" min="0" value="{{ship.crewStr_armor}}" /></div>
+      </td>
+    </tr>
+    <tr ng-if="ship.showCrewDetails">
+      <td colspan="4">
+        <span class="title h7 border-text top-side">{{ship.crewStr}} Details (e.g. names)</span>
+        <div>
+          <textarea class="basic-input flex-1" rows="{{ship.crewDetailRows || 6}}">{{ship.crewStr_details}}</textarea>
+        </div>
+      </td>
+    </tr>
+  </script>
+
+  <script type="text/ng-template" id="crewWide">
+    <div class="flex-row">
+      <table class="table-form crew">
+        <tbody ng-include="'crewRows'"></tbody>
+      </table>
+    </div>
+  </script>
+
+<!-----------------------------------------------------------------------------
+  id: shipCrewWide
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="shipCrewWide">
+    <div class="flex-row">
+      <table class="table-form ship crew">
+        <tbody ng-include="'shipRows'"></tbody>
+        <tbody ng-include="'crewRows'"></tbody>
+      </table>
+    </div>
+  </script>
+
+
+<!-----------------------------------------------------------------------------
+  id: shipCreation
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="shipCreation">
+    <div class="{{ship.groupClass}}">
+      <div class="{{ship.largeClass}}" ng-if="ship.showTitle">Creating A Ship</div>
+      <div class="{{ship.groupClass}} list-top" ng-if="ship.showFrames">By default, <span ng-if="ship.showPossessiveInstructions">your</span><span ng-if="ship.showNeutralInstructions">a</span> ship has handling=0. The speed, massive rating, and armor are based on its frame. The MC will tell you what crew size is necessary to staff the ship (they are provided). Warships also get the listed number of war options. Older ships may have fewer ship and war options than allowed.</div>
+    </div>
+    <div class="{{ship.groupClass}}" ng-if="ship.showFrames">
+      <div>Choose its FRAME:</div>
+      <div class="li">1 - Light (speed=3, massive=2, 1-armor, 1 ship option, 2 war options)</div>
+      <div class="li">2 - Small (speed=2, massive=8, 2-armor, 2 ship options, 2 war options)</div>
+      <div class="li" ng-if="ship.sizes.medium">3 - Medium (speed=1, massive=20, 2-armor, 2 ship options, 2 war options)</div>
+      <div class="li" ng-if="ship.sizes.heavy">4 - Heavy (speed=0, massive=45, 3-armor, 2 ship options, 2 war options)</div>
+      <div class="li" ng-if="ship.sizes.capital">5 - Capital (speed=0, massive=100, 4-armor, 2 ship options, 3 war options)</div>
+      <div class="li" ng-if="ship.sizes.capital">6 - Super Capital (speed=0, massive=130, 4-armor, 2 ship options, 3 war options)</div>
+    </div>
+    <div class="{{ship.groupClass}}" ng-if="ship.showOptions">
+      <div>STRENGTH tags (choose 1 or 2): Fast, rugged, aggressive, tight, huge, responsive, uncomplaining, capacious, workhorse, easily repaired.</div>
+    </div>
+    <div class="{{ship.groupClass}}" ng-if="ship.showOptions">
+      <div>LOOK tags (choose 1 or 2): Sleek, vintage, pristine, powerful, luxe, flashy, muscular, quirky, pretty, handcrafted, garish, hardworked.</div>
+    </div>
+    <div class="{{ship.groupClass}}" ng-if="ship.showOptions">
+      <div>WEAKNESS tags (choose 1 or 2): Slow, loud, lazy, sloppy, cramped, picky, guzzler, unreliable, temperamental.</div>
+    </div>
+    <div class="{{ship.groupClass}}" ng-if="ship.showOptions">
+      <div>SHIP OPTIONS (choose according to frame): <span class="inline-block">FTL-capable (if relevant),</span> <span class="inline-block">+1 armor,</span> <span class="inline-block">+1 speed,</span> <span class="inline-block">+1 handling,</span> or <span class="inline-block">±frame<sup>2</sup> massive.</span> <span class="">You can select the same option multiple times.</span></div>
+    </div>
+
+    <div class="{{ship.groupClass}}" ng-if="ship.showWarship">
+      <div class="{{ship.largeClass}}">Creating a Warship</div>
+      <div>Create the ship as normal, and then choose war options according to frame:</div>
+      <div class="li">Pick another ship option (see above)</div>
+      <div class="li">Close Armament (Frame+4-harm close)</div>
+      <div class="li">Ranged Armament (Frame+1-harm close/far)</div>
+      <div class="li">Assault Boarding Capability (small frame only)</div>
+      <div class="li">Parasite/Launch Bay (carry up to half your massive rating in light or small craft)</div>
+      <div class="li">Divide Fire: all armaments can split harm across multiple targets</div>
+      <div class="li">Larger Broadside: +1-harm for all armaments</div>
+    </div>
+
+    <div class="{{ship.groupClass}}" ng-if="ship.showShipCrew" ng-include="'shipCrewWide'"></div>
+    <div class="{{ship.groupClass}}" ng-if="ship.showShip" ng-include="'shipWide'"></div>
+    <div class="{{ship.groupClass}}" ng-if="ship.showCrew" ng-include="'crewWide'"></div>
+  </script>
+
+  <script type="text/ng-template" id="basicMoveReference">
+    <div class="title h4">{{move.label}}</div>
+    <div ng-repeat="child in move.children track by $index" class="h6 {{child.classes}}"><span class="{{child.titleClass}}" ng-if="child.title">{{child.title}} </span>{{child.text}}</div>
+  </script>
+
+<!-----------------------------------------------------------------------------
+  id: playbookBlurb
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="playbookBlurb">
+    <div ng-if="includeGuidance" class="title h3 center"><a href="#{{playbook.trope}}">the {{playbook.trope}}<span class="lowercase h5" ng-if="playbook.psion"> (psion)</span></a></div>
+    <div class="blurb-paragraph" ng-repeat="p in playbook.blurb.paragraphs track by $index">{{p}}</div>
+    <div class="blurb-paragraph instruction" ng-repeat="p in playbook.blurb.guidance track by $index" ng-if="includeGuidance">{{p}}</div>
+  </script>
+
+<!-----------------------------------------------------------------------------
+  id: cdClock
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="cdClock">
+    <table class="countdown-clock">
+      <tbody>
+        <tr>
+          <td></td>
+          <td>12</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>
+            <svg>
+              <circle class="ring" r="24" />
+              <line x1="25.0" y1="25.0" x2="25.0" y2="1.0" />
+              <line x1="25.0" y1="25.0" x2="49.0" y2="25.0" />
+              <line x1="25.0" y1="25.0" x2="25.0" y2="49.0" />
+              <line x1="25.0" y1="25.0" x2="1.0" y2="25.0" />
+              <line x1="25.0" y1="25.0" x2="4.22" y2="13.0" />
+              <line x1="25.0" y1="25.0" x2="13.0" y2="4.22" />
+            </svg>
+          </td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>6</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </script>
+
+<!-----------------------------------------------------------------------------
+  id: solarSystem
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="labelInput">
+    <div class="h6" style="margin-right: 2px;">{{ssf.label}}:</div>
+    <input class="flex-1 h6 underline" type="text" class="underline" value="{{ssf.value}}" />
+  </script>
+  <script type="text/ng-template" id="solarSystemMap">
+    <svg class="solar-system-map">
+      <circle class="ring" r="49" />
+      <circle class="ring" r="37" />
+      <circle class="ring" r="25" />
+      <circle class="ring" r="13" />
+      <circle class="dot" r="2" />
+    </svg>
+  </script>
+  
+  <script type="text/ng-template" id="solarSystem">
+    <div class="border anchor pad solar-system flex-col">
+      <div class="h4" style="position: absolute; left: 4px; top: -10px; width: 250px;">
+        <input class="underline" value="{{solarSystem.NAME}}" style="width: 100%;"/>
+      </div>
+      <div class="flex-row flex-1">
+        <div class="flex-1 flex-col" style="padding-top: 10px; margin: 0cm 0.1cm 0cm 0cm;">
+          <div class="flex-row solar-system-element"
+               ng-repeat="ssf in solarSystem.features track by $index"
+               ng-include="'labelInput'"></div>
+
+          <div class="flex-1 flex-col solar-system-element">
+            <div class="h6" style="margin-right: 2px;">Descriptions & Cast:</div>
+            <textarea class="flex-1" style="width: 100%;">{{solarSystem.descriptions ? solarSystem.descriptions.join('\n') : ''}}</textarea>
+          </div>
+          <div class="flex-1 flex-col solar-system-element">
+            <div class="h6" style="margin-right: 2px;">Stakes:</div>
+            <textarea class="flex-1" style="width: 100%;">{{solarSystem.stakes ? solarSystem.stakes.join('\n') : ''}}</textarea>
+          </div>
+          
+        </div>
+
+        <div class="flex-col" style="margin: 0.1cm 0cm 0cm 0cm;">
+          <div class="center bold h5">Map</div>
+          <div class="center" ng-include="'solarSystemMap'"></div>
+          <div class="center bold h5">Connected Threats</div>
+          <div class="flex-1 flex-col">
+            <textarea class="flex-1">{{solarSystem.threats ? solarSystem.threats.join('\n') : ''}}</textarea>
+          </div>
+          <div class="flex-row">
+            <div class="flex-1"></div>
+            <div ng-include="'cdClock'"></div>
+            <div class="flex-1"></div>
+            <div ng-include="'cdClock'"></div>
+            <div class="flex-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+<!-----------------------------------------------------------------------------
+  id: factions
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="factions">
+    
+  </script>
+
+<!-----------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+  End of NG-TEMPLATES
+-------------------------------------------------------------------------------
+------------------------------------------------------------------------------->
+
+</head>
+
+<body>
+
+  <div class="playbook-blurbs">
+    <div class="playbook-page flex-col break-after"
+         ng-repeat="thisSection in getNumber(2, 0) track by $index">
+      <div class="h2 title center">Playbook Summaries</div>
+      <div class="flex-col-wrap" style="flex: 1;">
+        <div class="playbook-blurb keep-together"
+             ng-repeat="playbook in playbooks track by $index"
+             ng-if="playbook.blurb.section == thisSection"
+             ng-init="includeGuidance = true"
+             ng-include="'playbookBlurb'"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="playbook-full" ng-repeat="playbook in playbooks track by $index" ng-if="!playbook.skip">
+  
+    <div class="playbook-page side-a" id="{{playbook.trope}}">
+      <div class="column flex-col">
+
+        <div class="flex-row">
+          <input type="text" class="flex-1 border-bottom" ng-model="playbookModel[playbook.trope]" style="font-size: 22px;"/>
+          <div class="input-label" style="padding-top: 7px;">,</div>
+        </div>
+
+        <div class="playbook-title title h1" style="margin-bottom: 0px;">{{playbook.trope}}</div>
+
+        <div class="playbook-blurb" ng-init="includeGuidance = false" ng-include="'playbookBlurb'"></div>
+
+        <div class="flex-row">
+          <div class="input-label">Look&nbsp;&nbsp;</div>
+          <textarea id="looks_{{playbook.trope2}}" class="flex-1 border-bottom" ></textarea>
+        </div>
+
+        <div class="flex-1 flex-row">
+          <div class="flex-1 flex-col">
+            <!-- Stats -->
+            <div class="border pad">
+              <div class="flex-row">
+                <table class="stats flex-1">
+                  <thead>
+                    <tr>
+                      <th colspan="2" class="underline thick title h3">Stats</th>
+                      <th colspan="2" class="subtitle underline thick h7">Basic Moves <span class="bullet-symbol empty"></span> (Advanced <span class="bullet-symbol filled"></span>)</span><br/>Other Moves <span class="bullet-symbol filled diamond"></span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="stat in stats.list track by $index">
+                      <td><input class="stat no-spinner" type="number" min="-2" max="3" /></td>
+                      <td colspan="2" class="title h4">{{stat.label}}</td>
+                      <td>
+                        <ul class="{{stats.moveClass}}" ng-if="stats.printMoves">
+                          <li ng-repeat="basicMove in stat.moves track by $index" ng-if="basicMove.type == 'basic'" class="li empty">{{basicMove.label}}</li>
+                          <li ng-repeat="basicMove in stat.moves track by $index" ng-if="basicMove.type == 'other'" class="li filled diamond">{{basicMove.label}}</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Bonds -->
+            <div class="flex-1 flex-col border pad list-top">
+              <div class="underline thick"><span class="title left h3">{{bonds.title}}</span> <span class="h6 instruction">{{bonds.subtitle}}</span></div>
+              <div class="flex-1 flex-row list-top" ng-include="'textareaInput'" ng-init="textarea.rows=3"></div>
+            </div>
+
+            <!-- Harm -->
+            <div class="border pad list-top">
+              <div class="underline thick"><span class="title left h3">Harm</span> <span class="h6 instruction">(Harm peripheral move)</span></div>
+              <div>
+                <div class="flex-row list-top">
+                  <div ng-repeat="harmBox in harmBoxes.boxes track by $index" class="harm-box {{harmBox.classes}}" style="flex: {{harmBox.flex}};">{{harmBox.label}}</div>
+                </div>
+                
+                <div class="flex-row" ng-if="harmBoxes.unstable.length>0">
+                  <div ng-repeat="uBox in harmBoxes.unstable track by $index" class="unstable-box" style="{{uBox.style}}">{{uBox.text}}</div>
+                </div>
+
+                <div class="list-top" ng-if="harmBoxes.untenableText.length>0 && harmBoxes.untenableList.length>0">
+                  <div>{{harmBoxes.untenableText}}</div>
+                  <ul class="empty">
+                    <li class="list-top" ng-repeat="res in harmBoxes.untenableList track by $index">{{res}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <div class="flex-col" style="margin-left: 0.1cm; width: 220px;">
+            <div class="border pad">
+              <div class="title left h3 underline thick">Experience</div>
+              <div>
+                <div class="flex-row xp-row list-top">
+                  <div class="flex-1 xp-label">{{XP.leftText}}</div>
+                  <div class="xp-box" ng-repeat="xpBox in XP.boxes track by $index">{{xpBox}}</div>
+                  <div class="flex-1 xp-label2">{{XP.rightText}}</div>
+                </div>
+                <div class="center instruction" ng-repeat="xpInstruc in XP.instructions track by $index">{{xpInstruc}}</div>
+
+                <div class="improvement-lists">
+                  <div>Improvements:</div>
+                  <ul class="empty">
+                    <li class="list-top" ng-repeat="improvement in playbook.improvements track by $index">{{improvement}}</li>
+                  </ul>
+                </div>
+                <div class="improvement-lists">
+                  <div>Advanced Improvements:</div>
+                  <ul class="empty">
+                    <li class="list-top" ng-repeat="improvementA in improvementsAdvanced track by $index">{{improvementA}}</li>
+                    <li class="list-top" ng-repeat="improvementA in playbook.improvementsAdvanced track by $index">{{improvementA}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- gear & barter -->
+            <div class="flex-1 flex-col border pad list-top">
+              <div class="underline thick"><span class="title left h3">Gear & Barter</span></div>
+              <div class="flex-1 flex-row list-top"
+                   ng-include="'textareaInput'"
+                   ng-init="textarea.rows=3"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="column flex-col" ng-init="thisSection = 2">
+
+        <div ng-repeat="feature in playbook.features track by $index" ng-if="feature.section == 2" ng-include="'featureTree'" class="{{feature.containerClass}}"></div>
+        <div ng-repeat="feature in playbook.features track by $index" ng-if="feature.section == '2b'" ng-include="'featureTree'" class="{{feature.containerClass}}"></div>
+
+      </div>
+
+    </div>
+    <div class="playbook-page side-b" id="{{playbook.trope}}2">
+    
+      <div class="column flex-1 flex-col" ng-init="thisSection = 3">
+
+        <div ng-repeat="feature in playbook.features track by $index" ng-if="feature.section == 3" ng-include="'featureTree'" class="{{feature.containerClass}}"></div>
+        <div ng-repeat="feature in playbook.features track by $index" ng-if="feature.section == '3b'" ng-include="'featureTree'" class="{{feature.containerClass}}"></div>
+
+      </div>
+
+      <div class="column flex-1 flex-col">
+        <!-- character creation -->
+        <div class="title center h3 underline thick" ng-if="firstLetterIsAVowel(playbook.trope) == false">Creating a {{playbook.trope}}</div>
+        <div class="title center h3 underline thick" ng-if="firstLetterIsAVowel(playbook.trope) == true">Creating an {{playbook.trope}}</div>
+        <div class="instruction center">Choose a name, look, stats, moves, gear, and bonds.</div>
+
+        <div class="character-creation flex-col-wrap row-size-2">
+
+          <div class="keep-together">
+            <!-- CC col 1 -->
+            <div class="title center h4" >Name</div>
+            <div class="flex-row">
+              <input type="text" class="flex-1 border-bottom" ng-model="playbookModel[playbook.trope]" />
+            </div>
+          </div>
+
+          <div class="keep-together" ng-repeat="ref in references track by $index" ng-if="!(ref.ccSkip)">
+            <div class="character-creation-paragraph">
+              <div class="looks-subsection"
+                   ng-init="refSection = ref.section"
+                   ng-include="'referenceTree_brief'">
+              </div>
+            </div>
+          </div>
+
+          <div class="keep-together">
+            <div class="title center h4">Stats</div>
+            <div class="instruction">Choose one set:</div>
+            <ul class="empty">
+              <li ng-repeat="arr in playbook.statArrays track by $index">{{arr}}</li>
+              <li ng-repeat="arr in stats.commonArrays track by $index">{{arr}}</li>
+            </ul>
+          </div>
+
+          <div class="keep-together">
+            <div class="title center h4">Moves</div>
+            <div class="character-creation-paragraph">
+              <div ng-repeat="instruct in playbook.moveInstructions track by $index">{{instruct}}</div>
+            </div>
+          </div>
+
+          <div class="keep-together">
+            <div class="title center h4">Gear</div>
+            <div ng-repeat="gear in playbook.gearSets track by $index" class="{{gear.setClass}}">
+              <div class="{{gear.textClass}}">{{gear.text}}</div>
+              <div class="{{gear.listClass}}" ng-repeat="li in gear.list track by $index">{{li}}</div>
+            </div>
+          </div>
+
+          <div ng-repeat="cc in playbook.extraCC track by $index"
+               ng-if="playbook.extraCC && cc.section == 1"
+               class="{{cc.setClass}}" style="{{cc.style}}"
+               ng-include="'characterCreationTree'"></div>
+
+          <div class="keep-together" ng-if="playbook.history.length > 0">
+            <div class="title center h4">History</div>
+            <div class="character-creation-paragraph">
+              <div ng-repeat="H in playbook.history track by $index" class="{{H.class}}">{{H.text}}
+                <div ng-if="H.result" class="{{H.class2}}">{{H.result}}</div>
+                <div ng-repeat="R in H.resultList track by $index" class="{{H.class2}}">{{R}}</div>
+              </div>
+            </div>  
+          </div>
+
+          <div class="keep-together">
+            <div class="title center h4">Bonds</div>
+            <div class="character-creation-paragraph bonds">
+              <div ng-repeat="BL in bonds.preamble track by $index">{{BL}}</div>
+              <div ng-repeat="H in playbook.bondHistory track by $index" class="{{H.class}}">{{H.text}}
+                <div ng-if="H.result" class="{{H.class2}}">{{H.result}}</div>
+                <div ng-repeat="R in H.resultList track by $index" class="{{H.class2}}">{{R}}</div>
+              </div>
+              <div ng-repeat="BL in bonds.postamble track by $index">{{BL}}</div>
+            </div>  
+          </div>
+
+          <div class="keep-together">
+            <div class="title center h4">Improvement</div>
+            <div class="character-creation-paragraph">
+              <div ng-repeat="I in improvementInstructions track by $index">{{I}}</div>
+            </div>
+          </div>
+
+          <div ng-repeat="cc in playbook.extraCC track by $index"
+               ng-if="playbook.extraCC && cc.section == 2"
+               class="{{cc.setClass}}" style="{{cc.style}}"
+               ng-include="'characterCreationTree'"></div>
+
+        </div>
+
+      </div>
+      
+    </div>
+
+  </div>
+
+  <div class="rules-references">
+    <div class="playbook-page" id="Basic-Moves">
+      <div class="column">
+        <div class="keep-together">
+          <div class="title h2 left"><span class="h1">Reference Sheet:</span> Basic Moves</div>
+          <div class="auto-column">
+            <div class="keep-together basic-move" ng-repeat="move in basicMoves track by $index" ng-include="'basicMoveReference'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="playbook-page">
+      <div class="column">
+        <div class="keep-together">
+          <div class="title h2 left"><span class="h1">Reference Sheet:</span> Peripheral Moves</div>
+          <div class="auto-column-3">
+            <div class="keep-together basic-move" ng-repeat="move in peripheralMoves track by $index" ng-include="'basicMoveReference'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="playbook-page">
+      <div class="column">
+        <div class="keep-together">
+          <div class="title h2 left"><span class="h1">Reference Sheet:</span> Battle Moves</div>
+          <div class="auto-column-2">
+            <div class="keep-together basic-move" ng-repeat="move in battleMoves track by $index" ng-include="'basicMoveReference'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="playbook-page">
+      <div class="column">
+        <div class="keep-together">
+          <div class="title h2 left"><span class="h1">Reference Sheet:</span> Vehicle Moves</div>
+          <div class="auto-column-2">
+            <div class="keep-together basic-move" ng-repeat="move in vehicleMoves track by $index" ng-include="'basicMoveReference'"></div>
+
+            <div class="keep-together" style="margin: 0 0.1cm 0.1cm;" ng-init="ship = { showTitle: true, largeClass: 'title h3 underline thick', groupClass: 'h6 feature-margin', showPossessiveInstructions: false, showNeutralInstructions: true, showFrames: true, sizes: { small: true, light: true, medium: true, heavy: true, capital: true }, showOptions: true, showWarship: true, showShipCrew: false, showShip: true, showCrew: false, crewDetailRows: 10, crewStr: 'crew', hideDelta: true };" ng-include="'shipCreation'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="playbook-page">
+      <div class="column">
+        <div class="keep-together">
+          <div class="title h2 left"><span class="h1">Reference Sheet:</span> Vehicle/Building Harm Moves</div>
+          <div class="auto-column-2">
+            <div class="keep-together basic-move" ng-repeat="move in vehicleHarmMoves track by $index" ng-include="'basicMoveReference'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="rules-reference" >
+    <div class="playbook-page flex-col">
+      <div class="column2">
+        <div class="title h2 left"><span class="h1">Reference Sheet:</span> Looks and Drives</div>
+      </div>
+      <div class="flex-1 flex-row">
+
+        <div ng-repeat="ref in references track by $index"
+             class="{{ref.exteriorClass}} character-creation-paragraph column2"
+             id="reference--{{ref.section}}">
+          <div>
+            <span class="title h4">{{ref.section}} </span>
+            <span class="h6 capitalize" ng-if="ref.subtitle">{{ref.subtitle}}</span>
+          </div>
+          <div class="looks-subsection" ng-include="'referenceTree'">
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="" ng-if="reusedFeatureCatalog && reusedFeatureCatalog.length > 0">
+    <div class="playbook-page flex-col"
+         ng-repeat="thisSection in getNumberIdx( reusedFeatureCatalog.length, 2) track by $index"
+         ng-init="commonFeaturePageIndex = $index">
+      <div class="column2">
+        <div class="title h2 left"> <span class="h1">Reference Sheet</span> </div>
+      </div>
+      <div class="flex-1 flex-row-wrap row-size-2">
+        <div ng-repeat="feature in reusedFeatureCatalog track by $index"
+             ng-if="testNumberIdx($index, 2, commonFeaturePageIndex, 1)"
+             class="flex-1 flex-col column2" fname="{{feature.sectionName}}">
+          <div class="{{feature.containerClass}}" ng-include="'featureTree'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="solar-system-pages" ng-init="blankSystems = getSolarSystemDetails(4);">
+    <div class="rules-reference"
+         ng-if="knownSolarSystems && knownSolarSystems.length > 0"
+         ng-init="systemPages = deriveNumber(knownSolarSystems.length, 4, 0);">
+      <div class="playbook-page flex-col"
+           ng-repeat="ssPage in systemPages">
+        <div class="title h2 left"><span class="h1">Reference Sheet:</span> Solar Systems</div>
+        <div class="flex-1 flex-row-wrap">
+          <div class="keep-together solar-system-container"
+               ng-repeat="solarSystem in knownSolarSystems track by $index"
+               ng-if="testRange($index, ssPage)"
+               ng-include="'solarSystem'">{{$index}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rules-reference"
+         ng-init="blankPages = getNumber(1, 0);">
+      <div class="playbook-page flex-col" ng-repeat="bss in blankPages track by $index">
+        <div class="title h2 left"><span class="h1">Reference Sheet:</span> Blank Solar Systems</div>
+        <div class="flex-1 flex-row-wrap">
+          <div class="keep-together solar-system-container"
+               ng-repeat="solarSystem in blankSystems track by $index"
+               ng-include="'solarSystem'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  <div class="keep-together" ng-include="'cdClock'"></div>
+  -->
+  
+  <!--
+  <div class="rules-reference" >
+    <div class="playbook-page flex-col">
+      <div class="">
+        <div class="title h2 left"><span class="h1">Reference Sheet:</span> ??</div>
+      </div>
+      <div class="flex-1 flex-row-wrap row-size-2">
+      </div>
+    </div>
+  </div>
+  -->
+</body>
+
+
+
+</html>
