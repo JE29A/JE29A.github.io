@@ -103,6 +103,11 @@ table {
 .inline-block {
   display: inline-block;
 }
+
+.hide-el {
+  display: none;
+}
+
 .flex-row,
 .flex-col {
   display: flex !important;

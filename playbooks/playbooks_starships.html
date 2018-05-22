@@ -64,25 +64,28 @@
       <div class="flex-1 flex-col padding-left padding-right">
 
         <div class="margin-top margin-bottom padding flex-row">
-          <span class="block h5 font-bold margin-right do-not-print">Name</span>
           <div class="flex-1">
-            <input class="h3 font-bold text-center" type="text" ng-model="shipName" style="width:100%;" />
+            <input class="capitalize h3 font-bold text-center" type="text" placeholder="Ship Name" style="width:100%;" />
           </div>
         </div>
 
-        <div class="flex-row margin-top margin-bottom text-center" ng-init="uniqueInputModel.ships[ship.trope2] = ship.trope;">
-          <input class="uppercase text-right h5 font-bold flex-1 do-not-print"
-                 value="{{sN}}" ng-model="uniqueInputModel.ships[ship.trope2]"></input>
-          <span class="block h5 text-right do-not-print" style="width: 73px; padding-top: 3px;">-Class Ship</span>
-          <div class="block flex-1 text-center print-only"><span class="h5 font-bold">{{uniqueInputModel.ships[ship.trope2]}}</span><span class="h5">-Class Ship</span></div>
+        <div class="flex-row margin-top margin-bottom text-center" ng-init="uniqueInputModel.ships[ship.trope2] = {trope: ship.trope, sizeLabel: ship.sizeLabel};">
+          <div class="flex-1 do-not-print">
+            <input class="capitalize text-right h5 font-bold do-not-print"
+                   value="{{sN}}" ng-model="uniqueInputModel.ships[ship.trope2].trope"
+                   style="width: 100%;"></input>
+          </div>
+          <span class="block h5 text-right do-not-print" style="padding-top: 3px;">-Class&nbsp;</span>
+          <div class="flex-1 do-not-print" style="padding-top: 2px;">
+            <input class="capitalize text-left h5"
+                   ng-model="uniqueInputModel.ships[ship.trope2].sizeLabel"
+                   style="width: 100%;"></input>
+          </div>
+
+          <div class="block flex-1 text-center print-only"><span class="h5 font-bold">{{uniqueInputModel.ships[ship.trope2].trope}}</span><span class="h5">-Class {{uniqueInputModel.ships[ship.trope2].sizeLabel}}</span></div>
+          
         </div>
 
-        <div class="border margin-top margin-bottom padding flex-row">
-          <span class="block h5 font-bold margin-right">Size</span>
-          <div class="flex-1">
-            <input class="h5" type="text" ng-model="shipSize" style="width:100%;" />
-          </div>
-        </div>
         <div class="border margin-top margin-bottom padding flex-row">
           <span class="block h5 font-bold margin-right">Look</span>
           <textarea class="flex-1 h6" rows="8" ng-model="shipLook"></textarea>
@@ -166,7 +169,7 @@
         </div>
       </div>
       <div class="flex-1 padding-left padding-right">
-        <div class="font-bold h4">Ship's Harm</div>
+        <div class="font-bold h4 text-center">Ship's Harm</div>
         <div class="long-text">
           <p>When <span class="font-bold">your Ship takes Damage</span>, mark off one of the options below for each point of Damage your Ship suffers.</p>
           <p>When <span class="font-bold">your Ship takes Damage and there are no unchecked options to mark off</span>, your Ship is destroyed.</p>
@@ -273,12 +276,18 @@
         <div class="long-text">
           <div>
             <span class="h5 font-bold">Your Ship's FTL: </span>
-            <select class="h5 font-bold">
-              <option class="h5 font-normal font-no-bold" ng-repeat="FTL in FTLs" value="{{FTL.label}}" ng-model="uniqueInputModel.FTL[FTL.label]">{{FTL.label}}</option>
+            <select class="h5 font-bold"
+                    ng-model="uniqueInputModel.FTL"
+                    placeholder="Select One">
+              <option class="h5 font-normal font-no-bold"
+                      ng-repeat="FTL in FTLs track by $index"
+                      value="{{FTL.key}}">{{FTL.label}}</option>
             </select>
           </div>
+          <div class="h5 font-bold">FTL Moves</div>
           <div ng-if="FTL.moves && FTL.moves.length > 0"
-               ng-repeat="FTL in FTLs track by $index">
+               ng-repeat="FTL in FTLs track by $index"
+               ng-show="uniqueInputModel.FTL == '{{FTL.key}}' ">
             <p ng-repeat="move in FTL.moves"><span ng-repeat="piece in move track by $index" class="{{piece.class}}">{{piece.text}}</span></p>
           </div>
         </div>
