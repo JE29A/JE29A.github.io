@@ -275,16 +275,18 @@
         <div class="h4 font-bold text-center">Ship Moves</div>
         <div class="long-text">
           <div>
-            <span class="h5 font-bold">Your Ship's FTL: </span>
-            <select class="h5 font-bold"
-                    ng-model="uniqueInputModel.FTL"
-                    placeholder="Select One">
-              <option class="h5 font-normal font-no-bold"
-                      ng-repeat="FTL in FTLs track by $index"
-                      value="{{FTL.key}}">{{FTL.label}}</option>
-            </select>
+            <div class="float-right">
+              <span class="h6">Your Ship's FTL: </span>
+              <select class="h6"
+                      ng-model="uniqueInputModel.FTL">
+                <option class="h6 font-normal font-no-bold"
+                        ng-repeat="FTL in FTLs track by $index"
+                        value="{{FTL.key}}"
+                        >{{FTL.label}}</option>
+              </select>
+            </div>
+            <span class="h5 font-bold">FTL Moves</span>
           </div>
-          <div class="h5 font-bold">FTL Moves</div>
           <div ng-if="FTL.moves && FTL.moves.length > 0"
                ng-repeat="FTL in FTLs track by $index"
                ng-show="uniqueInputModel.FTL == '{{FTL.key}}' ">

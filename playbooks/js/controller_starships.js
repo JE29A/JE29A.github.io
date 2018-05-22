@@ -62,6 +62,7 @@ function getFTL() {
 
   ret.push({
     label: "None",
+    selected: "selected",
     moves: [
       [
         {
@@ -78,7 +79,7 @@ function getFTL() {
       [
         {
           class: "font-bold",
-          text: "Starfall Move:"
+          text: "Starfall:"
         },{
           class: "",
           text: " When "
@@ -110,7 +111,7 @@ function getFTL() {
       ],[
         {
           class: "font-bold",
-          text: "Starrise Move:"
+          text: "Starrise:"
         },{
           class: "",
           text: " After a ship has spent 121 hours in drivespace, roll+Maintenance. "
