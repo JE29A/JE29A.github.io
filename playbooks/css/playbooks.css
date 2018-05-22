@@ -52,6 +52,19 @@
   width: 10.5in;
   height: 8.0in;
 }
+.page::before {
+  position: absolute;
+  top: 0px;
+  right: 1px;
+  text-align: right;
+  counter-increment: pageNumber;
+  content: counter(pageNumber);
+}
+
+.keep-together {
+  page-break-inside: avoid;
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -84,7 +97,7 @@ ul, menu, dir {
   -webkit-margin-after: 0.5em;
   -webkit-margin-start: 0px;
   -webkit-margin-end: 0px;
-  -webkit-padding-start: 30px;
+  -webkit-padding-start: 15px;
 }
 ul.li-none {
   list-style-type: none;
@@ -107,19 +120,15 @@ hr {
   border-color: #888;
 }
 
-.page::before {
-  position: absolute;
-  top: 0px;
-  right: 1px;
-  text-align: right;
-  counter-increment: pageNumber;
-  content: counter(pageNumber);
-}
 .block {
   display: block;
 }
 .inline-block {
   display: inline-block;
+}
+
+.anchor {
+  position: relative;
 }
 
 .hide-el {
@@ -171,6 +180,7 @@ hr {
 .auto-column-4 {
   column-count: 4;
 }
+
 .text-center {
   text-align: center;
 }
@@ -180,6 +190,10 @@ hr {
 .text-right {
   text-align: right;
 }
+.text-justify {
+  text-align: justify;
+}
+
 .float-left {
   float: left;
 }
@@ -278,6 +292,7 @@ p {
   -webkit-margin-after: 0.25em;
   -webkit-margin-start: 0px;
   -webkit-margin-end: 0px;
+  text-align: justify;
 }
 p ~ p {
   -webkit-margin-before: 0.5em;

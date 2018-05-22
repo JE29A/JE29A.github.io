@@ -15,15 +15,19 @@
       <img src="{{image.src}}" class="basic-image-class {{image.class}}" style="{{image.style}}"></img>
     </div>
   </script>
+
   <script type="text/ng-template" id="textareaInput">
     <textarea class="basic-input flex-1" rows="{{textarea.rows}}"></textarea>
   </script>
+
   <script type="text/ng-template" id="basicInput">
     <input class="basic-input no-spinner {{input.class}}" />
   </script>
+
   <script type="text/ng-template" id="basicInput_number">
     <input class="basic-input no-spinner {{input.class}}" type="number" min="0" />
   </script>
+
   <script type="text/ng-template" id="shipFeature">
     <div class="flex-row">
       <div ng-if="parseInt(feat.symbolCount,10) > 0">
@@ -51,6 +55,41 @@
       </div>
     </div>
   </script>
+
+  <script type="text/ng-template" id="shipModule">
+    <div class="h5">
+      <span class="symbol {{mod.symbolClass}}"
+            ng-repeat="n in repeatNTimes( mod.symbolCount )"
+            ng-if="mod.symbolCount && mod.symbolCount > 0"></span>
+      <span class="h5 font-bold">{{mod.name}}</span>
+      <div class="float-right h6" ng-if="mod.hasDischarged" style="padding-top: 2px;">
+        <span class="symbol empty circle"></span>
+        <span class="h6 font-bold">Discharged</span>
+      </div>
+    </div>
+    <div class="long-text">
+      <p class="font-italic" ng-if="mod.tags && mod.tags.length > 0">{{mod.tags}}</p>
+      <div ng-repeat="child in mod.children track by $index">
+        <p ng-if="child.type == 'p'" class="{{child.class}}">
+          <span ng-repeat="s in child.list track by $index" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span>
+        </p>
+        <ul ng-if="child.type == 'ul'" class="{{child.class}}">
+          <li ng-repeat="l in child.list track by $index">
+            <span ng-repeat="s in l track by $index" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span>
+          </li>
+        </ul>
+        <textarea ng-if="child.type == 'textarea'"
+                  class="{{child.class}}"
+                  style="{{child.style}}"
+                  rows="{{child.rows}}"></textarea>
+        <input ng-if="child.type == 'input'"
+               type="{{child.type2 || 'text'}}"
+               class="{{child.class}}"
+               style="{{child.style}}" />
+               
+      </div>
+    </div>
+  </script>
 <!-----------------------------------------------------------------------------
 -------------------------------------------------------------------------------
   End of NG-TEMPLATES
@@ -59,18 +98,21 @@
 </head>
 
 <body>
-  <div ng-repeat="ship in shipPlaybooks track by $index">
+  <div ng-repeat="ship in shipPlaybooks track by $index"
+       ng-init="uniqueInputModel.ships[ship.trope2] = {name: '', trope: ship.trope, sizeLabel: ship.sizeLabel, viName: ''};">
 
     <div class="page landscape flex-row">
       <div class="flex-1 flex-col padding-left-big padding-right-big">
 
         <div class="margin-top margin-bottom padding flex-row">
           <div class="flex-1">
-            <input class="capitalize h3 font-bold text-center" type="text" placeholder="Ship Name" style="width:100%;" />
+            <input class="capitalize h3 font-bold text-center"
+                   type="text" placeholder="Ship Name" style="width:100%;"
+                   ng-model="uniqueInputModel.ships[ship.trope2].name" />
           </div>
         </div>
 
-        <div class="flex-row margin-top margin-bottom text-center" ng-init="uniqueInputModel.ships[ship.trope2] = {trope: ship.trope, sizeLabel: ship.sizeLabel};">
+        <div class="flex-row margin-top margin-bottom text-center">
           <div class="flex-1 do-not-print">
             <input class="capitalize text-right h5 font-bold do-not-print"
                    value="{{sN}}" ng-model="uniqueInputModel.ships[ship.trope2].trope"
@@ -89,9 +131,27 @@
 
         <div class="border margin-top margin-bottom padding flex-row" style="position: relative;">
           <span class="block h5 font-bold margin-right" style="position: absolute; left: 4px; top: 1px;">Look</span>
-          <textarea class="flex-1 h6" rows="8" style="text-indent: 40px;"
+          <textarea class="flex-1 h6"           rows="8"
+                    style="text-indent: 40px;"
                     ng-model="shipLook"></textarea>
         </div>
+
+        <div class="margin-top margin-bottom">
+          <input class="capitalize h4 font-bold text-center"
+                 type="text" placeholder="VI's Name" style="width:100%;"
+                 ng-model="uniqueInputModel.ships[ship.trope2].viName" />
+          <div class="flex-row">
+            <div class="flex-1 anchor border margin"
+                 ng-repeat="stat in ['Charm', 'Cool', 'Sharp', 'Smarts', 'Tough']">
+              <div>
+                <input type="number" style="width: 100%;"
+                       class="text-center no-spinner h6 font-bold"
+                       min="-2" max="1" /></div>
+              <div class="h7 font-bold text-center">{{stat}}</div>
+            </div>
+          </div>
+        </div>
+
         <div class="margin-top margin-bottom flex-row">
           <table class="flex-1">
             <tbody>
@@ -219,6 +279,7 @@
           </div>
           <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(12) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
         </div>
+        <!--
         <div class="long-text margin-top fade">
           <div class="flex-row">
             <div class="flex-1">
@@ -232,6 +293,7 @@
           </div>
           <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(12) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
         </div>
+        -->
         <hr/>
         <div class="long-text">
           <div class="flex-row">
@@ -301,6 +363,23 @@
             <li>You sneak into a favorable position.</li>
           </ul>
           <p>When you run out of holds or act overtly, you become detectable again.</p>
+          <p>On a miss, prepare for the worst.</p>
+        </div>
+
+        <hr/>
+
+        <div class="long-text">
+          <div>
+            <span class="h5 font-bold">Run a Scan</span>
+          </div>
+          <p>When <span class="font-bold">you assess the situation using your Ship's sensors</span>, you have additional questions you can ask. Any question with the <span class="font-bold">active scan</span> tag temporarily apply the <span class="font-bold">overt</span> tag to your Ship.</p>
+          <ul class="auto-column-2">
+            <li>What class/size is that detected ship?</li>
+            <li><span class="font-italic">(Active Scan)</span> Are there any hiding ships?</li>
+            <li><span class="font-italic">(Active Scan)</span> What modules do they have?</li>
+            <li><span class="font-italic">(Active Scan)</span> Where are they weak?</li>
+            <li><span class="font-italic">(Active Scan)</span> Where are they strong?</li>
+          </ul>
         </div>
 
         <hr/>
@@ -355,6 +434,25 @@
     </div>
 
     <div class="page landscape flex-row">
+
+      <div class="flex-2 auto-column-2 padding-left padding-right" style="column-gap: 2px;">
+
+        <div class="padding-left padding-right long-text" style="column-span: all;">
+          <div class="text-center h4 font-bold">Upgrades &amp; Modules</div>
+          <p>Your ship starts with 2 Upgrade points to buy your starting Modules and may have up to a maximum of 8 Upgrade Points of Modules installed.</p>
+          <p>When you buy an Upgrade for your ship, check an upgrade box. Unless a Module says otherwise, you need to fill all of the Upgrade boxes before that Module is fully installed and functional in your ship.</p>
+          <p>If you are the maximum amount of Upgrade Points, you have to pull out a Module before you can start installing a new one. You do not get a refund on Upgrade Points.</p>
+          <hr/>
+        </div>
+
+        <div class="keep-together padding-left padding-right" ng-repeat="mod in shipModules track by $index" ng-include="'shipModule'"></div>
+
+      </div>
+
+      <div class="flex-1 padding-left-big padding-right-big"></div>
+
+      <div class="flex-1 padding-left-big padding-right-big"></div>
+
     </div>
   </div>
 </body>
