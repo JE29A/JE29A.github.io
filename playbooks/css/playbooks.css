@@ -95,16 +95,16 @@ table {
 }
 
 hr {
-    display: block;
-    unicode-bidi: isolate;
-    -webkit-margin-before: 0.25em;
-    -webkit-margin-after: 0.25em;
-    -webkit-margin-start: auto;
-    -webkit-margin-end: auto;
-    overflow: hidden;
-    border-style: inset;
-    border-width: 1px;
-    border-color: #888;
+  display: block;
+  unicode-bidi: isolate;
+  -webkit-margin-before: 0.25em;
+  -webkit-margin-after: 0.25em;
+  -webkit-margin-start: auto;
+  -webkit-margin-end: auto;
+  overflow: hidden;
+  border-style: inset;
+  border-width: 1px;
+  border-color: #888;
 }
 
 .page::before {
