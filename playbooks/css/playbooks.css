@@ -86,6 +86,10 @@ ul, menu, dir {
   -webkit-margin-end: 0px;
   -webkit-padding-start: 30px;
 }
+ul.li-none {
+  list-style-type: none;
+}
+
 table {
   border-collapse: collapse;
 }

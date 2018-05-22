@@ -293,12 +293,14 @@
             <p ng-repeat="move in FTL.moves"><span ng-repeat="piece in move track by $index" class="{{piece.class}}">{{piece.text}}</span></p>
           </div>
         </div>
+
         <div class="long-text">
           <div>
             <span class="h5 font-bold">Spot Repairs</span>
           </div>
           <p>When <span class="font-bold">you performs spot repairs on your ship to patch over Damage</span>, describe how you do it. <span class="font-bold">If there are no immediate pressures and you have plenty of time</span>, you do it with little complication. Apply Spot Repairs to one Damage option. <span class="font-bold">If you are under immediate danger or time is limited</span>, <span class="font-bold">act under pressure</span> to complete the repairs, unless you have a move better suited to the job.</p>
         </div>
+
         <div class="long-text">
           <div>
             <span class="h5 font-bold">Silent Running</span>
@@ -310,8 +312,32 @@
           </ul>
           <p>When you run out of holds or act overtly, you become detectable again.</p>
         </div>
+
+        <div class="long-text">
+          <div>
+            <span class="h5 font-bold">Get Paid</span>
+          </div>
+          <p>When <span class="font-bold">your Crew successfully completes a Contract and collects their pay</span> from the client or contact, roll+Contract Rating.</p>
+          <ul class="li-none">
+            <li><span class="font-bold">On a 13+</span>, you did exceptional well, choose 4.</li>
+            <li><span class="font-bold">On a 10-12</span>, you get a great deal, choose 3.</li>
+            <li><span class="font-bold">On a 7-9</span>, you get the standard deal, choose 2.</li>
+            <li><span class="font-bold">On a 6-</span>, it's a set up or raw deal. You may either walk away with a token payment and Choose 1, or choose 2 and deal with an enemy that's found you and wants to settle things now.</li>
+          </ul>
+          <ul>
+            <li class="font-italic">You make a payment to your Creditor, reduce Payments by 1 and reset the Debt Fuse.</li>
+            <li class="font-italic">You pay to maintain your ship, clear Maintenance Past Due and reset the Maintenance Fuse.</li>
+            <li class="font-italic">You get the Ship patched up. Remove all Damage from the Ship and clear all Spot Repairs.</li>
+            <li class="font-italic">You purchase an Upgrade for your Ship.</li>
+            <li class="font-italic">You fill the Ship's cargo hold with lucrative goods for slae elsewhere, roll <span class="font-no-italic font-bold">Lucrative Exports</span> to determine what Cargo is available.</li>
+            <li class="font-italic">You divide the spoils for some walking around money, each crew member rolls on <span class="font-no-italic font-bold">Hey Big Spender</span>.</li>
+            <li class="font-italic">You go shopping for a new Vehicle, roll <span class="font-no-italic font-bold">Test Drive</span>.</li>
+          </ul>
+          <p>After you've made your selections and resolved any consequent moves, you need to find more work.</p>
+        </div>
       </div>
     </div>
+
     <div class="page landscape flex-row">
     </div>
   </div>
