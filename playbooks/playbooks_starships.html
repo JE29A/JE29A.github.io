@@ -276,28 +276,9 @@
           <p>When <span class="font-bold">you perform Spot Repairs on Adrift</span>, you restore power - barely. You have Disadvantage on all system rolls until you have a chance to enact proper repairs.</p>
         </div>
       </div>
+
       <div class="flex-2 padding-left padding-right">
         <div class="h4 font-bold text-center">Ship Moves</div>
-        <div class="long-text">
-          <div>
-            <div class="float-right">
-              <span class="h6">Your Ship's FTL: </span>
-              <select class="h6"
-                      ng-model="uniqueInputModel.FTL">
-                <option class="h6 font-normal font-no-bold"
-                        ng-repeat="FTL in FTLs track by $index"
-                        value="{{FTL.key}}"
-                        >{{FTL.label}}</option>
-              </select>
-            </div>
-            <span class="h5 font-bold">FTL Moves</span>
-          </div>
-          <div ng-if="FTL.moves && FTL.moves.length > 0"
-               ng-repeat="FTL in FTLs track by $index"
-               ng-show="uniqueInputModel.FTL == '{{FTL.key}}' ">
-            <p ng-repeat="move in FTL.moves"><span ng-repeat="piece in move track by $index" class="{{piece.class}}">{{piece.text}}</span></p>
-          </div>
-        </div>
 
         <div class="long-text">
           <div>
@@ -340,6 +321,28 @@
           </ul>
           <p>After you've made your selections and resolved any consequent moves, you need to find more work.</p>
         </div>
+
+        <div class="long-text">
+          <div>
+            <div class="float-right">
+              <span class="h6">Your Ship's FTL: </span>
+              <select class="h6"
+                      ng-model="uniqueInputModel.FTL">
+                <option class="h6 font-normal font-no-bold"
+                        ng-repeat="FTL in FTLs track by $index"
+                        value="{{FTL.key}}"
+                        >{{FTL.label}}</option>
+              </select>
+            </div>
+            <span class="h5 font-bold">FTL Moves</span>
+          </div>
+          <div ng-if="FTL.moves && FTL.moves.length > 0"
+               ng-repeat="FTL in FTLs track by $index"
+               ng-show="uniqueInputModel.FTL == '{{FTL.key}}' ">
+            <p ng-repeat="move in FTL.moves"><span ng-repeat="piece in move track by $index" class="{{piece.class}}">{{piece.text}}</span></p>
+          </div>
+        </div>
+
       </div>
     </div>
 
