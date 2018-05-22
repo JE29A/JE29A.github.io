@@ -1,7 +1,8 @@
 var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) {
   $scope.uniqueInputModel = {
     FTL: '',
-    ships: {}
+    ships: {},
+    shipType: ''
   };
 /***********************************************************************
  * function
@@ -63,8 +64,24 @@ var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) 
  ***********************************************************************/
  $scope.shipPlaybooks = getShips();
  $scope.FTLs = getFTL();
+ $scope.shipBays = getShipBays();
  $scope.shipModules = getShipModules();
+ $scope.shipFuses = getShipFuses();
 });
+
+function getShipFuses() {
+  var ret = [];
+
+  ret.push({
+    label: "Debt",
+    fuseLabel: "Debt Fuse",
+    key: "debt",
+    
+  });
+
+  return ret;
+}
+
 function getFTL() {
   var ret = [];
 
@@ -311,6 +328,88 @@ function generateShip(s) {
   };
 }
 
+function getShipBays() {
+  var ret = [];
+
+  ret.push({
+    name: "Crew Quarters",
+    symbols: [],
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "The Ship has births for the main crew."
+          }
+        ]
+      },{
+        type: "textarea",
+        class: "h7 font-normal border",
+        style: "width: 100%;",
+        rows: 12
+      }
+    ]
+  });
+
+  ret.push({
+    name: "Cargo Bay",
+    symbols: [],
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "The Ship starts with a standard cargo bay. If your ship also has hidden storage, make sure to note what is placed where."
+          }
+        ]
+      },{
+        type: "textarea",
+        class: "h7 font-normal border",
+        style: "width: 100%;",
+        rows: 16
+      }
+    ]
+  });
+
+  return ret;
+
+  ret.push({
+    name: "",
+    symbolClass: "",
+    symbolCount: 1,
+    hasDischarged: true,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: ""
+          }
+        ]
+      },{
+        type: "ul",
+        class: "",
+        list: [
+          [
+            {
+              class: "",
+              text: ""
+            }
+          ]
+        ]
+      }
+    ]
+  });
+}
+
 function getShipModules() {
   var ret = [];
 
@@ -389,7 +488,7 @@ function getShipModules() {
         list: [
           {
             class: "",
-            text: "As long as the Computer Core isn't damaged, the VI can assist character moves if the VI has at least a 1 in that move's stat, in which case the character has Advantage."
+            text: "The VI can assist character moves if the VI has at least a 1 in that move's stat, in which case the character has Advantage."
           }
         ]
       }
@@ -408,7 +507,7 @@ function getShipModules() {
         list: [
           {
             class: "",
-            text: "The Ship has extra hull plating to make it more durable. Your ship may take 1 extra hit of superficial damage for each Upgrade Point spent on this Module."
+            text: "Your ship may take 1 extra hit of superficial damage for each Upgrade Point spent on this Module."
           }
         ]
       }
@@ -428,6 +527,29 @@ function getShipModules() {
           {
             class: "",
             text: "Redundant systems and backups make your ship more reliable. Your ship can take an additional System Hit. Additionally, you have Advantage when making repairs in a fraught situation."
+          }
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    name: "Additional Habital Space",
+    symbols: [
+      {
+        class: "empty",
+        count: 1
+      }
+    ],
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "The Ship can carry many more passengers and has additional comforts."
           }
         ]
       }
@@ -478,6 +600,29 @@ function getShipModules() {
           {
             class: "",
             text: "A basic model shuttle that attaches to the outer hull of your ship. The shuttle doesn't have any weapons or defenses of its own, but it's perfect for getting some passengers or cargo from one place to another."
+          }
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    name: "Hidden Storage",
+    symbols: [
+      {
+        class: "empty",
+        count: 1
+      }
+    ],
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "In addition to the normal cargo bay, the Ship has a hidden one that is shielded against deep scans. A careful search of the ship will eventually notice missing volume in the ship."
           }
         ]
       }
@@ -591,7 +736,7 @@ function getShipModules() {
         list: [
           {
             class: "",
-            text: "The Ship has an infirmary that can accomodate many patients. The infirmary is restocked as part of maintaining the ship."
+            text: "The Ship has an infirmary that can accomodate many patients. Restocked as part of maintaining the ship."
           }
         ]
       }
@@ -610,7 +755,7 @@ function getShipModules() {
         list: [
           {
             class: "",
-            text: "The Ship has an Autodoc bay that can treat injuries or wounds. Unsympathetic, rough surgery in an Autodoc heals the \"I'm Hurt Bad\" Harm. More unusual or bizarre maladies require an expert. If your ship hasn't have a full infirmary, it is located in a small cubical."
+            text: "The Ship has an Autodoc bay that can treat injuries or wounds. Unsympathetic, rough surgery in an Autodoc heals the \"I'm Hurt Bad\" Harm. More unusual or bizarre maladies require an expert. If your ship has a full infirmary this doesn't count as a Module. Restocked as part of maintaining the ship."
           }
         ]
       }
@@ -653,41 +798,9 @@ function getShipModules() {
         ]
       },{
         type: "textarea",
-        class: "h6 font-normal border",
+        class: "h7 font-normal border",
         style: "width: 100%;",
         rows: 4
-      }
-    ]
-  });
-
-  return ret;
-
-  ret.push({
-    name: "",
-    symbolClass: "",
-    symbolCount: 1,
-    hasDischarged: true,
-    tags: "",
-    children: [
-      {
-        type: "p",
-        list: [
-          {
-            class: "",
-            text: ""
-          }
-        ]
-      },{
-        type: "ul",
-        class: "",
-        list: [
-          [
-            {
-              class: "",
-              text: ""
-            }
-          ]
-        ]
       }
     ]
   });

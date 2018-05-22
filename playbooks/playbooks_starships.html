@@ -56,11 +56,64 @@
     </div>
   </script>
 
+  <script type="text/ng-template" id="shipFuse">
+    
+  </script>
+
+  <script type="text/ng-template" id="shipDebt">
+    <div class="long-text margin-top margin-bottom">
+      <div class="flex-row">
+        <table class="flex-1">
+          <tbody>
+            <tr>
+              <td colspan="2" class="text-center">
+                <span class="h4 font-bold">Debt Fuse </span>
+                <span class="h4 symbol empty"
+                      ng-repeat="n in repeatNTimes(5) track by $index"></span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <span class="h5 font-bold">Creditor</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <textarea class="border h6" rows="8"
+                          style="width: 100%; height: 100%;"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td class="padding-top text-right">
+                <input class="border h6 no-spinner text-center float-right"
+                       type="number" style="width: 40px;"
+                       min="0" />
+                <span class="h5 font-bold margin-right-big">Payments</span>
+              </td>
+              <td class="padding-top text-left">
+                <input class="border h6 no-spinner text-center float-left"
+                       type="number" style="width: 25px;"
+                       min="-2" max="2" />
+                <span class="h5 font-bold margin-left-big">Disposition</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>When <span class="font-bold">you complete an episode</span>, mark one Debt Fuse. When <span class="font-bold">the Debt Fuse is full</span>, reduce your creditor's Disposition by 1, and your Creditor comes looking for you.</p>
+      <p>Some moves will allow you to clear the Debt Fuse and reduce your Payments. When your Payments reaches 0, you own your ship.</p>
+    </div>
+  </script>
+
   <script type="text/ng-template" id="shipModule">
     <div class="h5">
       <span class="symbol {{mod.symbolClass}}"
             ng-repeat="n in repeatNTimes( mod.symbolCount )"
             ng-if="mod.symbolCount && mod.symbolCount > 0"></span>
+      <span ng-if="mod.symbols" ng-repeat="sym in mod.symbols">
+        <span ng-repeat="n in repeatNTimes( sym.count )"
+              class="symbol {{sym.class}}"></span>
+      </span>
       <span class="h5 font-bold">{{mod.name}}</span>
       <div class="float-right h6" ng-if="mod.hasDischarged" style="padding-top: 2px;">
         <span class="symbol empty circle"></span>
@@ -152,48 +205,12 @@
           </div>
         </div>
 
-        <div class="margin-top margin-bottom flex-row">
-          <table class="flex-1">
-            <tbody>
-              <tr>
-                <td colspan="2" class="text-center">
-                  <span class="h4 font-bold">Debt Fuse </span>
-                  <span class="h4 symbol empty"
-                        ng-repeat="n in repeatNTimes(5) track by $index"></span>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <span class="h5 font-bold">Creditor</span>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <textarea class="border h6" rows="8"
-                            style="width: 100%; height: 100%;"></textarea>
-                </td>
-              </tr>
-              <tr>
-                <td class="padding-top text-right">
-                  <input class="border h6 no-spinner text-center float-right"
-                         type="number" style="width: 40px;"
-                         min="0" />
-                  <span class="h5 font-bold margin-right-big">Payments</span>
-                </td>
-                <td class="padding-top text-left">
-                  <input class="border h6 no-spinner text-center float-left"
-                         type="number" style="width: 25px;"
-                         min="-2" max="2" />
-                  <span class="h5 font-bold margin-left-big">Disposition</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="long-text">
-          <p>When <span class="font-bold">you complete an episode</span>, mark one Debt Fuse. When <span class="font-bold">the Debt Fuse is full</span>, reduce your creditor's Disposition by 1, and your Creditor comes looking for you.</p>
-          <p>Some moves will allow you to clear the Debt Fuse and reduce your Payments. When your Payments reaches 0, you own your ship.</p>
-        </div>
+        <div ng-repeat="SF in shipFuses track by $index"
+             ng-show="uniqueInputModel.shipType == '{{SF.key}}' "
+             ng-include="''"></div>
+
+        <div ng-include="'shipDebt'"></div>
+
         <div class="margin-top margin-bottom">
           <div class="text-center">
             <span class="h4 font-bold">Maintenance Fuse </span>
@@ -435,23 +452,45 @@
 
     <div class="page landscape flex-row">
 
-      <div class="flex-2 auto-column-2 padding-left padding-right" style="column-gap: 2px;">
+      <div class="flex-3 auto-column-3 padding-left padding-right" style="column-gap: 2px;">
 
         <div class="padding-left padding-right long-text" style="column-span: all;">
           <div class="text-center h4 font-bold">Upgrades &amp; Modules</div>
-          <p>Your ship starts with 2 Upgrade points to buy your starting Modules and may have up to a maximum of 8 Upgrade Points of Modules installed.</p>
+          <p>Your ship starts with 2 Upgrade points to buy your starting Modules and may have up to 8 Modules installed. Modules without a box to mark do not count against your maximum Modules.</p>
           <p>When you buy an Upgrade for your ship, check an upgrade box. Unless a Module says otherwise, you need to fill all of the Upgrade boxes before that Module is fully installed and functional in your ship.</p>
-          <p>If you are the maximum amount of Upgrade Points, you have to pull out a Module before you can start installing a new one. You do not get a refund on Upgrade Points.</p>
+          <p>If you are the maximum number of Modules, you have to pull out a Module before you can start installing a new one. You do not get a refund on Upgrade Points.</p>
           <hr/>
         </div>
 
-        <div class="keep-together padding-left padding-right" ng-repeat="mod in shipModules track by $index" ng-include="'shipModule'"></div>
+        <div class="keep-together padding-left padding-right"
+             ng-repeat="mod in shipBays track by $index"
+             ng-include="'shipModule'"></div>
+
+        <hr ng-if="shipBays && shipBays.length > 0" />
+
+        <div class="keep-together padding-left padding-right"
+             ng-repeat="mod in shipModules track by $index"
+             ng-include="'shipModule'"></div>
 
       </div>
 
-      <div class="flex-1 padding-left-big padding-right-big"></div>
+      <div class="flex-1 padding-left-big padding-right-big">
 
-      <div class="flex-1 padding-left-big padding-right-big"></div>
+        <div class="text-center h4 font-bold">Making Your Ship</div>
+
+        <div class="long-text">
+          <p>Select a Ship Fuse type: 
+            <select class="h6"
+                    ng-model="uniqueInputModel.shipType">
+              <option class="h6 font-normal font-no-bold"
+                      ng-repeat="SF in shipFuses track by $index"
+                      value="{{SF.key}}">{{SF.label}}</option>
+            </select>
+          </p>
+          
+        </div>
+
+      </div>
 
     </div>
   </div>
