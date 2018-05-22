@@ -61,6 +61,7 @@
   <div ng-repeat="ship in shipPlaybooks track by $index">
     <div class="page landscape flex-row">
       <div class="flex-1 flex-col padding-left padding-right">
+<<<<<<< HEAD
 
         <div class="margin-top margin-bottom padding flex-row">
           <span class="block h5 font-bold margin-right do-not-print">Name</span>
@@ -74,20 +75,37 @@
                  value="{{sN}}" ng-model="uniqueInputModel.ships[ship.trope2]"></input>
           <span class="block h5 text-right do-not-print" style="width: 73px; padding-top: 3px;">-Class Ship</span>
           <div class="block flex-1 text-center print-only"><span class="h5 font-bold">{{uniqueInputModel.ships[ship.trope2]}}</span><span class="h5">-Class Ship</span></div>
+=======
+        <div class="margin-top margin-bottom text-center">
+          <input class="uppercase text-right h5 font-bold resizing"
+                 value="{{ship.trope}}"
+                 style="padding-right: 75px;"></input>
+          <span style="position: relative;">
+            <span class="block h5 text-right" style="width: 73px; position:absolute; top: -4px; right: 1.5px;">-Class Ship</span>
+          </span>
         </div>
-
+        <div class="border margin-top margin-bottom padding flex-row">
+          <span class="block h5 font-bold margin-right">Name</span>
+          <div class="flex-1">
+            <input class="h4" type="text" ng-model="shipName" style="width:100%;" />
+          </div>
+>>>>>>> df9ed7f175ea0e0e306e5be775a3f1f23b282da4
+        </div>
         <div class="border margin-top margin-bottom padding flex-row">
           <span class="block h5 font-bold margin-right">Size</span>
           <div class="flex-1">
             <input class="h5" type="text" ng-model="shipSize" style="width:100%;" />
           </div>
         </div>
-
         <div class="border margin-top margin-bottom padding flex-row">
           <span class="block h5 font-bold margin-right">Look</span>
           <textarea class="flex-1 h6" rows="8" ng-model="shipLook"></textarea>
         </div>
+<<<<<<< HEAD
 
+=======
+        <div class="flex-1"></div>
+>>>>>>> df9ed7f175ea0e0e306e5be775a3f1f23b282da4
         <div class="margin-top margin-bottom flex-row">
           <table class="flex-1">
             <tbody>
@@ -298,7 +316,11 @@
             <li>You escape notice or enemy scans.</li>
             <li>You sneak into a favorable position.</li>
           </ul>
+<<<<<<< HEAD
           <p>When you run out of holds or act overtly, you become detectable again.</p>
+=======
+          <p>When you run out of hold or act overtly, you become detectable again.</p>
+>>>>>>> df9ed7f175ea0e0e306e5be775a3f1f23b282da4
         </div>
       </div>
     </div>

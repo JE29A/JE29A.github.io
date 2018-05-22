@@ -167,5 +167,9 @@ function autoShip(size, trope) {
   };
 }
 function genericShip() {
+<<<<<<< HEAD
   return autoShip(1, 'Generic');
+=======
+  return autoShip(1, null);
+>>>>>>> df9ed7f175ea0e0e306e5be775a3f1f23b282da4
 }
