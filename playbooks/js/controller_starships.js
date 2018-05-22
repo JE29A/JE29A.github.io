@@ -1,127 +1,63 @@
 var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) {
-
   $scope.uniqueInputModel = {
     FTL: {}
   };
-
-
-
 /***********************************************************************
-
  * function
-
  ***********************************************************************/
-
   $scope.firstLetterIsAVowel = function(str) {
-
     if (!str) {
-
       return false;
-
     }
-
     var s = String(str).substring(0,1).toLowerCase();
-
     switch(s) {
-
       case 'a':
-
       case 'e':
-
       case 'i':
-
       case 'o':
-
       case 'u':
-
         return true;
-
       default:
-
     }
-
     return false;
-
   };
-
-
-
   $scope.repeatNTimes = function(n) {
-
     var ret = [];
-
     var i;
-
     for(i = 0; i < n; i++) {
-
       ret.push( i );
-
     }
-
     return ret;
-
   };
-
-
-
   $scope.groupArrIntoSets = function(arr, size, classStr) {
-
     var ret = [], temp;
-
     var i;
-
     if (!size) { size = 2; }
-
     if (!classStr) { classStr = ''; }
-
     temp = [];
-
     for(i = 0; i < arr.length; i++) {
-
       temp.push( arr[i] );
-
       if (temp.length >= size) {
-
         ret.push( temp );
-
         temp = [];
-
       }
-
     }
-
     if (temp.length > 0) {
-
       while (temp.length < size) {
-
         temp.push({ class: classStr});
-
       }
-
       ret.push( temp );
-
     }
-
     return ret;
-
   };
-
-
-
 /***********************************************************************
-
  * data
-
  ***********************************************************************/
-
  $scope.shipPlaybooks = getShips();
  $scope.FTLs = getFTL();
-
 });
-
 function getFTL() {
   var ret = [];
-
   ret.push({
     label: "Stardrive",
     moves: [
@@ -186,7 +122,6 @@ function getFTL() {
       ]
     ]
   });
-
   /*
   ret.push({
     label: "Hyperspace",
@@ -200,31 +135,19 @@ function getFTL() {
     ]
   });
   */
-
   ret.sort(function(a, b) {
     if (a.label > b.label) { return 1; }
     if (a.label < b.label) { return -1; }
     return 0;
   });
-
   return ret;
 }
-
-
-
 function getShips() {
-
   var ret = [];
-
-
   ret.push( genericShip() );
   
-
   return ret;
-
 }
-
-
 function autoShip(size, trope) {
   if (!size || size < 1) {
     size = 0;
@@ -235,19 +158,13 @@ function autoShip(size, trope) {
   return {
     trope: trope,
     trope2: String(trope).replace(/ /g,"_"),
-
     size: 1,
     startingValues: {
       payments: 10 + 10 * size,
       disposition: 0
     }
-
   };
 }
-
-
 function genericShip() {
-
   return autoShip(1, null);
-
 }
