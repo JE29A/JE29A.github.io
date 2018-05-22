@@ -60,8 +60,9 @@
 
 <body>
   <div ng-repeat="ship in shipPlaybooks track by $index">
+
     <div class="page landscape flex-row">
-      <div class="flex-1 flex-col padding-left padding-right">
+      <div class="flex-1 flex-col padding-left-big padding-right-big">
 
         <div class="margin-top margin-bottom padding flex-row">
           <div class="flex-1">
@@ -86,9 +87,10 @@
           
         </div>
 
-        <div class="border margin-top margin-bottom padding flex-row">
-          <span class="block h5 font-bold margin-right">Look</span>
-          <textarea class="flex-1 h6" rows="8" ng-model="shipLook"></textarea>
+        <div class="border margin-top margin-bottom padding flex-row" style="position: relative;">
+          <span class="block h5 font-bold margin-right" style="position: absolute; left: 4px; top: 1px;">Look</span>
+          <textarea class="flex-1 h6" rows="8" style="text-indent: 40px;"
+                    ng-model="shipLook"></textarea>
         </div>
         <div class="margin-top margin-bottom flex-row">
           <table class="flex-1">
@@ -168,7 +170,7 @@
           <p>While <span class="font-bold">Maintenance Past Due is checked</span>, all rolls involving the Ship and its systems are at Disadvantage.</p>
         </div>
       </div>
-      <div class="flex-1 padding-left padding-right">
+      <div class="flex-1 padding-left-big padding-right-big">
         <div class="font-bold h4 text-center">Ship's Harm</div>
         <div class="long-text">
           <p>When <span class="font-bold">your Ship takes Damage</span>, mark off one of the options below for each point of Damage your Ship suffers.</p>
@@ -200,7 +202,7 @@
               <span class="h6 font-bold">Spot Repairs</span>
             </div>
           </div>
-          <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(10) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+          <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(12) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
           <p>One of your Ship's systems has been hit! Fill in which one. Any roll using that Ship System is at Disadvantage.</p>
           <p>When <span class="font-bold">you perform Spot Repairs on a System Hit</span>, you restore normal operation, negate Disadvantage from <span class="font-italic">this</span> System Damage.</p>
         </div>
@@ -215,7 +217,7 @@
               <span class="h6 font-bold">Spot Repairs</span>
             </div>
           </div>
-          <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(10) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+          <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(12) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
         </div>
         <div class="long-text margin-top fade">
           <div class="flex-row">
@@ -228,7 +230,7 @@
               <span class="h6 font-bold">Spot Repairs</span>
             </div>
           </div>
-          <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(10) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+          <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(12) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
         </div>
         <hr/>
         <div class="long-text">
@@ -277,7 +279,7 @@
         </div>
       </div>
 
-      <div class="flex-2 padding-left padding-right">
+      <div class="flex-2 padding-left-big padding-right-big">
         <div class="h4 font-bold text-center">Ship Moves</div>
 
         <div class="long-text">
@@ -286,6 +288,8 @@
           </div>
           <p>When <span class="font-bold">you performs spot repairs on your ship to patch over Damage</span>, describe how you do it. <span class="font-bold">If there are no immediate pressures and you have plenty of time</span>, you do it with little complication. Apply Spot Repairs to one Damage option. <span class="font-bold">If you are under immediate danger or time is limited</span>, <span class="font-bold">act under pressure</span> to complete the repairs, unless you have a move better suited to the job.</p>
         </div>
+
+        <hr/>
 
         <div class="long-text">
           <div>
@@ -298,6 +302,8 @@
           </ul>
           <p>When you run out of holds or act overtly, you become detectable again.</p>
         </div>
+
+        <hr/>
 
         <div class="long-text">
           <div>
@@ -321,6 +327,8 @@
           </ul>
           <p>After you've made your selections and resolved any consequent moves, you need to find more work.</p>
         </div>
+
+        <hr/>
 
         <div class="long-text">
           <div>

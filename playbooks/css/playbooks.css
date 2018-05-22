@@ -328,6 +328,7 @@ span.symbol.fade::after,
 span.symbol.faded::after {
   color: #AAA !important;
 }
+
 .padding,
 .padding-top {
   padding-top: 2px;
@@ -344,6 +345,23 @@ span.symbol.faded::after {
 .padding-left {
   padding-left: 2px;
 }
+.padding-big,
+.padding-top-big {
+  padding-top: 4px;
+}
+.padding-big,
+.padding-right-big {
+  padding-right: 4px;
+}
+.padding-big,
+.padding-bottom-big {
+  padding-bottom: 4px;
+}
+.padding-big,
+.padding-left-big {
+  padding-left: 4px;
+}
+
 .border,
 .border-top {
   border-top: 2px solid black;
@@ -360,6 +378,23 @@ span.symbol.faded::after {
 .border-left {
   border-left: 2px solid black;
 }
+.border-big,
+.border-top-big {
+  border-top: 4px solid black;
+}
+.border-big,
+.border-right-big {
+  border-right: 4px solid black;
+}
+.border-big,
+.border-bottom-big {
+  border-bottom: 4px solid black;
+}
+.border-big,
+.border-left-big {
+  border-left: 4px solid black;
+}
+
 .margin,
 .margin-top {
   margin-top: 2px;
@@ -376,6 +411,23 @@ span.symbol.faded::after {
 .margin-left {
   margin-left: 2px;
 }
+.margin-big,
+.margin-top-big {
+  margin-top: 4px;
+}
+.margin-big,
+.margin-right-big {
+  margin-right: 4px;
+}
+.margin-big,
+.margin-bottom-big {
+  margin-bottom: 4px;
+}
+.margin-big,
+.margin-left-big {
+  margin-left: 4px;
+}
+
 .shadow {
   box-shadow: 2px 2px #666;
 }
