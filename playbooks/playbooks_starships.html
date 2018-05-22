@@ -73,14 +73,13 @@
     <div class="page landscape flex-row">
       <div class="flex-1 flex-col padding-left padding-right">
 
-        <div class="margin-top margin-bottom flex-row">
-          <div class="flex-1"></div>
-          <div>
-            <input class="uppercase text-right h5 font-bold font-italic resizing"
-                   value="{{ship.trope}}"></input>
-          </div>
-          <span class="block h5 font-bold" style="padding-top: 1px;">-Class Ship</span>
-          <div class="flex-1"></div>
+        <div class="margin-top margin-bottom text-center">
+          <input class="uppercase text-right h5 font-bold resizing"
+                 value="{{ship.trope}}"
+                 style="padding-right: 75px;"></input>
+          <span style="position: relative;">
+            <span class="block h5 text-right" style="width: 73px; position:absolute; top: -4px; right: 1.5px;">-Class Ship</span>
+          </span>
         </div>
 
         <div class="border margin-top margin-bottom padding flex-row">
@@ -130,13 +129,13 @@
                   <input class="border h6 no-spinner text-center float-right"
                          type="number" style="width: 40px;"
                          min="0" max="20" />
-                  <span class="h5 font-bold">Payments</span>
+                  <span class="h5 font-bold margin-right">Payments</span>
                 </td>
                 <td class="padding-top">
                   <input class="border h6 no-spinner text-center float-left"
                          type="number" style="width: 40px;"
                          min="-2" max="2" />
-                  <span class="h5 font-bold">Disposition</span>
+                  <span class="h5 font-bold margin-left">Disposition</span>
                 </td>
               </tr>
             </tbody>
@@ -322,6 +321,20 @@
             <span class="h5 font-bold">Spot Repairs</span>
           </div>
           <p>When <span class="font-bold">you performs spot repairs on your ship to patch over Damage</span>, describe how you do it. <span class="font-bold">If there are no immediate pressures and you have plenty of time</span>, you do it with little complication. Apply Spot Repairs to one Damage option. <span class="font-bold">If you are under immediate danger or time is limited</span>, <span class="font-bold">act under pressure</span> to complete the repairs, unless you have a move better suited to the job.</p>
+        </div>
+
+        <div class="long-text">
+          <div>
+            <span class="h5 font-bold">Silent Running</span>
+          </div>
+          <p>When <span class="font-bold">you power off your active sensors to conceal your vessel</span>, roll+Smarts. <span class="font-bold">On a 10+</span>, hold 2. <span class="font-bold">On a 7-9</span>, hold 1. Spend hold 1 for 1 on the following:</p>
+          <ul>
+            <li>You escape notice or enemy scans.</li>
+            <li>You sneak into a favorable position.</li>
+          </ul>
+          <p>When you run out of hold or act overtly, you become detectable again.</p>
+
+          
         </div>
       </div>
 
