@@ -143,12 +143,14 @@ function getFTL() {
   });
   return ret;
 }
+
 function getShips() {
   var ret = [];
   ret.push( genericShip() );
   
   return ret;
 }
+
 function autoShip(size, trope) {
   if (!size || size < 1) {
     size = 0;
@@ -166,6 +168,7 @@ function autoShip(size, trope) {
     }
   };
 }
+
 function genericShip() {
   return autoShip(1, 'Generic');
 }
