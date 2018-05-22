@@ -7,29 +7,23 @@
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
   <script src="js/angular.min.js"></script>
   <script src="js/controller_starships.js"></script>
-
 <!-----------------------------------------------------------------------------
   Start of NG-TEMPLATES
 ------------------------------------------------------------------------------->
-
   <script type="text/ng-template" id="includePicture">
     <div class="basic-image-class">
       <img src="{{image.src}}" class="basic-image-class {{image.class}}" style="{{image.style}}"></img>
     </div>
   </script>
-
   <script type="text/ng-template" id="textareaInput">
     <textarea class="basic-input flex-1" rows="{{textarea.rows}}"></textarea>
   </script>
-
   <script type="text/ng-template" id="basicInput">
     <input class="basic-input no-spinner {{input.class}}" />
   </script>
-
   <script type="text/ng-template" id="basicInput_number">
     <input class="basic-input no-spinner {{input.class}}" type="number" min="0" />
   </script>
-
   <script type="text/ng-template" id="shipFeature">
     <div class="flex-row">
       <div ng-if="parseInt(feat.symbolCount,10) > 0">
@@ -57,36 +51,29 @@
       </div>
     </div>
   </script>
-
 <!-----------------------------------------------------------------------------
 -------------------------------------------------------------------------------
   End of NG-TEMPLATES
 -------------------------------------------------------------------------------
 ------------------------------------------------------------------------------->
-
 </head>
-
 <body>
-
   <div ng-repeat="ship in shipPlaybooks track by $index">
-
     <div class="page landscape flex-row">
       <div class="flex-1 flex-col padding-left padding-right">
 
-        <div class="margin-top margin-bottom text-center">
-          <input class="uppercase text-right h5 font-bold resizing"
-                 value="{{ship.trope}}"
-                 style="padding-right: 75px;"></input>
-          <span style="position: relative;">
-            <span class="block h5 text-right" style="width: 73px; position:absolute; top: -4px; right: 1.5px;">-Class Ship</span>
-          </span>
+        <div class="margin-top margin-bottom padding flex-row">
+          <span class="block h5 font-bold margin-right do-not-print">Name</span>
+          <div class="flex-1">
+            <input class="h3 font-bold text-center" type="text" ng-model="shipName" style="width:100%;" />
+          </div>
         </div>
 
-        <div class="border margin-top margin-bottom padding flex-row">
-          <span class="block h5 font-bold margin-right">Name</span>
-          <div class="flex-1">
-            <input class="h4" type="text" ng-model="shipName" style="width:100%;" />
-          </div>
+        <div class="flex-row margin-top margin-bottom text-center" ng-init="uniqueInputModel.ships[ship.trope2] = ship.trope;">
+          <input class="uppercase text-right h5 font-bold flex-1 do-not-print"
+                 value="{{sN}}" ng-model="uniqueInputModel.ships[ship.trope2]"></input>
+          <span class="block h5 text-right do-not-print" style="width: 73px; padding-top: 3px;">-Class Ship</span>
+          <div class="block flex-1 text-center print-only"><span class="h5 font-bold">{{uniqueInputModel.ships[ship.trope2]}}</span><span class="h5">-Class Ship</span></div>
         </div>
 
         <div class="border margin-top margin-bottom padding flex-row">
@@ -100,8 +87,6 @@
           <span class="block h5 font-bold margin-right">Look</span>
           <textarea class="flex-1 h6" rows="8" ng-model="shipLook"></textarea>
         </div>
-
-        <div class="flex-1"></div>
 
         <div class="margin-top margin-bottom flex-row">
           <table class="flex-1">
@@ -145,7 +130,6 @@
           <p>When <span class="font-bold">you complete an episode</span>, mark one Debt Fuse. When <span class="font-bold">the Debt Fuse is full</span>, reduce your creditor's Disposition by 1, and your Creditor comes looking for you.</p>
           <p>Some moves will allow you to clear the Debt Fuse and reduce your Payments. When your Payments reaches 0, you own your ship.</p>
         </div>
-
         <div class="margin-top margin-bottom">
           <div class="text-center">
             <span class="h4 font-bold">Maintenance Fuse </span>
@@ -170,14 +154,11 @@
             </div>
             <div class="flex-1"></div>
           </div>
-
           <div class="long-text">
             <p>When <span class="font-bold">you complete an episode</span>, mark one Maintenance Fuse. When <span class="font-bold">the Maintenance Fuse is full</span>, reset the Maintenance Fuse and check Maintenance Past Due. If it is already past due, the MC will inflict damage to the ship or a ship system.</p>
             <p>Some moves will allow you to reset the Maintenance Fuse and clear the Maintenance Past Due.</p>
-          
           </div>
         </div>
-
         <div class="h4">
           <span class="symbol empty"></span><span class="h4 font-bold margin-left">Maintenance Past Due</span>
         </div>
@@ -185,16 +166,13 @@
           <p>While <span class="font-bold">Maintenance Past Due is checked</span>, all rolls involving the Ship and its systems are at Disadvantage.</p>
         </div>
       </div>
-
       <div class="flex-1 padding-left padding-right">
         <div class="font-bold h4">Ship's Harm</div>
-
         <div class="long-text">
           <p>When <span class="font-bold">your Ship takes Damage</span>, mark off one of the options below for each point of Damage your Ship suffers.</p>
           <p>When <span class="font-bold">your Ship takes Damage and there are no unchecked options to mark off</span>, your Ship is destroyed.</p>
           <p>When you <span class="font-bold">perform Spot Repairs on your Ship</span>, check the Spot Repairs option for the Damage you are repairing, and apply the appropriate effect.</p>
         </div>
-
         <div class="long-text border-top margin-top">
           <div>
             <span class="symbol empty h5"></span>
@@ -207,7 +185,6 @@
                   ng-repeat="n in repeatNTimes(10)"></span>
           </div>
         </div>
-
         <div class="long-text border-top margin-top">
           <div class="flex-row">
             <div class="flex-1">
@@ -223,7 +200,6 @@
           <p>One of your Ship's systems has been hit! Fill in which one. Any roll using that Ship System is at Disadvantage.</p>
           <p>When <span class="font-bold">you perform Spot Repairs on a System Hit</span>, you restore normal operation, negate Disadvantage from <span class="font-italic">this</span> System Damage.</p>
         </div>
-
         <div class="long-text margin-top fade">
           <div class="flex-row">
             <div class="flex-1">
@@ -237,7 +213,6 @@
           </div>
           <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(10) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
         </div>
-
         <div class="long-text margin-top fade">
           <div class="flex-row">
             <div class="flex-1">
@@ -251,7 +226,6 @@
           </div>
           <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(10) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
         </div>
-
         <div class="long-text border-top margin-top">
           <div class="flex-row">
             <div class="flex-1">
@@ -266,7 +240,6 @@
           <p>The deck shudders and panels flicker. Any roll using a Ship System is at Disadvantage.</p>
           <p>When <span class="font-bold">you perform Spot Repairs on a Direct Hit</span>, you restore normal operation, negate Disadvantage from Direct Hit.</p>
         </div>
-
         <div class="long-text border-top margin-top">
           <div class="flex-row">
             <div class="flex-1">
@@ -281,7 +254,6 @@
           <p>A hole is blasted in the side of your ship and one or more sections are exposed to vacuum.</p>
           <p>When <span class="font-bold">you perform Spot Repairs on a Hull Breach</span>, you restore atmosphere to the vented sections, but you are dangerously low on Life Support, any rolls that require physical exertion are at Disadvantage.</p>
         </div>
-
         <div class="long-text border-top margin-top">
           <div class="flex-row">
             <div class="flex-1">
@@ -296,13 +268,9 @@
           <p>All systems are down. You keep your inertia, but are also at the mercy of any gravity acting on you.</p>
           <p>When <span class="font-bold">you perform Spot Repairs on Adrift</span>, you restore power - barely. You have Disadvantage on all system rolls until you have a chance to enact proper repairs.</p>
         </div>
-
       </div>
-
       <div class="flex-2 padding-left padding-right">
-
         <div class="h4 font-bold text-center">Ship Moves</div>
-
         <div class="long-text">
           <div>
             <span class="h5 font-bold">Your Ship's FTL: </span>
@@ -315,14 +283,12 @@
             <p ng-repeat="move in FTL.moves"><span ng-repeat="piece in move track by $index" class="{{piece.class}}">{{piece.text}}</span></p>
           </div>
         </div>
-
         <div class="long-text">
           <div>
             <span class="h5 font-bold">Spot Repairs</span>
           </div>
           <p>When <span class="font-bold">you performs spot repairs on your ship to patch over Damage</span>, describe how you do it. <span class="font-bold">If there are no immediate pressures and you have plenty of time</span>, you do it with little complication. Apply Spot Repairs to one Damage option. <span class="font-bold">If you are under immediate danger or time is limited</span>, <span class="font-bold">act under pressure</span> to complete the repairs, unless you have a move better suited to the job.</p>
         </div>
-
         <div class="long-text">
           <div>
             <span class="h5 font-bold">Silent Running</span>
@@ -332,22 +298,12 @@
             <li>You escape notice or enemy scans.</li>
             <li>You sneak into a favorable position.</li>
           </ul>
-          <p>When you run out of hold or act overtly, you become detectable again.</p>
-
-          
+          <p>When you run out of holds or act overtly, you become detectable again.</p>
         </div>
       </div>
-
     </div>
-
     <div class="page landscape flex-row">
-
-      
-
     </div>
-
   </div>
-  
 </body>
-
 </html>
