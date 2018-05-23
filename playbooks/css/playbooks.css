@@ -321,6 +321,9 @@ p,
 .h7 sup {
   font-size: 7px;
 }
+.clickable {
+  cursor: pointer;
+}
 span.symbol {
   position: relative;
 }
