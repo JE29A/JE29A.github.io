@@ -57,7 +57,41 @@
   </script>
 
   <script type="text/ng-template" id="shipFuse">
-    
+    <div class="long-text margin-top margin-bottom">
+      <div class="flex-row">
+        <table class="flex-1">
+          <tbody>
+            <tr>
+              <td colspan="2" class="text-center">
+                <span class="h4 font-bold">{{SF.fuseLabel}} </span>
+                <span class="h4 symbol empty"
+                      ng-repeat="n in repeatNTimes(5) track by $index"></span>
+              </td>
+            </tr>
+            <tr ng-repeat="row in SF.rows track by $index">
+              <td ng-repeat="cell in row track by $index"
+                  colspan="{{cell.colspan}}"
+                  rowspan="{{cell.rowspan}}"
+                  class="{{cell.cellClass}}" style="{{cell.style}}">
+                <input ng-if="cell.type == 'input'"
+                       class="{{cell.riderClass}}"
+                       style="{{cell.riderStyle}}"
+                       type="{{cell.riderType}}"
+                       min="{{cell.riderMin}}" max="{{cell.riderMax}}" />
+                <div class="{{cell.textClass}}" style="{{cell.style}}">{{cell.text}}</div>
+                <textarea ng-if="cell.type == 'textarea'"
+                          class="{{cell.riderClass}}"
+                          style="{{cell.riderStyle}}"
+                          rows="{{cell.riderRows || 2}}"></textarea>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div ng-repeat="child in SF.children track by $index">
+        <p ng-if="child.type == 'p'" class="{{child.class}}"><span ng-repeat="s in child.list" class="{{s.class}}">{{s.text}}</span></p>
+      </div>
+    </div>
   </script>
 
   <script type="text/ng-template" id="shipDebt">
@@ -189,6 +223,8 @@
                     ng-model="shipLook"></textarea>
         </div>
 
+        <div><hr/></div>
+
         <div class="margin-top margin-bottom">
           <input class="capitalize h4 font-bold text-center"
                  type="text" placeholder="VI's Name" style="width:100%;"
@@ -205,13 +241,7 @@
           </div>
         </div>
 
-        <div ng-repeat="SF in shipFuses track by $index"
-             ng-show="uniqueInputModel.shipType == '{{SF.key}}' "
-             ng-include="''"></div>
-
-        <div ng-include="'shipDebt'"></div>
-
-        <div class="margin-top margin-bottom">
+        <div class="margin-top margin-bottom long-text">
           <div class="text-center">
             <span class="h4 font-bold">Maintenance Fuse </span>
           </div>
@@ -239,14 +269,21 @@
             <p>When <span class="font-bold">you complete an episode</span>, mark one Maintenance Fuse. When <span class="font-bold">the Maintenance Fuse is full</span>, reset the Maintenance Fuse and check Maintenance Past Due. If it is already past due, the MC will inflict damage to the ship or a ship system.</p>
             <p>Some moves will allow you to reset the Maintenance Fuse and clear the Maintenance Past Due.</p>
           </div>
-        </div>
-        <div class="h4">
-          <span class="symbol empty"></span><span class="h4 font-bold margin-left">Maintenance Past Due</span>
-        </div>
-        <div class="long-text">
+          <div class="h4">
+            <span class="symbol empty"></span><span class="h4 font-bold margin-left">Maintenance Past Due</span>
+          </div>
           <p>While <span class="font-bold">Maintenance Past Due is checked</span>, all rolls involving the Ship and its systems are at Disadvantage.</p>
         </div>
+
+        <div><hr/></div>
+
+        <div ng-repeat="SF in shipFuses track by $index"
+             ng-show="uniqueInputModel.shipType == '{{SF.key}}' "
+             ng-include="'shipFuse'"></div>
+
+        <!--<div ng-include="'shipDebt'"></div>-->
       </div>
+
       <div class="flex-1 padding-left-big padding-right-big">
         <div class="font-bold h4 text-center">Ship's Harm</div>
         <div class="long-text">
@@ -456,7 +493,7 @@
 
         <div class="padding-left padding-right long-text" style="column-span: all;">
           <div class="text-center h4 font-bold">Upgrades &amp; Modules</div>
-          <p>Your ship starts with 2 Upgrade points to buy your starting Modules and may have up to 8 Modules installed. Modules without a box to mark do not count against your maximum Modules.</p>
+          <p>Your ship starts with 3 Upgrade points to buy your starting Modules and may have up to 10 Modules installed. Modules without a box to mark do not count against your maximum Modules.</p>
           <p>When you buy an Upgrade for your ship, check an upgrade box. Unless a Module says otherwise, you need to fill all of the Upgrade boxes before that Module is fully installed and functional in your ship.</p>
           <p>If you are the maximum number of Modules, you have to pull out a Module before you can start installing a new one. You do not get a refund on Upgrade Points.</p>
           <hr/>

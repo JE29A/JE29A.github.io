@@ -76,7 +76,68 @@ function getShipFuses() {
     label: "Debt",
     fuseLabel: "Debt Fuse",
     key: "debt",
-    
+    rows: [
+      [
+        {
+          colspan: 2,
+          text: "Creditor",
+          textClass: "h5 font-bold text-left",
+          type: "textarea",
+          riderClass: "border h6",
+          riderStyle: "width: 100%;",
+          riderRows: 8
+        }
+      ],[
+        {
+          cellClass: "padding-top text-left",
+          text: "Payments",
+          textClass: "h5 font-bold inline-block text-left",
+          type: "input",
+          riderType: "number",
+          riderClass: "border h6 no-spinner text-center float-right",
+          riderStyle: "width: 35px;",
+          riderMin: 0,
+          riderMax: 100
+        },{
+          cellClass: "padding-top text-right",
+          text: "Disposition",
+          textClass: "h5 font-bold inline-block",
+          type: "input",
+          riderType: "number",
+          riderClass: "border h6 no-spinner text-center float-left",
+          riderStyle: "width: 25px;",
+          riderMin: -2,
+          riderMax: 2
+        }
+      ]
+    ],
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            text: "When "
+          },{
+            class: "font-bold",
+            text: "you complete an episode"
+          },{
+            text: ", mark one Debt Fuse. When "
+          },{
+            class: "font-bold",
+            text: "the Debt Fuse is full"
+          },{
+            text: ", reduce your creditor's Disposition by 1, and your Creditor comes looking for you."
+          }
+        ]
+      },{
+        type: "p",
+        list: [
+          {
+            text: "Some moves will allow you to clear the Debt Fuse and reduce your Payments. When your Payments reaches 0, you own your ship."
+          }
+        ]
+      }
+    ]
   });
 
   return ret;
@@ -489,6 +550,25 @@ function getShipModules() {
           {
             class: "",
             text: "The VI can assist character moves if the VI has at least a 1 in that move's stat, in which case the character has Advantage."
+          }
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    name: "FTL Capable",
+    symbolClass: "empty",
+    symbolCount: 1,
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "Your ship is FTL capable. Select a choice on the front page."
           }
         ]
       }
