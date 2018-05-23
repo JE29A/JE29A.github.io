@@ -75,7 +75,7 @@ function getShipFuses() {
   ret.push({
     label: "Independent Spacers (Debt Clock)",
     fuseLabel: "Debt Clock",
-    key: "debt",
+    key: "",
     missionCompleteStr: "Get Paid",
     getPaidChoices: [
       "You make a payment to your Creditor, reduce Payments by 1 and reset the Debt Clock.",
@@ -298,6 +298,7 @@ function getFTL() {
 
   ret.push({
     label: "None",
+    key: "",
     selected: "selected",
     moves: [
       [
@@ -505,12 +506,14 @@ function getFTL() {
 
   var i;
   for(i = 0; i < ret.length; i++) {
-    ret[i].key = ret[i].label.replace(/ /g, '_').toLowerCase();
+    if (ret[i].key == undefined) {
+      ret[i].key = ret[i].label.replace(/ /g, '_').toLowerCase();
+    }
   }
 
   ret.sort(function(a, b) {
-    if (a.key == 'none') { return -1; }
-    if (b.key == 'none') { return 1; }
+    if (a.key == '') { return -1; }
+    if (b.key == '') { return 1; }
     if (a.key > b.key) { return 1; }
     if (a.key < b.key) { return -1; }
     return 0;

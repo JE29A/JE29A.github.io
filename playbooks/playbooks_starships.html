@@ -467,7 +467,7 @@
           </ul>
           <ul>
             <li class="font-bold"
-                ng-show="!(uniqueInputModel.shipType)">Select a Motivation to populate your choices.</li>
+                ng-show="uniqueInputModel.shipType == undefined">Select a Motivation to populate your choices.</li>
             <div ng-repeat="SF in shipFuses track by $index"
                  ng-show="uniqueInputModel.shipType == '{{SF.key}}'">
               <li class="font-italic"
@@ -488,8 +488,7 @@
                       ng-model="uniqueInputModel.FTL">
                 <option class="h6 font-normal font-no-bold"
                         ng-repeat="FTL in FTLs track by $index"
-                        value="{{FTL.key}}"
-                        >{{FTL.label}}</option>
+                        value="{{FTL.key}}">{{FTL.label}}</option>
               </select>
             </div>
             <span class="h5 font-bold">FTL Moves</span>
