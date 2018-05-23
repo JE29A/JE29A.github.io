@@ -7,7 +7,7 @@ function getPlaybook_spacehand() {
       "Get +1 to Cool (max +2)",
       "Get +1 to Sharp (max +2)",
       "Get +1 to Tough (max +2)",
-      "Get a light or small starship or warship",
+      "REPLACE",
       "Get a new spacer move",
       "Get a new spacer move",
       "Get a new spacer move",
@@ -190,28 +190,6 @@ function getPlaybook_spacehand() {
         section: 3,
         useCommon: "spacer-crew",
         containerClass: ""
-      }
-      ,{
-        section: "3b",
-        containerClass: "",
-        titleDivClass: "",
-        title: "Your ship",
-        titleClass: "title h4",
-        ships: [
-          {
-            showTitle: false,
-            shipSuffix: "",
-            largeClass: "h4",
-            groupClass: "h6",
-            showShipCrew: false,
-            showShip: true,
-            showCrew: false,
-            showCrewDetails: false,
-            crewDetailRows: 10,
-            crewStr: "crew",
-            hideDelta: false
-          }
-        ]
       }
     ]
   };

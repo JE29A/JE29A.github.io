@@ -10,7 +10,7 @@ function getPlaybook_tramp() {
       "Get +1 to Tough (max +2)",
       "Get a new tramp move",
       "Get a new tramp move",
-      "Erase a tag from your first ship",
+      "REPLACE",
       "Get a move from another playbook",
       "Get a move from another playbook"
     ],
@@ -106,105 +106,6 @@ function getPlaybook_tramp() {
       }
     ],
     features: [
-      /*
-      {
-        section: 3,
-        titleDivClass: "",
-        title: "",
-        titleClass: "title h3",
-        ships: [
-          {
-            showTitle: true,
-            largeClass: "title h3 underline thick",
-            groupClass: "h6 feature-margin",
-            showPossessiveInstructions: false,
-            showNeutralInstructions: true,
-            showFrames: true,
-            sizes: {
-              small: true,
-              light: true,
-              medium: true,
-              heavy: true,
-              capital: true
-            },
-            showOptions: true,
-            showWarship: true,
-            showShipCrew: false,
-            showShip: false,
-            showCrew: false,
-            crewStr: "crew",
-            hideDelta: true
-          }
-        ]
-      },
-      */
-      //{ section: "2b", images: [ { src: "timelapse4.png", class: "", style: "height: 15%;" } ] },
-      /*
-      {
-        section: "2b",
-        containerClass: "border pad",
-        titleDivClass: "underline thick",
-        title: "Your first ship",
-        titleClass: "title h4",
-        ships: [
-          {
-            showTitle: false,
-            shipSuffix: "",
-            largeClass: "h4",
-            groupClass: "h6",
-            showPossessiveInstructions: false,
-            showNeutralInstructions: false,
-            showFrames: false,
-            sizes: {
-              small: true,
-              light: true,
-              medium: true,
-              heavy: true,
-              capital: true
-            },
-            showOptions: false,
-            showWarship: false,
-            showShipCrew: true,
-            showShip: false,
-            showCrew: false,
-            crewStr: "crew",
-            hideDelta: true
-          }
-        ]
-      },
-      */
-      /*
-      {
-        section: "3b",
-        containerClass: "border pad",
-        titleDivClass: "underline thick",
-        title: "Your other ships",
-        titleClass: "title h4",
-        ships: [
-          {
-            showTitle: false,
-            shipSuffix: " 2",
-            largeClass: "h4",
-            groupClass: "h6",
-            showShipCrew: false,
-            showShip: true,
-            showCrew: false,
-            crewStr: "crew",
-            hideDelta: true
-          },{
-            showTitle: false,
-            shipSuffix: " 3",
-            largeClass: "h4",
-            groupClass: "h6",
-            showShipCrew: false,
-            showShip: true,
-            showCrew: false,
-            crewStr: "crew",
-            hideDelta: true
-          }
-        ]
-      },
-      */
       {
         section: 2,
         titleDivClass: "underline thick",
@@ -213,12 +114,6 @@ function getPlaybook_tramp() {
         divClass: "",
         divList: [
           {
-            titleDivClass: "li filled list-top",
-            title: "Captain",
-            titleClass: "h6 move-label",
-            subtitle: "You own your ship free and clear (okay, there might be a mortgage). You have a small or light frame starship and the crew to staff it. It can be a warship if you wish.",
-            subtitleClass: "h6"
-          },{
             titleDivClass: "li empty list-top",
             title: "Daredevil",
             titleClass: "h6 move-label",
@@ -229,12 +124,6 @@ function getPlaybook_tramp() {
             title: "Fighter Jock Mentality",
             titleClass: "h6 move-label",
             subtitle: "When you THREATEN WITH VIOLENCE, roll+Cool instead of +Tough.",
-            subtitleClass: "h6"
-          },{
-            titleDivClass: "li empty list-top",
-            title: "Private Fleet",
-            titleClass: "h6 move-label",
-            subtitle: "Gain two more small or light frame ships and the crew to staff them that you detail. These are civilian ships.",
             subtitleClass: "h6"
           },{
             titleDivClass: "li empty list-top",

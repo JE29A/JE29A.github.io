@@ -3,10 +3,10 @@ function getPlaybook_engineer() {
     trope: "engineer",
     nameModelString: "playbookModelName_engineer",
     improvements: [
+      "Get +1 to Charm (max +2)",
       "Get +1 to Cool (max +2)",
       "Get +1 to Sharp (max +2)",
       "Get +1 to Tough (max +2)",
-      "Get a light or small starship or warship",
       "Add 2 options to your workspace",
       "Get a new engineer move",
       "Get a new engineer move",
@@ -193,6 +193,7 @@ function getPlaybook_engineer() {
                 title: "Scrap pile"
               },{
                 titleDivClass: "li empty",
+
                 titleClass: "h6",
                 title: "Controlled environment"
               },{

@@ -139,7 +139,7 @@ function getPlaybook_medtech() {
             titleDivClass: "li empty list-top",
             titleClass: "h6 move-label",
             subtitleClass: "h6",
-            title: "Infirmary",
+            title: "Infirmary -- REPLACE",
             subtitle: "You get a surgical infirmary (you detail where) with life support, a pharma-printer, robotic arm assistant, and smart dispenser. Get patients into it and you can work on them with a 1-stock discount (+1 for 0-stock, +2 for 1-stock, +3 for 1-stock). Modern facilities don't waste surgical kits like 21st century chop-shops."
           },{
             titleDivClass: "li empty list-top",

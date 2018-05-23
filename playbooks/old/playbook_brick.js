@@ -10,7 +10,7 @@ function getPlaybook_brick() {
       "Get a new brick move",
       "Get a new brick move",
       "Get a new brick move",
-      "Get a small or light warship",
+      "REPLACE",
       "Get a move from another playbook",
       "Get a move from another playbook"
     ],
@@ -277,37 +277,6 @@ function getPlaybook_brick() {
         divClass: "border",
         includeTextarea: true,
         textareaRows: 6
-      },{
-        section: "3",
-        containerClass: "border pad",
-        titleDivClass: "underline thick",
-        title: "Your warship",
-        titleClass: "title h4",
-        ships: [
-          {
-            showTitle: false,
-            shipSuffix: "",
-            largeClass: "h4",
-            groupClass: "h6 feature-margin",
-            showPossessiveInstructions: false,
-            showNeutralInstructions: true,
-            showFrames: true,
-            sizes: {
-              small: true,
-              light: true,
-              medium: true,
-              heavy: true,
-              capital: true
-            },
-            showOptions: true,
-            showWarship: true,
-            showShipCrew: true,
-            showShip: false,
-            showCrew: false,
-            crewStr: "crew",
-            hideDelta: true
-          }
-        ]
       }
     ]
   };

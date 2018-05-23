@@ -7,10 +7,10 @@ function getPlaybook_show() {
       "Get +1 to Sharp (max +2)",
       "Get +1 to Smarts (max +2)",
       "Get +1 to Tough (max +2)",
-      "SOMETHING",
       "Get a new show move",
       "Get a new show move",
-      "Get a small or light ship",
+      "Get a new show move",
+      "REPLACE",
       "Get a move from another playbook",
       "Get a move from another playbook"
     ],
@@ -255,37 +255,6 @@ function getPlaybook_show() {
         textareaRows: 2,
         textareaClass: "flex-1",
         containerClass: "flex-1 flex-col"
-      },{
-        section: "3",
-        containerClass: "border pad",
-        titleDivClass: "underline thick",
-        title: "Your ship",
-        titleClass: "title h4",
-        ships: [
-          {
-            showTitle: false,
-            shipSuffix: "",
-            largeClass: "h4",
-            groupClass: "h6 feature-margin",
-            showPossessiveInstructions: false,
-            showNeutralInstructions: true,
-            showFrames: false,
-            sizes: {
-              small: true,
-              light: true,
-              medium: true,
-              heavy: true,
-              capital: true
-            },
-            showOptions: false,
-            showWarship: false,
-            showShipCrew: true,
-            showShip: false,
-            showCrew: false,
-            crewStr: "crew",
-            hideDelta: true
-          }
-        ]
       }
     ]
   };
