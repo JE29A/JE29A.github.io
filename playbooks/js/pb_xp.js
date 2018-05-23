@@ -8,7 +8,7 @@ function getXPRules() {
           class: "font-bold",
           text: "you roll a 6-, when a move directs you to, or the MC tells you to,"
         },{
-          text: "mark Experience. when you have 5 marks, choose an improvement and clear your Experience."
+          text: " mark Experience. when you have 5 marks, choose an improvement and clear your Experience."
         }
       ]
     ],

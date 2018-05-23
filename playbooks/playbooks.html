@@ -14,6 +14,23 @@
 <!-----------------------------------------------------------------------------
   Start of NG-TEMPLATES
 ------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="playbookLongText">
+    <div ng-repeat="child in FEAT.children track by $index">
+      <p ng-if="child.type == 'p'" class="{{child.class}}"><span ng-repeat="s in child.list track by $index" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span></p>
+      <ul ng-if="child.type == 'ul'" class="{{child.class}}">
+        <li ng-repeat="l in child.list track by $index"><span ng-repeat="s in l track by $index" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span></li>
+      </ul>
+      <textarea ng-if="child.type == 'textarea'"
+                class="{{child.class}}"
+                style="{{child.style}}"
+                rows="{{child.rows}}"></textarea>
+      <input ng-if="child.type == 'input'"
+             type="{{child.type2 || 'text'}}"
+             class="{{child.class}}"
+             style="{{child.style}}" />
+    </div>
+  </script>
+
   <script type="text/ng-template" id="playbookStatBox">
     <div class="stat">
       <div class="border anchor">
@@ -30,7 +47,7 @@
   <script type="text/ng-template" id="playbookStatTable">
     <div class="anchor">
       <span class="h4 font-bold">Stats</span>
-      <span class="h7 text-right inline-block" style="position: absolute; right: 1px; bottom: 0px;">{{stats.instructions}}</span>
+      <span class="h7 text-right inline-block" style="position: absolute; right: 1px; bottom: 1px;">{{stats.instructions}}</span>
     </div>
     <div>
       <table class="width-100">
@@ -50,14 +67,14 @@
       <div class="keep-together auto-column-span width-100">
         <div class="anchor">
           <span class="h4 font-bold">Harm</span>
-          <span class="h7 text-justify inline-block" style="position: absolute; left: 55px; right: 1px; bottom: 0px;">When <span class="font-bold">you are directed to mark Harm,</span> mark off one of the Harm options or 1 Stress for each Harm you receive. <span class="font-bold">When you have 5 Stress,</span> clear your Stress track and take a Calamity (on the back).</span>
+          <span class="h7 text-justify inline-block" style="position: absolute; left: 55px; right: 1px; bottom: 1px;">When <span class="font-bold">you are directed to mark Harm,</span> mark off one of the Harm options or 1 Stress for each Harm you receive. <span class="font-bold">When you have 5 Stress,</span> clear your Stress track and take a Calamity.</span>
         </div>
         
       </div>
 
       <div class="text-left h4 keep-together margin-top margin-bottom">
-        <span class="h4 font-bold">Stress</span>
-        <span class="h4 symbol empty clickable" ng-repeat="n in repeatNTimes(5)"></span>
+        <span class="h5 font-bold">Stress</span>
+        <span class="h5 symbol empty clickable" ng-repeat="n in repeatNTimes(5)"></span>
       </div>
       
       <div class="keep-together" ng-repeat="harmBox in harmBoxes track by $index">
@@ -71,10 +88,10 @@
 
   <script type="text/ng-template" id="playbookFoibles">
     <div class="long-text">
-      <div>
-        <span class="h5 font-bold">Foibles</span>
+      <div class="anchor">
+        <span class="h4 font-bold">Foibles</span>
+        <span class="h7 text-justify inline-block" style="position: absolute; bottom: 0px; right: 1px; left: 69px;">When you choose to gain a Foible, write it below. <span class="font-bold">When a Foible applies to the current situation,</span> choose 1:</p>
       </div>
-      <p>When you choose to gain a Foible, write it below. <span class="font-bold">When a Foible applies to the current situation,</span> choose 1:</p>
       <ul>
         <li>Decline the offer to apply your Foible, and continue playing as normal.</li>
         <li>Apply your Foible. You have Disadvantage going forward.</li>
@@ -88,18 +105,87 @@
 
   <script type="text/ng-template" id="playbookGear">
     <div class="long-text anchor">
-      <div>
-        <span class="h5 font-bold">Gear & Vehicles</span>
+      <div class="anchor">
+        <span class="h4 font-bold">Gear & Vehicles</span>
+        <span class="h7 inline-block" style="position: absolute; bottom: 1px; right: 1px; left: 147px;">When <span class="font-bold">you get ready for action and select your Loadout.</span> Choose items from your Gear list equal to the same number of your Gear slots.</span>
       </div>
       <div class="border padding">
-        <div class="float-right h6">
-          <span class="font-bold h6" style="margin-left: 6px;">Slots: </span><span class="clickable symbol empty checked" ng-repeat="n in repeatNTimes(3) track by $index"></span><span class="clickable symbol empty" ng-repeat="n in repeatNTimes(2) track by $index"></span>
-        </div>
-        <p class="no-top">When <span class="font-bold">you get ready for action and select your Loadout.</span> Choose items from your Gear list equal to the same number of your Gear slots.</p>
-        <div>
-          <textarea class="width-100 h6" rows="4"></textarea>
+        <div class="anchor">
+          <textarea class="width-100 h6" rows="6" style="text-indent: 105px;"></textarea>
+          <div style="position: absolute; top: -4px; left: 0px;">
+            <span class="font-bold h6">Slots: </span><span class="clickable symbol empty checked h5" ng-repeat="n in repeatNTimes(3) track by $index"></span><span class="clickable symbol empty h5" ng-repeat="n in repeatNTimes(2) track by $index"></span>
+          </div>
         </div>
       </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="playbookMoves">
+    <div class="keep-together margin-top margin-bottom" ng-repeat="move in playbook.moves track by $index">
+      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <span class="clickable symbol empty h5 {{move.class}}"></span>
+        <span class="h5 font-bold">{{move.label}}</span>
+      </div>
+      <div ng-init="FEAT = move" ng-include="'playbookLongText'" style="padding-top: 5px;"></div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="playbookCalamity">
+    <div class="long-text">
+      <div>
+        <span class="h4 font-bold">Calamity</span>
+      </div>
+      <p><span class="font-bold">Mark a calamity that is relevant to your situation,</span> describe the consequences mentioned in your choice and take an Improvement. If appropriate, you may write a Foible about it.</p>
+      <div class="h6" ng-repeat="calamity in playbook.calamities track by $index">
+        <p><span class="clickable symbol empty h6"></span> {{calamity.text}}</p>
+        <ul ng-if="calamity.list && calamity.list.length > 0" class="font-italic h7">
+          <li ng-repeat="s in calamity.list track by $index">{{s}}</li>
+        </ul>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="playbookCreation">
+    <div class="long-text">
+      <div>
+        <span class="h4 font-bold">Making a <span class="capitalize">{{playbook.trope}}</span></span>
+      </div>
+      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <span class="h5 font-bold">Name:</span>
+      </div>
+      <p class="no-top" style="padding-top: 5px;">Choose a name or make up your own:</p>
+      <p class="text-left">{{playbook.names}}</p>
+
+      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <span class="h5 font-bold">Look:</span>
+      </div>
+      <p class="no-top" style="padding-top: 5px;">Choose a pronoun and up to 4:</p>
+      <p class="text-left">Him, Her, Them, It, Em, Zim, Per, Sir, Ver, [name].</p>
+      <p class="text-left">{{playbook.looks}}</p>
+
+      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <span class="h5 font-bold">Stats:</span>
+      </div>
+      <p class="no-top" style="padding-top: 5px;">Assign your stats.</p>
+
+      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <span class="h5 font-bold">Gear:</span>
+      </div>
+      <p class="no-top" style="padding-top: 5px;">You start with 3 Gear slots. Choose 5 Gear from the list below to start with:</p>
+      <div ng-repeat="g in playbook.gear track by $index">
+        <span class="h6 clickable symbol empty"></span>
+        <span class="h7">{{g}}</span>
+      </div>
+
+      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <span class="h5 font-bold">Moves:</span>
+      </div>
+      <p class="no-top" style="padding-top: 5px;">Choose 2 of your {{playbook.trope}} moves and 1 move from anywhere.</p>
+
+      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <span class="h5 font-bold">Foibles:</span>
+      </div>
+      <p class="no-top" style="padding-top: 5px;">Create a Foible or two.</p>
     </div>
   </script>
 <!-----------------------------------------------------------------------------
@@ -116,7 +202,7 @@
 
     <div class="page landscape flex-row" pb-side="a">
 
-      <div class="flex-1 padding-left padding-right">
+      <div class="flex-2 padding-left padding-right">
 
         <div class="flex-row">
           <div class="flex-1 margin-right">
@@ -171,14 +257,35 @@
 
       </div>
 
-      <div class="flex-1 padding-left padding-right">
-        
+      <div class="flex-2 padding-left padding-right flex-col">
+        <div>
+          <span class="h4 font-bold capitalize">{{playbook.trope}} Moves</span>
+        </div>
+        <div ng-include="'playbookMoves'"></div>
+        <div class="flex-1 margin-top margin-bottom flex-col border">
+          <div>
+            <span class="h5 font-bold">Other Moves</span>
+          </div>
+          <textarea class="flex-1 width-100 h6"></textarea>
+        </div>
       </div>
+
+      
 
     </div>
 
     <div class="page landscape flex-row" pb-side="b">
-      
+      <div class="flex-2 padding-left padding-right">
+        
+      </div>
+
+      <div class="flex-1 padding-left padding-right">
+        <div class="margin-top margin-bottom" ng-include="'playbookCalamity'"></div>
+      </div>
+
+      <div class="flex-1 padding-left padding-right">
+        <div class="margin-top margin-bottom" ng-include="'playbookCreation'"></div>
+      </div>
     </div>
 
   </div>
