@@ -519,8 +519,6 @@
              ng-repeat="mod in shipBays track by $index"
              ng-include="'shipModule'"></div>
 
-        <hr ng-if="shipBays && shipBays.length > 0" />
-
         <div class="keep-together padding-left padding-right"
              ng-repeat="mod in shipModules track by $index"
              ng-include="'shipModule'"></div>
@@ -542,6 +540,8 @@
                       value="{{SF.key}}">{{SF.label}}</option>
             </select>
           </p>
+          <p ng-repeat="SF in shipFuses track by $index"
+             ng-show="uniqueInputModel.shipType == '{{SF.key}}' ">{{SF.blurb}}</p>
           
         </div>
 

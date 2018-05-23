@@ -77,6 +77,7 @@ function getShipFuses() {
     fuseLabel: "Debt Clock",
     key: "",
     missionCompleteStr: "Get Paid",
+    blurb: "Your crew are independent spacers trying to make a living.",
     getPaidChoices: [
       "You make a payment to your Creditor, reduce Payments by 1 and reset the Debt Clock.",
       "You pay to maintain your ship, clear Maintenance Past Due and reset the Maintenance Clock.",
@@ -591,42 +592,6 @@ function getShipBays() {
     ]
   });
 
-  return ret;
-
-  ret.push({
-    name: "",
-    symbolClass: "",
-    symbolCount: 1,
-    hasDischarged: true,
-    tags: "",
-    children: [
-      {
-        type: "p",
-        list: [
-          {
-            class: "",
-            text: ""
-          }
-        ]
-      },{
-        type: "ul",
-        class: "",
-        list: [
-          [
-            {
-              class: "",
-              text: ""
-            }
-          ]
-        ]
-      }
-    ]
-  });
-}
-
-function getShipModules() {
-  var ret = [];
-
   ret.push({
     name: "Computer Core",
     symbolClass: "empty",
@@ -687,6 +652,7 @@ function getShipModules() {
             text: "The ship also has 1 or 2 personality traits from below (or make up your own)."
           }
         ]
+
       },{
         type: "p",
         class: "text-center font-italic",
@@ -699,6 +665,42 @@ function getShipModules() {
       }
     ]
   });
+
+  return ret;
+
+  ret.push({
+    name: "",
+    symbolClass: "",
+    symbolCount: 1,
+    hasDischarged: true,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: ""
+          }
+        ]
+      },{
+        type: "ul",
+        class: "",
+        list: [
+          [
+            {
+              class: "",
+              text: ""
+            }
+          ]
+        ]
+      }
+    ]
+  });
+}
+
+function getShipModules() {
+  var ret = [];
 
   ret.push({
     name: "FTL Capable",
@@ -713,44 +715,6 @@ function getShipModules() {
           {
             class: "",
             text: "Your ship is FTL capable. Select a choice on the front page."
-          }
-        ]
-      }
-    ]
-  });
-
-  ret.push({
-    name: "Extra Hull Plating",
-    symbolClass: "empty",
-    symbolCount: 3,
-    hasDischarged: false,
-    tags: "",
-    children: [
-      {
-        type: "p",
-        list: [
-          {
-            class: "",
-            text: "Your ship may take 1 extra hit of superficial damage for each Upgrade Point spent on this Module."
-          }
-        ]
-      }
-    ]
-  });
-
-  ret.push({
-    name: "Redundant Systems",
-    symbolClass: "empty",
-    symbolCount: 1,
-    hasDischarged: false,
-    tags: "",
-    children: [
-      {
-        type: "p",
-        list: [
-          {
-            class: "",
-            text: "Redundant systems and backups make your ship more reliable. Your ship can take an additional System Hit harm. Additionally, you have Advantage when making repairs in a fraught situation."
           }
         ]
       }
@@ -854,6 +818,113 @@ function getShipModules() {
   });
 
   ret.push({
+    name: "Mining Equipment",
+    symbols: [
+      {
+        class: "empty",
+        count: 1
+      }
+    ],
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "Your ship is equiped with the necessary equipment to fracture and collect minerals from asteroids or planet surfaces."
+          }
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    name: "Infirmary/Autodoc",
+    symbolClass: "empty",
+    symbolCount: 2,
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "For 1 Upgrade Point, the Ship has an infirmary that can accomodate many patients. Restocked as part of maintaining the ship."
+          }
+        ]
+      },{
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "For 2 Upgrade Points, the infirmary also has an Autodoc bay that can treat injuries or wounds. Unsympathetic, rough surgery in an Autodoc heals the \"I'm Hurt Bad\" Harm. More unusual or bizarre maladies require an expert."
+          }
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    name: "Machine Shop/Fabricator",
+    symbolClass: "empty",
+    symbolCount: 2,
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "With 1 Upgrade Point, the Ship has a machine shop where some components can be created with enough time. With 2 Upgrade Points, the ship has advanced fabricating printers that can create nanocircuitry if it has the necessary raw materials."
+          }
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    name: "Extra Hull Plating",
+    symbolClass: "empty",
+    symbolCount: 3,
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "Your ship may take 1 extra hit of superficial damage for each Upgrade Point spent on this Module."
+          }
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    name: "Redundant Systems",
+    symbolClass: "empty",
+    symbolCount: 1,
+    hasDischarged: false,
+    tags: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            class: "",
+            text: "Redundant systems and backups make your ship more reliable. Your ship can take an additional System Hit harm. Additionally, you have Advantage when making repairs in a fraught situation."
+          }
+        ]
+      }
+    ]
+  });
+
+  ret.push({
     name: "Sidewalls",
     symbolClass: "empty",
     symbolCount: 2,
@@ -948,10 +1019,10 @@ function getShipModules() {
     ]
   });
 
-  ret.push({
-    name: "Infirmary",
+    ret.push({
+    name: "Specialized Compartments",
     symbolClass: "empty",
-    symbolCount: 1,
+    symbolCount: 3,
     hasDischarged: false,
     tags: "",
     children: [
@@ -960,71 +1031,14 @@ function getShipModules() {
         list: [
           {
             class: "",
-            text: "The Ship has an infirmary that can accomodate many patients. Restocked as part of maintaining the ship."
-          }
-        ]
-      }
-    ]
-  });
-
-  ret.push({
-    name: "Autodoc",
-    symbolClass: "empty",
-    symbolCount: 1,
-    hasDischarged: false,
-    tags: "",
-    children: [
-      {
-        type: "p",
-        list: [
-          {
-            class: "",
-            text: "The Ship has an Autodoc bay that can treat injuries or wounds. Unsympathetic, rough surgery in an Autodoc heals the \"I'm Hurt Bad\" Harm. More unusual or bizarre maladies require an expert. If your ship has a full infirmary this doesn't count as a Module. Restocked as part of maintaining the ship."
-          }
-        ]
-      }
-    ]
-  });
-
-  ret.push({
-    name: "Machineshop",
-    symbolClass: "empty",
-    symbolCount: 2,
-    hasDischarged: false,
-    tags: "",
-    children: [
-      {
-        type: "p",
-        list: [
-          {
-            class: "",
-            text: "With 1 Upgrade Point, the Ship has a machineshop where some components can be created with enough time. With 2 Upgrade Points, the ship has advanced fabricating printers that can create nanocircuitry if it has the necessary raw materials."
-          }
-        ]
-      }
-    ]
-  });
-
-  ret.push({
-    name: "Specialized Compartment",
-    symbolClass: "empty",
-    symbolCount: 1,
-    hasDischarged: false,
-    tags: "",
-    children: [
-      {
-        type: "p",
-        list: [
-          {
-            class: "",
-            text: "Your ship has an specialized compartment that isn't listed above. Detail it."
+            text: "Your ship has an additional specialized compartment for each Upgrade Point. Detail them."
           }
         ]
       },{
         type: "textarea",
         class: "h7 font-normal border",
         style: "width: 100%;",
-        rows: 4
+        rows: 6
       }
     ]
   });
