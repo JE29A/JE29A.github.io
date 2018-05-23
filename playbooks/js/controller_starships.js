@@ -73,9 +73,19 @@ function getShipFuses() {
   var ret = [];
 
   ret.push({
-    label: "Debt",
-    fuseLabel: "Debt Fuse",
+    label: "Independent Spacers (Debt Clock)",
+    fuseLabel: "Debt Clock",
     key: "debt",
+    missionCompleteStr: "Get Paid",
+    getPaidChoices: [
+      "You make a payment to your Creditor, reduce Payments by 1 and reset the Debt Clock.",
+      "You pay to maintain your ship, clear Maintenance Past Due and reset the Maintenance Clock.",
+      "You get the Ship patched up. Remove all Damage from the Ship.",
+      "You purchase an Upgrade for your Ship.",
+      "You go shopping for a new Vehicle, roll Test Drive.",
+      "You fill the Ship's cargo hold with lucrative goods for slae elsewhere, roll Lucrative Exports to determine what Cargo is available.",
+      "You divide the spoils for some walking around money, each crew member rolls on Hey Big Spender."
+    ],
     rows: [
       [
         {
@@ -85,7 +95,7 @@ function getShipFuses() {
           type: "textarea",
           riderClass: "border h6",
           riderStyle: "width: 100%;",
-          riderRows: 8
+          riderRows: 7
         }
       ],[
         {
@@ -121,10 +131,10 @@ function getShipFuses() {
             class: "font-bold",
             text: "you complete an episode"
           },{
-            text: ", mark one Debt Fuse. When "
+            text: ", mark one Debt Clock. When "
           },{
             class: "font-bold",
-            text: "the Debt Fuse is full"
+            text: "the Debt Clock is full"
           },{
             text: ", reduce your creditor's Disposition by 1, and your Creditor comes looking for you."
           }
@@ -133,9 +143,149 @@ function getShipFuses() {
         type: "p",
         list: [
           {
-            text: "Some moves will allow you to clear the Debt Fuse and reduce your Payments. When your Payments reaches 0, you own your ship."
+            text: "Some moves will allow you to clear the Debt Clock and reduce your Payments. When your Payments reaches 0, you own your ship."
           }
         ]
+      }
+    ]
+  });
+
+  ret.push({
+    label: "Organization Service (Duty Clock)",
+    fuseLabel: "Duty Clock",
+    key: "duty",
+    missionCompleteStr: "Report Success",
+    getPaidChoices: [
+      "You make the right connections within your Organization, increase Duty by 1.",
+      "You put your Ship in for a service, and reset the Maintenance Fuse.",
+      "You get your Ship patched up. Remove all Damage from the Ship",
+      "You requisition an Upgrade for your Ship.",
+      "You requisition a new Vehicle.",
+      "You collect your Salary and have off-duty time to spend it, each crew member rolls on Hey Big Spender."
+    ],
+    rows: [
+      [
+        {
+          colspan: 2,
+          text: "Organization",
+          textClass: "h5 font-bold text-left",
+          type: "textarea",
+          riderClass: "border h6",
+          riderStyle: "width: 100%;",
+          riderRows: 7
+        }
+      ],[
+        {
+          cellClass: "padding-top text-left vertical-align-top",
+          text: "Rank",
+          textClass: "h5 font-bold inline-block text-left",
+          type: "input",
+          riderType: "number",
+          riderClass: "border h6 no-spinner text-center float-right",
+          riderStyle: "width: 40px;",
+          riderMin: -1,
+          riderMax: 3
+        },{
+          cellClass: "padding-top text-right vertical-align-top",
+          text: "Disposition",
+          textClass: "h5 font-bold inline-block text-right",
+          type: "input",
+          riderType: "number",
+          riderClass: "border h6 no-spinner text-center float-left",
+          riderStyle: "width: 40px;",
+          riderMin: -2,
+          riderMax: +2
+        }
+      ]
+    ],
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            text: "When "
+          },{
+            class: "font-bold",
+            text: "the Duty Clock is full"
+          },{
+            text: ", reset it and increase your Rank by 1, to a maximum Rank of +3. When you fail in a mission set by your Organization, the MC will tell you one of the following:"
+          }
+        ]
+      },{
+        type: "ul",
+        list: [
+          [
+            {
+              class: "font-italic",
+              text: "Your failure has affected many in your Organization, and your reputation takes a hit. Reduce your Organization's Disposition by 1."
+            }
+          ],[
+            {
+              class: "font-italic",
+              text: "Your failure goes on your permanent record. Reduce Duty by 1. If your Duty is at 0, reduce Rank by 1 to a minimum Rank of -1."
+            }
+          ]
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    label: "Pirates (Crime Clock)",
+    fuseLabel: "Crime Clock",
+    key: "pirate",
+    missionCompleteStr: "Fence Cargo",
+    getPaidChoices: [
+      "You pay Fines or frame someone else for your crimes, uncheck Infamous and reset the Crime Fuse.",
+    "You pay the bills, you pay the maintenance costs for your ship, and reset the Maintenance Fuse.",
+    "You get the Ship patched up. Remove all Damage from the Ship.",
+    "You purchase an Upgrade for your Ship.",
+    "You go shopping for a new Vehicle, roll Test Drive.",
+    "You fill your ship’s cargo hold with lucrative goods for sale elsewhere, roll Lucrative Exports to determine what Cargo is available.",
+    "You divide the spoils for some walking around money, each crew member rolls on Hey Big Spender."
+    ],
+    rows: [
+      [
+        {
+          colspan: 2,
+          text: "Reputation",
+          textClass: "h5 font-bold text-left",
+          type: "textarea",
+          riderClass: "border h6",
+          riderStyle: "width: 100%;",
+          riderRows: 7
+        }
+      ]
+    ],
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            text: "When "
+          },{
+            class: "font-bold",
+            text: "you complete a Contract or Episode that reinforces your criminal Reputation"
+          },{
+            text: ", increase your Crime Clock by 1. When "
+          },{
+            class: "font-bold",
+            text: "your Crime Clock is full"
+          },{
+            text: ", make Infamous."
+          }
+        ]
+      },{
+        type: "div",
+        class: "h5",
+        symbols: [
+          {
+            class: "empty",
+            count: 1
+          }
+        ],
+        text: "Infamous",
+        textClass: "h5 font-bold"
       }
     ]
   });
@@ -543,15 +693,6 @@ function getShipModules() {
             text: "Bloodthirsty, Pacifist, Posh, Crude, Indecisive, Curious, Thoughtful, Lonely, Dispassionate"
           }
         ]
-      },{
-        type: "p",
-        class: "",
-        list: [
-          {
-            class: "",
-            text: "The VI can assist character moves if the VI has at least a 1 in that move's stat, in which case the character has Advantage."
-          }
-        ]
       }
     ]
   });
@@ -606,7 +747,7 @@ function getShipModules() {
         list: [
           {
             class: "",
-            text: "Redundant systems and backups make your ship more reliable. Your ship can take an additional System Hit. Additionally, you have Advantage when making repairs in a fraught situation."
+            text: "Redundant systems and backups make your ship more reliable. Your ship can take an additional System Hit harm. Additionally, you have Advantage when making repairs in a fraught situation."
           }
         ]
       }

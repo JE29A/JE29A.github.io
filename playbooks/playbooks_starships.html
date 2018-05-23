@@ -72,13 +72,18 @@
               <td ng-repeat="cell in row track by $index"
                   colspan="{{cell.colspan}}"
                   rowspan="{{cell.rowspan}}"
-                  class="{{cell.cellClass}}" style="{{cell.style}}">
+                  class="{{cell.cellClass}}" style="{{cell.cellStyle}}">
                 <input ng-if="cell.type == 'input'"
                        class="{{cell.riderClass}}"
                        style="{{cell.riderStyle}}"
                        type="{{cell.riderType}}"
                        min="{{cell.riderMin}}" max="{{cell.riderMax}}" />
                 <div class="{{cell.textClass}}" style="{{cell.style}}">{{cell.text}}</div>
+                <input ng-if="cell.type == 'input2'"
+                       class="{{cell.riderClass}}"
+                       style="{{cell.riderStyle}}"
+                       type="{{cell.riderType}}"
+                       min="{{cell.riderMin}}" max="{{cell.riderMax}}" />
                 <textarea ng-if="cell.type == 'textarea'"
                           class="{{cell.riderClass}}"
                           style="{{cell.riderStyle}}"
@@ -89,7 +94,14 @@
         </table>
       </div>
       <div ng-repeat="child in SF.children track by $index">
-        <p ng-if="child.type == 'p'" class="{{child.class}}"><span ng-repeat="s in child.list" class="{{s.class}}">{{s.text}}</span></p>
+        <p ng-if="child.type == 'p'" class="{{child.class}}" style="{{child.style}}"><span ng-repeat="s in child.list" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span></p>
+        <ul ng-if="child.type == 'ul'" class="{{child.class}}" style="{{child.style}}">
+          <li ng-repeat="l in child.list"><span ng-repeat="s in l" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span></li>
+        </ul>
+        <div ng-if="child.type == 'div'" class="{{child.class}}" style="{{child.style}}">
+          <span ng-repeat="sym in child.symbols track by $index"><span ng-repeat="s in repeatNTimes( sym.count )" class="symbol {{sym.class}}"></span></span>
+          <span class="{{child.textClass}}" style="{{child.textStyle}}">{{child.text}}</span>
+        </div>
       </div>
     </div>
   </script>
@@ -243,7 +255,7 @@
 
         <div class="margin-top margin-bottom long-text">
           <div class="text-center">
-            <span class="h4 font-bold">Maintenance Fuse </span>
+            <span class="h4 font-bold">Maintenance Clock </span>
           </div>
           <div class="flex-row">
             <div class="flex-1"></div>
@@ -266,8 +278,8 @@
             <div class="flex-1"></div>
           </div>
           <div class="long-text">
-            <p>When <span class="font-bold">you complete an episode</span>, mark one Maintenance Fuse. When <span class="font-bold">the Maintenance Fuse is full</span>, reset the Maintenance Fuse and check Maintenance Past Due. If it is already past due, the MC will inflict damage to the ship or a ship system.</p>
-            <p>Some moves will allow you to reset the Maintenance Fuse and clear the Maintenance Past Due.</p>
+            <p>When <span class="font-bold">you complete an episode</span>, mark one Maintenance Clock. When <span class="font-bold">the Maintenance Clock is full</span>, reset the Maintenance Clock and check Maintenance Past Due. If it is already past due, the MC will inflict damage to the ship or a ship system.</p>
+            <p>Some moves will allow you to reset the Maintenance Clock and clear the Maintenance Past Due.</p>
           </div>
           <div class="h4">
             <span class="symbol empty"></span><span class="h4 font-bold margin-left">Maintenance Past Due</span>
@@ -440,7 +452,11 @@
 
         <div class="long-text">
           <div>
-            <span class="h5 font-bold">Get Paid</span>
+            <span class="h5 font-bold"
+                  ng-show="!(uniqueInputModel.shipType)">Contract Completed</span>
+            <span class="h5 font-bold"
+                  ng-repeat="SF in shipFuses track by $index"
+                  ng-show="uniqueInputModel.shipType == '{{SF.key}}'">{{SF.missionCompleteStr}}</span>
           </div>
           <p>When <span class="font-bold">your Crew successfully completes a Contract and collects their pay</span> from the client or contact, roll+Contract Rating.</p>
           <ul class="li-none">
@@ -450,13 +466,14 @@
             <li><span class="font-bold">On a 6-</span>, it's a set up or raw deal. You may either walk away with a token payment and Choose 1, or choose 2 and deal with an enemy that's found you and wants to settle things now.</li>
           </ul>
           <ul>
-            <li class="font-italic">You make a payment to your Creditor, reduce Payments by 1 and reset the Debt Fuse.</li>
-            <li class="font-italic">You pay to maintain your ship, clear Maintenance Past Due and reset the Maintenance Fuse.</li>
-            <li class="font-italic">You get the Ship patched up. Remove all Damage from the Ship and clear all Spot Repairs.</li>
-            <li class="font-italic">You purchase an Upgrade for your Ship.</li>
-            <li class="font-italic">You fill the Ship's cargo hold with lucrative goods for slae elsewhere, roll <span class="font-no-italic font-bold">Lucrative Exports</span> to determine what Cargo is available.</li>
-            <li class="font-italic">You divide the spoils for some walking around money, each crew member rolls on <span class="font-no-italic font-bold">Hey Big Spender</span>.</li>
-            <li class="font-italic">You go shopping for a new Vehicle, roll <span class="font-no-italic font-bold">Test Drive</span>.</li>
+            <li class="font-bold"
+                ng-show="!(uniqueInputModel.shipType)">Select a Motivation to populate your choices.</li>
+            <div ng-repeat="SF in shipFuses track by $index"
+                 ng-show="uniqueInputModel.shipType == '{{SF.key}}'">
+              <li class="font-italic"
+                  ng-repeat="choice in SF.getPaidChoices track by $index"
+                  ng-if="choice && choice.length > 0">{{choice}}</li>
+            </div>
           </ul>
           <p>After you've made your selections and resolved any consequent moves, you need to find more work.</p>
         </div>
@@ -493,7 +510,7 @@
 
         <div class="padding-left padding-right long-text" style="column-span: all;">
           <div class="text-center h4 font-bold">Upgrades &amp; Modules</div>
-          <p>Your ship starts with 3 Upgrade points to buy your starting Modules and may have up to 10 Modules installed. Modules without a box to mark do not count against your maximum Modules.</p>
+          <p>Your ship starts with 4 Upgrade points to buy your starting Modules and may have up to 10 Modules installed. Modules without a box to mark do not count against your maximum Modules.</p>
           <p>When you buy an Upgrade for your ship, check an upgrade box. Unless a Module says otherwise, you need to fill all of the Upgrade boxes before that Module is fully installed and functional in your ship.</p>
           <p>If you are the maximum number of Modules, you have to pull out a Module before you can start installing a new one. You do not get a refund on Upgrade Points.</p>
           <hr/>
@@ -516,8 +533,10 @@
         <div class="text-center h4 font-bold">Making Your Ship</div>
 
         <div class="long-text">
-          <p>Select a Ship Fuse type: 
-            <select class="h6"
+          <p>The Ship is like another character that is utilized by every member of the Crew.</p>
+          <div class="h5 font-bold">Crew Motivation</div>
+          <p>Each Crew has a motivation that relates to how they got their Ship. The motivatin determines which clock your Crew contends with: 
+            <select class="h6 block text-center" style="width: 100%;"
                     ng-model="uniqueInputModel.shipType">
               <option class="h6 font-normal font-no-bold"
                       ng-repeat="SF in shipFuses track by $index"
