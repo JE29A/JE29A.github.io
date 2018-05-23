@@ -77,7 +77,16 @@ function getShipFuses() {
     fuseLabel: "Debt Clock",
     key: "",
     missionCompleteStr: "Get Paid",
-    blurb: "Your crew are independent spacers trying to make a living.",
+    blurb: "Your crew are independent spacers trying to make a living and also to pay off the debt on your ship. You'll need to take jobs, and earn big to keep the debt collectors at bay.",
+    looks: "Dirty, rusted, grimy, worn, outdated, stuttering, dented, rattles, listing, scorched, ugly, functional.",
+    creationList: [
+      {
+        title: "Debt and your Creditor",
+        texts: [
+          "Your starting Debt is 20 Payments. Write this figure in your Ship's Payments panel. Describe your Creditor and what makes them dangerous. Your Creditor's Disposition starts at Neutral, 0."
+        ]
+      }
+    ],
     getPaidChoices: [
       "You make a payment to your Creditor, reduce Payments by 1 and reset the Debt Clock.",
       "You pay to maintain your ship, clear Maintenance Past Due and reset the Maintenance Clock.",
@@ -156,6 +165,17 @@ function getShipFuses() {
     fuseLabel: "Duty Clock",
     key: "duty",
     missionCompleteStr: "Report Success",
+    blurb: "You are semi-autonomous special agents of an organization. Your organization may be an espionage & intelligence agency, a corporation, a government, or a security & investigation agency or association. It may be a local organization looking to expand or already a galaxyspanning. Your Organization gives you missions, but leave how you complete them up to you.",
+    looks: "Sleek, Chrome, Elegant, Murmuring, Smooth, Sharp, Functional, Military, Advanced, Experimental, Prototype, Spacious.",
+    creationList: [
+      {
+        title: "Duty & Rank",
+        texts: [
+          "Your Organization commands you, and you have a duty to them. As a group of semi-autonomous Specialists, your crew will be given missions by your Organization that furthers their agenda, purpose, or duty.",
+          "Describe your Organization and their purpose. Your Crew starts at Rank 0. Your Rank has a minimum value of -1 and a maximum of +3."
+        ]
+      }
+    ],
     getPaidChoices: [
       "You make the right connections within your Organization, increase Duty by 1.",
       "You put your Ship in for a service, and reset the Maintenance Fuse.",
@@ -236,6 +256,17 @@ function getShipFuses() {
     fuseLabel: "Crime Clock",
     key: "pirate",
     missionCompleteStr: "Fence Cargo",
+    blurb: "Freebooters, Corsairs, Buccaneers, Privateers. You may be called many things, but it is very clear what you are. No good, low down, dirty pirates. You prey on the weak, take what you want, and kill anyone who gets in your way. No-one expects mercy from pirates, and so they will give no mercy to you. At least, that's your reputation. Will you live up to the name you have been given as violent, bloodthirsty illegals, or will you carve a more noble destiny?",
+    looks: "Brutal, Predatory, Spikes, Skulls, Dangerous, Mismatched, Intimidating, Piecemeal, Ugly, Vicious, Rusty, Black, Functional, Cramped, Rattling, Groaning.",
+    creationList: [
+      {
+        title: "Crime & Infamy",
+        texts: [
+          "As a pirate ship, you have infamy for breaking the law and attacking the innocent, whether that reputation is justified or not. As such, you are wanted by a powerful agency of galactic law.",
+          "Describe the nature of your crews criminal reputation, and why civilized space hates and fears you. When you complete a Contract or Episode Strain that brings your Crimes to the attention of others, mark the Crime Clock."
+        ]
+      }
+    ],
     getPaidChoices: [
       "You pay Fines or frame someone else for your crimes, uncheck Infamous and reset the Crime Fuse.",
     "You pay the bills, you pay the maintenance costs for your ship, and reset the Maintenance Fuse.",
@@ -594,8 +625,15 @@ function getShipBays() {
 
   ret.push({
     name: "Computer Core",
-    symbolClass: "empty",
-    symbolCount: 2,
+    symbols: [
+      {
+        class: "empty checked",
+        count: 0
+      },{
+        class: "empty",
+        count: 3
+      }
+    ],
     hasDischarged: false,
     tags: "",
     children: [
@@ -618,7 +656,7 @@ function getShipBays() {
             {
               class: "inline-block",
               style: "width: 83px;",
-              text: "0 Upgrade Points:"
+              text: "1 Upgrade Point:"
             },{
               class: "",
               text: "=0/=0/-1/-1/-2"
@@ -627,7 +665,7 @@ function getShipBays() {
             {
               class: "inline-block",
               style: "width: 83px;",
-              text: "1 Upgrade Point: "
+              text: "2 Upgrade Point: "
             },{
               class: "",
               text: "+1/=0/=0/-1/-1"
@@ -636,7 +674,7 @@ function getShipBays() {
             {
               class: "inline-block",
               style: "width: 83px;",
-              text: "2 Upgrade Points: "
+              text: "3 Upgrade Points: "
             },{
               class: "",
               text: "+1/+1/=0/=0/-1"

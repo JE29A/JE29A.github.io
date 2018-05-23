@@ -153,13 +153,7 @@
 
   <script type="text/ng-template" id="shipModule">
     <div class="h5">
-      <span class="symbol {{mod.symbolClass}}"
-            ng-repeat="n in repeatNTimes( mod.symbolCount )"
-            ng-if="mod.symbolCount && mod.symbolCount > 0"></span>
-      <span ng-if="mod.symbols" ng-repeat="sym in mod.symbols">
-        <span ng-repeat="n in repeatNTimes( sym.count )"
-              class="symbol {{sym.class}}"></span>
-      </span>
+      <span class="symbol {{mod.symbolClass}}" ng-repeat="n in repeatNTimes( mod.symbolCount )" ng-if="mod.symbolCount && mod.symbolCount > 0"></span><span ng-if="mod.symbols" ng-repeat="sym in mod.symbols"><span ng-repeat="n in repeatNTimes( sym.count )" class="symbol {{sym.class}}"></span></span>
       <span class="h5 font-bold">{{mod.name}}</span>
       <div class="float-right h6" ng-if="mod.hasDischarged" style="padding-top: 2px;">
         <span class="symbol empty circle"></span>
@@ -542,7 +536,27 @@
           </p>
           <p ng-repeat="SF in shipFuses track by $index"
              ng-show="uniqueInputModel.shipType == '{{SF.key}}' ">{{SF.blurb}}</p>
-          
+
+          <div class="h5 font-bold">Name:</div>
+          <p>Decide on a name together. Make it evocative and pronounceable. Does the Ship's VI have the same name?</p>
+
+          <div class="h5 font-bold">Look:</div>
+          <p>Choose up to 5:</p>
+          <p class="font-italic" ng-repeat="SF in shipFuses track by $index" ng-show="uniqueInputModel.shipType == '{{SF.key}}' ">{{SF.looks}}</p>
+
+          <div ng-repeat="SF in shipFuses track by $index"
+               ng-show="uniqueInputModel.shipType == '{{SF.key}}' ">
+            <div ng-repeat="CL in SF.creationList track by $index">
+              <div class="h5 font-bold">{{CL.title}}</div>
+              <p ng-repeat="text in CL.texts track by $index">{{text}}</p>
+            </div>
+          </div>
+
+          <div class="h5 font-bold">Upgrades & Modules:</div>
+          <p>Your ship starts with 4 Upgrade Points to spend on Modules.</p>
+
+          <div class="h5 font-bold">Draw your Ship:</div>
+          <p>If you want you can draw a cool picture of your ship, or its basic layout. List a few interesting or important locations on your ship where the crew often interacts.</p>
         </div>
 
       </div>
