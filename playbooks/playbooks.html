@@ -79,8 +79,9 @@
         <li>Decline the offer to apply your Foible, and continue playing as normal.</li>
         <li>Apply your Foible. You have Disadvantage going forward.</li>
       </ul>
-      <div ng-repeat="n in repeatNTimes(3) track by $index">
-        <textarea class="margin-top margin-bottom border width-100 h7" rows="3"></textarea>
+      <div class="anchor" ng-repeat="n in repeatNTimes(3) track by $index">
+        <textarea class="margin-top margin-bottom border width-100 h7" rows="3" style="text-indent: 39px;"></textarea>
+        <span class="h7 font-bold" style="position: absolute; top: 4px; left: 3px;">Foible {{$index+1}}</span>
       </div>
     </div>
   </script>
