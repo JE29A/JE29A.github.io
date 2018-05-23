@@ -1,0 +1,185 @@
+<html ng-app="myApp" ng-controller="myPlaybooks">
+<head>
+  <meta charset="utf-8" />
+  <title>Star World: Playbooks</title>
+  <script src="js/stretchy.min.js" data-filter=".resizing" async></script>
+  <link rel="stylesheet" href="css/playbooks.css" />
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/pb_moves.js"></script>
+  <script src="js/pb_xp.js"></script>
+  <script src="jsPlaybooks/pbDef_brick.js"></script>
+  <script src="js/controller_playbooks.js"></script>
+<!-----------------------------------------------------------------------------
+  Start of NG-TEMPLATES
+------------------------------------------------------------------------------->
+  <script type="text/ng-template" id="playbookStatBox">
+    <div class="stat">
+      <div class="border anchor">
+        <input type="number" min="-2" max="3" class="no-spinner h4 font-bold text-center width-100" />
+        <div class="h5 font-bold text-center">{{stat.label}}</div>
+        <span class="clickable symbol empty" style="position: absolute; top: -4px; left: 1px;"></span>
+      </div>
+      <ul class="h7" style="-webkit-margin-before: 0; -webkit-margin-after: 0">
+        <li ng-repeat="move in stat.moves track by $index">{{move.label}}</li>
+      </ul>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="playbookStatTable">
+    <div class="anchor">
+      <span class="h4 font-bold">Stats</span>
+      <span class="h7 text-right inline-block" style="position: absolute; right: 1px; bottom: 0px;">{{stats.instructions}}</span>
+    </div>
+    <div>
+      <table class="width-100">
+        <tbody>
+          <tr>
+            <td ng-repeat="stat in stats.list track by $index"
+                ng-include="'playbookStatBox'"
+                class="vertical-align-top stat" style="width: 19%;"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="playbookHarm">
+    <div class="long-text auto-column-2">
+      <div class="keep-together auto-column-span width-100">
+        <div class="anchor">
+          <span class="h4 font-bold">Harm</span>
+          <span class="h7 text-justify inline-block" style="position: absolute; left: 55px; right: 1px; bottom: 0px;">When <span class="font-bold">you are directed to mark Harm,</span> mark off one of the Harm options or 1 Stress for each Harm you receive. <span class="font-bold">When you have 5 Stress,</span> clear your Stress track and take a Calamity (on the back).</span>
+        </div>
+        
+      </div>
+
+      <div class="text-left h4 keep-together margin-top margin-bottom">
+        <span class="h4 font-bold">Stress</span>
+        <span class="h4 symbol empty clickable" ng-repeat="n in repeatNTimes(5)"></span>
+      </div>
+      
+      <div class="keep-together" ng-repeat="harmBox in harmBoxes track by $index">
+        <div>
+          <span class="h5 symbol empty clickable"></span>
+          <span class="h5 font-bold">{{harmBox.label}}</span>
+          <p>{{harmBox.text}}</p>
+        </div>
+      </div>
+  </script>
+
+  <script type="text/ng-template" id="playbookFoibles">
+    <div class="long-text">
+      <div>
+        <span class="h5 font-bold">Foibles</span>
+      </div>
+      <p>When you choose to gain a Foible, write it below. <span class="font-bold">When a Foible applies to the current situation,</span> choose 1:</p>
+      <ul>
+        <li>Decline the offer to apply your Foible, and continue playing as normal.</li>
+        <li>Apply your Foible. You have Disadvantage going forward.</li>
+      </ul>
+      <div ng-repeat="n in repeatNTimes(3) track by $index">
+        <textarea class="margin-top margin-bottom border width-100 h7" rows="3"></textarea>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="playbookGear">
+    <div class="long-text anchor">
+      <div>
+        <span class="h5 font-bold">Gear & Vehicles</span>
+      </div>
+      <div class="border padding">
+        <div class="float-right h6">
+          <span class="font-bold h6" style="margin-left: 6px;">Slots: </span><span class="clickable symbol empty checked" ng-repeat="n in repeatNTimes(3) track by $index"></span><span class="clickable symbol empty" ng-repeat="n in repeatNTimes(2) track by $index"></span>
+        </div>
+        <p class="no-top">When <span class="font-bold">you get ready for action and select your Loadout.</span> Choose items from your Gear list equal to the same number of your Gear slots.</p>
+        <div>
+          <textarea class="width-100 h6" rows="4"></textarea>
+        </div>
+      </div>
+    </div>
+  </script>
+<!-----------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+  End of NG-TEMPLATES
+-------------------------------------------------------------------------------
+------------------------------------------------------------------------------->
+</head>
+
+<body>
+
+  <div ng-repeat="playbook in playbooks track by $index"
+       ng-init="uniqueInputModel.playbooks[playbook.trope2] = {name: '', trope: playbook.trope};">
+
+    <div class="page landscape flex-row" pb-side="a">
+
+      <div class="flex-1 padding-left padding-right">
+
+        <div class="flex-row">
+          <div class="flex-1 margin-right">
+            <div class="margin-top margin-bottom">
+              <div>
+                <input type="text" class="border-bottom font-bold h4 text-center width-100" placeholder="Name" />
+              </div>
+              <div class="text-center">
+                <span class="h4 font-bold capitalize">The </span>
+                <span class="h3 font-bold uppercase">{{playbook.trope}}</span>
+              </div>
+            </div>
+            <div class="margin-top margin-bottom border anchor">
+              <textarea class="width-100 h6"
+                        style="text-indent: 44px;"
+                        rows="4"></textarea>
+              <span class="h5 font-bold"
+                    style="position: absolute; top: 0px; left: 3px;">Look:</span>
+            </div>
+          </div>
+          <div class="margin-left" style="width: 200px;">
+            <div class="h5">
+              <span class="h5 font-bold">Experience:</span>
+              <span class="clickable symbol empty" ng-repeat="n in repeatNTimes(5)"></span>
+            </div>
+            <div class="long-text">
+              <p ng-repeat="paragraph in xp.earn track by $index"><span ng-repeat="s in paragraph track by $index" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span></p>
+              <ul class="font-italic no-bottom">
+                <li ng-repeat="reward in xp.rewards track by $index">{{reward}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div><hr/></div>
+
+        <div class="margin-top margin-bottom">
+          <div ng-include="'playbookStatTable'"></div>
+        </div>
+
+        <div><hr/></div>
+
+        <div class="margin-top margin-bottom" ng-include="'playbookHarm'"></div>
+
+        <div><hr/></div>
+
+        <div class="margin-top margin-bottom" ng-include="'playbookFoibles'"></div>
+
+        <div><hr/></div>
+
+        <div class="margin-top margin-bottom" ng-include="'playbookGear'"></div>
+
+      </div>
+
+      <div class="flex-1 padding-left padding-right">
+        
+      </div>
+
+    </div>
+
+    <div class="page landscape flex-row" pb-side="b">
+      
+    </div>
+
+  </div>
+</body>
+</html>
