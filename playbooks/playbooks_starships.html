@@ -5,6 +5,7 @@
   <script src="js/stretchy.min.js" data-filter=".resizing" async></script>
   <link rel="stylesheet" href="css/playbooks.css" />
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="js/controller_starships.js"></script>
 <!-----------------------------------------------------------------------------
@@ -32,7 +33,7 @@
     <div class="flex-row">
       <div ng-if="parseInt(feat.symbolCount,10) > 0">
         <span ng-repeat="n in repeatNTimes( parseInt(feat.symbolCount,10) ) track by $index"
-              class="symbol {{feat.symbol}}"></span>
+              class="clickable symbol {{feat.symbol}}"></span>
       </div>
       <div class="flex-1">
         <div class="{{feat.header}}"
@@ -99,64 +100,19 @@
           <li ng-repeat="l in child.list"><span ng-repeat="s in l" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span></li>
         </ul>
         <div ng-if="child.type == 'div'" class="{{child.class}}" style="{{child.style}}">
-          <span ng-repeat="sym in child.symbols track by $index"><span ng-repeat="s in repeatNTimes( sym.count )" class="symbol {{sym.class}}"></span></span>
+          <span ng-repeat="sym in child.symbols track by $index"><span ng-repeat="s in repeatNTimes( sym.count )" class="clickable symbol {{sym.class}}"></span></span>
           <span class="{{child.textClass}}" style="{{child.textStyle}}">{{child.text}}</span>
         </div>
       </div>
     </div>
   </script>
 
-  <script type="text/ng-template" id="shipDebt">
-    <div class="long-text margin-top margin-bottom">
-      <div class="flex-row">
-        <table class="flex-1">
-          <tbody>
-            <tr>
-              <td colspan="2" class="text-center">
-                <span class="h4 font-bold">Debt Fuse </span>
-                <span class="h4 symbol empty"
-                      ng-repeat="n in repeatNTimes(5) track by $index"></span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <span class="h5 font-bold">Creditor</span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <textarea class="border h6" rows="8"
-                          style="width: 100%; height: 100%;"></textarea>
-              </td>
-            </tr>
-            <tr>
-              <td class="padding-top text-right">
-                <input class="border h6 no-spinner text-center float-right"
-                       type="number" style="width: 40px;"
-                       min="0" />
-                <span class="h5 font-bold margin-right-big">Payments</span>
-              </td>
-              <td class="padding-top text-left">
-                <input class="border h6 no-spinner text-center float-left"
-                       type="number" style="width: 25px;"
-                       min="-2" max="2" />
-                <span class="h5 font-bold margin-left-big">Disposition</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p>When <span class="font-bold">you complete an episode</span>, mark one Debt Fuse. When <span class="font-bold">the Debt Fuse is full</span>, reduce your creditor's Disposition by 1, and your Creditor comes looking for you.</p>
-      <p>Some moves will allow you to clear the Debt Fuse and reduce your Payments. When your Payments reaches 0, you own your ship.</p>
-    </div>
-  </script>
-
   <script type="text/ng-template" id="shipModule">
     <div class="h5">
-      <span class="symbol {{mod.symbolClass}}" ng-repeat="n in repeatNTimes( mod.symbolCount )" ng-if="mod.symbolCount && mod.symbolCount > 0"></span><span ng-if="mod.symbols" ng-repeat="sym in mod.symbols"><span ng-repeat="n in repeatNTimes( sym.count )" class="symbol {{sym.class}}"></span></span>
+      <span class="clickable symbol {{mod.symbolClass}}" ng-repeat="n in repeatNTimes( mod.symbolCount )" ng-if="mod.symbolCount && mod.symbolCount > 0"></span><span ng-if="mod.symbols" ng-repeat="sym in mod.symbols"><span ng-repeat="n in repeatNTimes( sym.count )" class="clickable symbol {{sym.class}}"></span></span>
       <span class="h5 font-bold">{{mod.name}}</span>
       <div class="float-right h6" ng-if="mod.hasDischarged" style="padding-top: 2px;">
-        <span class="symbol empty circle"></span>
+        <span class="clickable symbol empty circle"></span>
         <span class="h6 font-bold">Discharged</span>
       </div>
     </div>
@@ -259,7 +215,7 @@
                   <tr>
                     <td class="h5 text-center">Clear</td>
                     <td class="h5 text-center" style="padding-left: 5px;"
-                        ng-repeat="n in repeatNTimes(4) track by $index"><span class="symbol empty"></span></td>
+                        ng-repeat="n in repeatNTimes(4) track by $index"><span class="clickable symbol empty"></span></td>
                   </tr>
                   <tr>
                     <td class="h5 text-center">+1</td>
@@ -276,7 +232,7 @@
             <p>Some moves will allow you to reset the Maintenance Clock and clear the Maintenance Past Due.</p>
           </div>
           <div class="h4">
-            <span class="symbol empty"></span><span class="h4 font-bold margin-left">Maintenance Past Due</span>
+            <span class="clickable symbol empty"></span><span class="h4 font-bold margin-left">Maintenance Past Due</span>
           </div>
           <p>While <span class="font-bold">Maintenance Past Due is checked</span>, all rolls involving the Ship and its systems are at Disadvantage.</p>
         </div>
@@ -300,13 +256,13 @@
         <hr/>
         <div class="long-text">
           <div>
-            <span class="symbol empty h5"></span>
+            <span class="clickable symbol empty h5"></span>
             <span class="h5 font-bold">Superficial Damage</span>
           </div>
           <p>Your armor took the damage for you, absorbing some of the damage without compromising the ship. Superficial Damage makes your ship look uglier, but it doesn't have any additional negative effects. You can't Spot Repair Superficial Damage. Some ships have extra armor, allowing additional Superficial Damage to be absorbed.</p>
           <div>
             <span class="h5 font-bold">Extra Damage</span>
-            <span class="symbol empty fade h5"
+            <span class="clickable symbol empty fade h5"
                   ng-repeat="n in repeatNTimes(10)"></span>
           </div>
         </div>
@@ -314,11 +270,11 @@
         <div class="long-text">
           <div class="flex-row">
             <div class="flex-1">
-              <span class="symbol empty h5"></span>
+              <span class="clickable symbol empty h5"></span>
               <span class="h5 font-bold">System Hit</span>
             </div>
             <div>
-              <span class="symbol empty h6"></span>
+              <span class="clickable symbol empty h6"></span>
               <span class="h6 font-bold">Spot Repairs</span>
             </div>
           </div>
@@ -329,11 +285,11 @@
         <div class="long-text margin-top fade">
           <div class="flex-row">
             <div class="flex-1">
-              <span class="symbol empty h5"></span>
+              <span class="clickable symbol empty h5"></span>
               <span class="h5 font-bold">System Hit</span>
             </div>
             <div>
-              <span class="symbol empty h6"></span>
+              <span class="clickable symbol empty h6"></span>
               <span class="h6 font-bold">Spot Repairs</span>
             </div>
           </div>
@@ -343,11 +299,11 @@
         <div class="long-text margin-top fade">
           <div class="flex-row">
             <div class="flex-1">
-              <span class="symbol empty h5"></span>
+              <span class="clickable symbol empty h5"></span>
               <span class="h5 font-bold">System Hit</span>
             </div>
             <div>
-              <span class="symbol empty h6"></span>
+              <span class="clickable symbol empty h6"></span>
               <span class="h6 font-bold">Spot Repairs</span>
             </div>
           </div>
@@ -358,11 +314,11 @@
         <div class="long-text">
           <div class="flex-row">
             <div class="flex-1">
-              <span class="symbol empty h5"></span>
+              <span class="clickable symbol empty h5"></span>
               <span class="h5 font-bold">Direct Hit</span>
             </div>
             <div>
-              <span class="symbol empty h6"></span>
+              <span class="clickable symbol empty h6"></span>
               <span class="h6 font-bold">Spot Repairs</span>
             </div>
           </div>
@@ -373,11 +329,11 @@
         <div class="long-text">
           <div class="flex-row">
             <div class="flex-1">
-              <span class="symbol empty h5"></span>
+              <span class="clickable symbol empty h5"></span>
               <span class="h5 font-bold">Hull Breach</span>
             </div>
             <div>
-              <span class="symbol empty h6"></span>
+              <span class="clickable symbol empty h6"></span>
               <span class="h6 font-bold">Spot Repairs</span>
             </div>
           </div>
@@ -388,11 +344,11 @@
         <div class="long-text">
           <div class="flex-row">
             <div class="flex-1">
-              <span class="symbol empty h5"></span>
+              <span class="clickable symbol empty h5"></span>
               <span class="h5 font-bold">Adrift</span>
             </div>
             <div>
-              <span class="symbol empty h6"></span>
+              <span class="clickable symbol empty h6"></span>
               <span class="h6 font-bold">Spot Repairs</span>
             </div>
           </div>

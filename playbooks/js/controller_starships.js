@@ -1,3 +1,9 @@
+$(document).ready(function() {
+  $('span.symbol.clickable').on('click', function() {
+    $(this).toggleClass('checked');
+  });
+});
+
 var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) {
   $scope.uniqueInputModel = {
     FTL: '',
