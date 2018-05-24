@@ -74,6 +74,10 @@ body {
 body {
   counter-reset: pageNumber;
 }
+a {
+  color: blue;
+  text-decoration: inherit;
+}
 input, textarea {
   background: #DDD;
   border: 0px;
