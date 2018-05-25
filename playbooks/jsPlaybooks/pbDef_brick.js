@@ -33,9 +33,9 @@ function getPBDef_brick() {
             text: "When "
           },{
             class: "font-bold",
-            text: "you match yourself against a unit in battle,"
+            text: "you match yourself against a group in battle,"
           },{
-            text: " you treat them as one size smaller when exchanging harm."
+            text: " you ignore extra incoming harm equal to your Cool+Sharp."
           }
         ]
       }
