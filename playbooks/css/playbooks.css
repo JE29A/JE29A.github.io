@@ -526,5 +526,8 @@ tr > *:last-child {
 }
 
 .move-details-block {
-    padding-top: 5px;
+  padding-top: 5px;
+}
+.character-creation-details {
+  padding-top: 6px;
 }

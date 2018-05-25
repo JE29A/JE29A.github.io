@@ -30,7 +30,7 @@ function getHarmRules() {
     symbols: [
       {
         class: "empty",
-        count: 2
+        count: 1
       }
     ],
     text: "You're a bit banged up, but it's nothing serious. Can be healed by choosing Shrug it off when you roll Recover, or when a Scene ends."
@@ -158,25 +158,28 @@ function getLooks(tropes) {
   var lookList = {
     dirty: ["Dusty", "Worn", "Haggard", "Weary", "Scorched", "Pinched", "Shifty", "Grave"],
     detective: ["Determined", "Stubborn", "Surly", "Suspicious"],
-    buff: ["Heavy Build", "Rugged", "Calloused", "Hard", "Stern", "Stoic", "Imposing"],
+    soldier: ["Stern", "Stoic", "Imposing"],
+    buff: ["Heavy Build", "Rugged", "Calloused", "Hard"],
     veteran: ["Calloused", "Compassionate", "Grim", "Rugged", "Scarred", "Stoic", "Weary"],
     slight: ["Lithe", "Compact", "Sleek", "Slight", "Sharp", "Nimble", "Shadowy"],
     confident: ["Confident", "Competent", "Dexterous"],
     spy: ["Nondescript", "Paranoid"],
     private: ["Guarded", "Quiet"],
     nosy: ["Curious", "Nosy"],
+    sensitive: ["Compassionate"],
     bossy: ["Commanding"],
-    assertive: ["Forceful"],
+    assertive: ["Aggressive", "Forceful"],
     smart: ["Aloof", "Distracted", "Skinny", "Focused", "Tidy", "Sharp"],
     experienced: ["Wise", "Calm"],
     old: ["Elderly", "Pudgy", "Aged", "Rusty", "Faded"],
     reclusive: ["Wiry", "Paunchy", "Pale", "Pallid", "Still", "Mysterious"],
     astristocratic: ["Elegant", "Polished", "Pristine", "Neat", "Respectable"],
-    charming: ["Charming", "Compassionate", "Expressive", "Sexy", "Hot"],
-    antihero: ["Shifty", "Nervous", "Craven", "Sharp", "Unconventional"],
+    charming: ["Charming", "Expressive", "Sexy", "Hot"],
+    unsure: ["Shifty", "Nervous", "Craven"],
+    odd: ["Unconventional"],
     fashionable: ["Trendy", "Dapper"],
     sloppy: ["Scruffy", "Worn", "Mismatched", "Ragged"],
-    wild: ["Wild", "Dangerous", "Hot-blooded", "Violent", "Aggressive"]
+    wild: ["Wild", "Dangerous", "Hot-blooded", "Violent"]
   };
 
   for(key in tropes) {

@@ -10,8 +10,9 @@ function getPBDef_psion_pusher() {
 
   var gearInstructions = "Choose 4 Gear from the list below to start with:";
   var gear = [
-    "Pistol (1 harm, near/close, loud)",
-    "Bladed Weapon (2 harm, near, silent)",
+    "Pistol (2 harm, near/close, loud)",
+    "Stutter Pistol (1 harm, near/clear, loud, nonlethal)",
+    "Subdual Weapon (1 harm, near, silent, nonlethal)",
     "Tactical Pack (3 uses)",
     "Extra Ammo (3 uses)",
     "Scanner",
@@ -141,6 +142,7 @@ function getPBDef_psion_pusher() {
     looks: looks,
     gearInstructions: gearInstructions,
     gear: gear,
+    statAdvice: "Charm is your main stat.",
     moves: moves,
     moveCreation: [
       ""

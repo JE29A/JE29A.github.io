@@ -30,8 +30,11 @@ function getPlaybookDefinitions() {
 
   ret.push( getPBDef_brick() );
 
+  ret.push( getPBDef_psion_esper() );
   ret.push( getPBDef_psion_porter() );
   ret.push( getPBDef_psion_pusher() );
+  ret.push( getPBDef_psion_shaper() );
+  ret.push( getPBDef_psion_teke() );
 
   return ret;
 }

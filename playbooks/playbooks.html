@@ -11,8 +11,11 @@
   <script src="js/pb_moves.js"></script>
   <script src="js/pb_xp.js"></script>
   <script src="jsPlaybooks/pbDef_brick.js"></script>
+  <script src="jsPlaybooks/pbDef_psion_esper.js"></script>
   <script src="jsPlaybooks/pbDef_psion_porter.js"></script>
   <script src="jsPlaybooks/pbDef_psion_pusher.js"></script>
+  <script src="jsPlaybooks/pbDef_psion_shaper.js"></script>
+  <script src="jsPlaybooks/pbDef_psion_teke.js"></script>
   <script src="js/controller_playbooks.js"></script>
 <!-----------------------------------------------------------------------------
   Start of NG-TEMPLATES
@@ -176,7 +179,7 @@
         <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
           <span class="h5 font-bold">Name:</span>
         </div>
-        <p class="no-top" style="padding-top: 5px;">Choose a name or make up your own:</p>
+        <p class="no-top character-creation-details">Choose a name or make up your own:</p>
         <p class="text-left">{{playbook.names}}</p>
       </div>
 
@@ -184,7 +187,7 @@
         <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
           <span class="h5 font-bold">Look:</span>
         </div>
-        <p class="no-top" style="padding-top: 5px;">Choose a pronoun and up to 4:</p>
+        <p class="no-top character-creation-details">Choose a pronoun and up to 4:</p>
         <p class="text-left">Him, Her, Them, It, Em, Zim, Per, Sir, Ver, [name].</p>
         <p class="text-left">{{playbook.looks}}</p>
       </div>
@@ -193,28 +196,31 @@
         <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
           <span class="h5 font-bold">Stats:</span>
         </div>
-        <p class="no-top" style="padding-top: 5px;">Assign your stats.</p>
+        <p class="no-top character-creation-details">
+          <span>Assign your stats.</span>
+          <span ng-if="playbook.statAdvice">{{playbook.statAdvice}}</span>
+        </p>
       </div>
 
       <div class="keep-together">
         <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
           <span class="h5 font-bold">Moves:</span>
         </div>
-        <p class="no-top" style="padding-top: 5px;">Choose 2 {{playbook.trope}} moves and 1 move from any playbook.</p>
+        <p class="no-top character-creation-details">Choose 2 {{playbook.trope}} moves and 1 move from any playbook.</p>
       </div>
 
       <div class="keep-together">
         <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
           <span class="h5 font-bold">Foibles:</span>
         </div>
-        <p class="no-top" style="padding-top: 5px;">Create 1 to 3 Foibles. If you don't accept a foible very often, consider replacing it.</p>
+        <p class="no-top character-creation-details">Create 1 to 3 Foibles. If you don't accept a foible very often, consider replacing it.</p>
       </div>
 
       <div class="keep-together">
         <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
           <span class="h5 font-bold">Gear:</span>
         </div>
-        <p class="no-top" style="padding-top: 5px;">You start with 3 Gear slots.<br/> {{playbook.gearInstructions}}</p>
+        <p class="no-top character-creation-details">{{playbook.gearInstructions}}</p>
         <div ng-repeat="g in playbook.gear track by $index">
           <span class="h6 clickable symbol empty"></span>
           <span class="h7">{{g}}</span>

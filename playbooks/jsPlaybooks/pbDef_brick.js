@@ -6,13 +6,14 @@ function getPBDef_brick() {
     "Thrax", "Shen", "Bastion", "Helm", "Valik", "Handen", "Mei", "Phasral", "Malcom", "Desen", "Harric", "Grunt"
   ].sort().join(', ') + ".";
 
-  var looks = getLooks({ buff: true, veteran: true });
+  var looks = getLooks({ buff: true, veteran: true, soldier: true });
 
   var gearInstructions = "Choose 5 Gear from the list below to start with:";
   var gear = [
     "Pistol (2 harm, near/close, loud)",
     "Assault Rifle (2 harm, close/far, autofire, loud)",
-    "Shotgun (3 harm, close, loud, messy)",
+    "Flechette (3 harm, close, loud, messy, -1 vs armor)",
+    "Subdual Weapon (1 harm, near, silent, nonlethal)",
     "Bladed Weapon (2 harm, near, silent)",
     "Tactical Armor (1 armor)",
     "Tactical Pack (3 uses)",
@@ -197,6 +198,7 @@ function getPBDef_brick() {
     looks: looks,
     gearInstructions: gearInstructions,
     gear: gear,
+    statAdvice: "Tough is your main stat.",
     moves: moves,
     moveCreation: [
       ""
