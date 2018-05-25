@@ -30,5 +30,8 @@ function getPlaybookDefinitions() {
 
   ret.push( getPBDef_brick() );
 
+  ret.push( getPBDef_psion_porter() );
+  ret.push( getPBDef_psion_pusher() );
+
   return ret;
 }

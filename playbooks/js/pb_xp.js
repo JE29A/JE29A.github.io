@@ -143,3 +143,51 @@ function getFoibles() {
 
   return ret;
 }
+
+function getLooks(tropes) {
+  function addLooksToObj(obj, list) {
+    var i;
+    for(i = 0; i < list.length; i++) {
+      obj[ list[i] ] = true;
+    }
+    return obj;
+  }
+
+  var ret = [], looks = {}, key;
+
+  var lookList = {
+    dirty: ["Dusty", "Worn", "Haggard", "Weary", "Scorched", "Pinched", "Shifty", "Grave"],
+    detective: ["Determined", "Stubborn", "Surly", "Suspicious"],
+    buff: ["Heavy Build", "Rugged", "Calloused", "Hard", "Stern", "Stoic", "Imposing"],
+    veteran: ["Calloused", "Compassionate", "Grim", "Rugged", "Scarred", "Stoic", "Weary"],
+    slight: ["Lithe", "Compact", "Sleek", "Slight", "Sharp", "Nimble", "Shadowy"],
+    confident: ["Confident", "Competent", "Dexterous"],
+    spy: ["Nondescript", "Paranoid"],
+    private: ["Guarded", "Quiet"],
+    nosy: ["Curious", "Nosy"],
+    bossy: ["Commanding"],
+    assertive: ["Forceful"],
+    smart: ["Aloof", "Distracted", "Skinny", "Focused", "Tidy", "Sharp"],
+    experienced: ["Wise", "Calm"],
+    old: ["Elderly", "Pudgy", "Aged", "Rusty", "Faded"],
+    reclusive: ["Wiry", "Paunchy", "Pale", "Pallid", "Still", "Mysterious"],
+    astristocratic: ["Elegant", "Polished", "Pristine", "Neat", "Respectable"],
+    charming: ["Charming", "Compassionate", "Expressive", "Sexy", "Hot"],
+    antihero: ["Shifty", "Nervous", "Craven", "Sharp", "Unconventional"],
+    fashionable: ["Trendy", "Dapper"],
+    sloppy: ["Scruffy", "Worn", "Mismatched", "Ragged"],
+    wild: ["Wild", "Dangerous", "Hot-blooded", "Violent", "Aggressive"]
+  };
+
+  for(key in tropes) {
+    if ( tropes[key] ) {
+      looks = addLooksToObj( looks, lookList[key] );
+    }
+  } 
+
+  for(key in looks) {
+    ret.push( key );
+  }
+
+  return ret.sort().join(", ") +".";
+}

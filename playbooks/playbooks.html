@@ -11,6 +11,8 @@
   <script src="js/pb_moves.js"></script>
   <script src="js/pb_xp.js"></script>
   <script src="jsPlaybooks/pbDef_brick.js"></script>
+  <script src="jsPlaybooks/pbDef_psion_porter.js"></script>
+  <script src="jsPlaybooks/pbDef_psion_pusher.js"></script>
   <script src="js/controller_playbooks.js"></script>
 <!-----------------------------------------------------------------------------
   Start of NG-TEMPLATES
@@ -135,7 +137,7 @@
     <div class="auto-column-2">
       <div class="keep-together margin-top margin-bottom" ng-repeat="move in playbook.moves track by $index">
         <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
-          <span class="clickable symbol empty h5 {{move.class}}"></span>
+          <span class="clickable symbol empty h5 {{move.symbolClass}}"></span>
           <span class="h5 font-bold">{{move.label}}</span>
         </div>
         <div ng-init="FEAT = move" ng-include="'playbookLongText'" class="move-details-block"></div>
@@ -212,7 +214,7 @@
         <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
           <span class="h5 font-bold">Gear:</span>
         </div>
-        <p class="no-top" style="padding-top: 5px;">You start with 3 Gear slots. Choose 5 Gear from the list below to start with:</p>
+        <p class="no-top" style="padding-top: 5px;">You start with 3 Gear slots.<br/> {{playbook.gearInstructions}}</p>
         <div ng-repeat="g in playbook.gear track by $index">
           <span class="h6 clickable symbol empty"></span>
           <span class="h7">{{g}}</span>

@@ -6,10 +6,9 @@ function getPBDef_brick() {
     "Thrax", "Shen", "Bastion", "Helm", "Valik", "Handen", "Mei", "Phasral", "Malcom", "Desen", "Harric", "Grunt"
   ].sort().join(', ') + ".";
 
-  var looks = [
-    "Heavy Build", "Scarred", "Rugged", "Weary", "Calloused", "Hard", "Stern", "Stoic", "Grim", "Imposing", "Compassionate"
-  ].sort().join(', ') + ".";
+  var looks = getLooks({ buff: true, veteran: true });
 
+  var gearInstructions = "Choose 5 Gear from the list below to start with:";
   var gear = [
     "Pistol (2 harm, near/close, loud)",
     "Assault Rifle (2 harm, close/far, autofire, loud)",
@@ -18,6 +17,7 @@ function getPBDef_brick() {
     "Tactical Armor (1 armor)",
     "Tactical Pack (3 uses)",
     "Extra Ammo (3 uses)",
+    "Scanner",
     "Vacsuit"
   ];
 
@@ -195,6 +195,7 @@ function getPBDef_brick() {
     trope2: trope.toLowerCase().replace(/ /g, '_'),
     names: names,
     looks: looks,
+    gearInstructions: gearInstructions,
     gear: gear,
     moves: moves,
     moveCreation: [
