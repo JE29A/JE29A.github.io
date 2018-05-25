@@ -104,14 +104,14 @@
   </script>
 
   <script type="text/ng-template" id="playbookGear">
-    <div class="long-text anchor">
+    <div class="long-text anchor flex-1 flex-col">
       <div class="anchor">
         <span class="h4 font-bold">Gear & Vehicles</span>
         <span class="h7 inline-block" style="position: absolute; bottom: 1px; right: 1px; left: 147px;">When <span class="font-bold">you get ready for action and select your Loadout.</span> Choose items from your Gear list equal to the same number of your Gear slots.</span>
       </div>
-      <div class="border padding">
-        <div class="anchor">
-          <textarea class="width-100 h6" rows="6" style="text-indent: 105px;"></textarea>
+      <div class="border padding flex-1 flex-col">
+        <div class="anchor flex-1 flex-col">
+          <textarea class="width-100 h6 flex-1" style="text-indent: 105px;"></textarea>
           <div style="position: absolute; top: -4px; left: 0px;">
             <span class="font-bold h6">Slots: </span><span class="clickable symbol empty checked h5" ng-repeat="n in repeatNTimes(3) track by $index"></span><span class="clickable symbol empty h5" ng-repeat="n in repeatNTimes(2) track by $index"></span>
           </div>
@@ -126,7 +126,7 @@
         <span class="clickable symbol empty h5 {{move.class}}"></span>
         <span class="h5 font-bold">{{move.label}}</span>
       </div>
-      <div ng-init="FEAT = move" ng-include="'playbookLongText'" style="padding-top: 5px;"></div>
+      <div ng-init="FEAT = move" ng-include="'playbookLongText'" style="padding-top: 1px;"></div>
     </div>
   </script>
 
@@ -202,7 +202,7 @@
 
     <div class="page landscape flex-row" pb-side="a">
 
-      <div class="flex-2 padding-left padding-right">
+      <div class="flex-2 padding-left padding-right flex-col">
 
         <div class="flex-row">
           <div class="flex-1 margin-right">
@@ -253,7 +253,7 @@
 
         <div><hr/></div>
 
-        <div class="margin-top margin-bottom" ng-include="'playbookGear'"></div>
+        <div class="margin-top margin-bottom flex-1 flex-col" ng-include="'playbookGear'"></div>
 
       </div>
 

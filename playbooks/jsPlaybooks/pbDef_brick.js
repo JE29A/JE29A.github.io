@@ -22,10 +22,32 @@ function getPBDef_brick() {
   ];
 
   moves.push({
+    label: "\"You And What Army?\"",
+    class: "checked",
+    children: [
+      {
+        type: "p",
+        class: "h6",
+        list: [
+          {
+            text: "When "
+          },{
+            class: "font-bold",
+            text: "you match yourself against a unit in battle,"
+          },{
+            text: " you treat them as one size smaller when exchanging harm."
+          }
+        ]
+      }
+    ]
+  });
+
+  moves.push({
     label: "Always Be Prepared",
     children: [
       {
         type: "p",
+        class: "h6",
         list: [
           {
             text: "When ",
@@ -45,6 +67,7 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
+        class: "h6",
         list: [
           {
             text: "When "
@@ -82,6 +105,7 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
+        class: "h6",
         list: [
           {
             text: "When ",
@@ -115,6 +139,7 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
+        class: "h6",
         list: [
           {
             text: "You have a special weapon that doesn't count against your gear, choose 1:"
@@ -150,6 +175,7 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
+        class: "h6",
         list: [
           {
             text: "When "
@@ -158,25 +184,6 @@ function getPBDef_brick() {
             text: "you rely on intuition during battle,"
           },{
             text: " roll+Tough instead of +Smarts."
-          }
-        ]
-      }
-    ]
-  });
-
-  moves.push({
-    label: "\"You And What Army?\"",
-    children: [
-      {
-        type: "p",
-        list: [
-          {
-            text: "When "
-          },{
-            class: "font-bold",
-            text: "you match yourself against a unit in battle,"
-          },{
-            text: " you treat them as one size smaller when exchanging harm."
           }
         ]
       }
@@ -196,6 +203,9 @@ function getPBDef_brick() {
     looks: looks,
     gear: gear,
     moves: moves,
+    moveCreation: [
+      ""
+    ],
     calamities: calamities
   };
 }
