@@ -390,31 +390,33 @@
         <div><hr/></div>
 
         <div class="long-text">
-          <div>
-            <span class="h5 font-bold"
-                  ng-show="!(uniqueInputModel.shipType)">Contract Completed</span>
-            <span class="h5 font-bold"
-                  ng-repeat="SF in shipFuses track by $index"
-                  ng-show="uniqueInputModel.shipType == '{{SF.key}}'">{{SF.missionCompleteStr}}</span>
+          <div ng-show="uniqueInputModel.shipType == undefined">
+            <div><span class="h5 font-bold">Contract Completed</span></div>
+            <ul class="li-none">
+              <li><span class="font-bold">On a 13+</span>, you did exceptional well, choose 4.</li>
+              <li><span class="font-bold">On a 10-12</span>, you get a great deal, choose 3.</li>
+              <li><span class="font-bold">On a 7-9</span>, you get the standard deal, choose 2.</li>
+              <li><span class="font-bold">On a 6-</span>, things get complicated.</li>
+            </ul>
+            <ul>
+              <li class="font-bold">Select a Motivation to populate your choices.</li>
+            </ul>
           </div>
-          <p>When <span class="font-bold">your Crew successfully completes a Contract and collects their pay</span> from the client or contact, roll+Contract Rating.</p>
-          <ul class="li-none">
-            <li><span class="font-bold">On a 13+</span>, you did exceptional well, choose 4.</li>
-            <li><span class="font-bold">On a 10-12</span>, you get a great deal, choose 3.</li>
-            <li><span class="font-bold">On a 7-9</span>, you get the standard deal, choose 2.</li>
-            <li><span class="font-bold">On a 6-</span>, it's a set up or raw deal. You may either walk away with a token payment and Choose 1, or choose 2 and deal with an enemy that's found you and wants to settle things now.</li>
-          </ul>
-          <ul>
-            <li class="font-bold"
-                ng-show="uniqueInputModel.shipType == undefined">Select a Motivation to populate your choices.</li>
-            <div ng-repeat="SF in shipFuses track by $index"
-                 ng-show="uniqueInputModel.shipType == '{{SF.key}}'">
+          <div ng-repeat="SF in shipFuses track by $index"
+               ng-show="uniqueInputModel.shipType == '{{SF.key}}'">
+            <div><span class="h5 font-bold">{{SF.missionCompleteStr}}</span></div>
+            <p><span ng-repeat="prompt in SF.getPaidPrompt" class="{{prompt.class}}">{{prompt.text}}</span></p>
+
+            <ul class="li-none">
+              <li ng-repeat="holds in SF.getPaidHolds"><span ng-repeat="prompt in holds" class="{{prompt.class}}">{{prompt.text}}</span></li>
+            </ul>
+            <ul>
               <li class="font-italic"
                   ng-repeat="choice in SF.getPaidChoices track by $index"
                   ng-if="choice && choice.length > 0">{{choice}}</li>
-            </div>
-          </ul>
-          <p>After you've made your selections and resolved any consequent moves, you need to find more work.</p>
+            </ul>
+            <p>{{SF.getPaidAftermath}}</p>
+          </div>
         </div>
 
         <div><hr/></div>

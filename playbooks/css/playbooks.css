@@ -118,8 +118,8 @@ option {
 ul, menu, dir {
   display: block;
   list-style-type: disc;
-  -webkit-margin-before: 0.5em;
-  -webkit-margin-after: 0.5em;
+  -webkit-margin-before: 0.2em;
+  -webkit-margin-after: 0.2em;
   -webkit-margin-start: 0px;
   -webkit-margin-end: 0px;
   -webkit-padding-start: 15px;
@@ -224,6 +224,7 @@ div.vr {
   height: 100%;
 }
 
+.column-span,
 .auto-column-span {
   column-span: all;
 }
@@ -265,6 +266,16 @@ div.vr {
 .float-right {
   float: right;
 }
+.float-left.float-margins {
+  margin-right: 6px;
+  margin-bottom: -5px;
+}
+.float-right.float-margins {
+  margin-left: 6px;
+  margin-bottom: -5px;
+}
+
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -531,4 +542,7 @@ tr > *:last-child {
 .harm-box-details,
 .character-creation-details {
   padding-top: 6px;
+}
+.basic-move-details {
+  padding-top: 8px;
 }

@@ -9,7 +9,7 @@ var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) 
   $scope.uniqueInputModel = {
     playbooks: {},
     controls: {
-      showMoveReference: false
+      showMoveReference: true
     }
   };
   //functions
@@ -23,6 +23,10 @@ var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) 
   $scope.harmBoxes = getHarmRules();
   $scope.foibles = getFoibles();
   $scope.playbooks = getPlaybookDefinitions();
+  $scope.moves = {
+    basic: getBasicMoves()
+  };
+  console.log( $scope.moves.basic );
 });
 
 function getPlaybookDefinitions() {

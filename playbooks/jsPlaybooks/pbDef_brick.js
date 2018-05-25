@@ -138,7 +138,7 @@ function getPBDef_brick() {
         type: "p",
         list: [
           {
-            text: "You have a special weapon that doesn't count against your gear, choose 1:"
+            text: "You have a special weapon that doesn't count against your gear slots, choose 1:"
           }
         ]
       },{

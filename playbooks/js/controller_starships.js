@@ -10,69 +10,18 @@ var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) 
     ships: {},
     shipType: ''
   };
-/***********************************************************************
- * function
- ***********************************************************************/
-  $scope.firstLetterIsAVowel = function(str) {
-    if (!str) {
-      return false;
-    }
-    var s = String(str).substring(0,1).toLowerCase();
-    switch(s) {
-      case 'a':
-      case 'e':
-      case 'i':
-      case 'o':
-      case 'u':
-        return true;
-      default:
-    }
-    return false;
-  };
-  $scope.repeatInObject = function(obj) {
-    var key, ret = [];
-    for(key in obj) {
-      ret.push( key );
-    }
-    return ret;
-  };
-  $scope.repeatNTimes = function(n) {
-    var ret = [];
-    var i;
-    for(i = 0; i < n; i++) {
-      ret.push( i );
-    }
-    return ret;
-  };
-  $scope.groupArrIntoSets = function(arr, size, classStr) {
-    var ret = [], temp;
-    var i;
-    if (!size) { size = 2; }
-    if (!classStr) { classStr = ''; }
-    temp = [];
-    for(i = 0; i < arr.length; i++) {
-      temp.push( arr[i] );
-      if (temp.length >= size) {
-        ret.push( temp );
-        temp = [];
-      }
-    }
-    if (temp.length > 0) {
-      while (temp.length < size) {
-        temp.push({ class: classStr});
-      }
-      ret.push( temp );
-    }
-    return ret;
-  };
-/***********************************************************************
- * data
- ***********************************************************************/
- $scope.shipPlaybooks = getShips();
- $scope.FTLs = getFTL();
- $scope.shipBays = getShipBays();
- $scope.shipModules = getShipModules();
- $scope.shipFuses = getShipFuses();
+
+  //functions
+  $scope.firstLetterIsAVowel = firstLetterIsAVowel_def;
+  $scope.repeatInObject = repeatInObject_def;
+  $scope.repeatNTimes = repeatNTimes_def;
+  $scope.groupArrIntoSets = groupArrIntoSets_def;
+  //data
+  $scope.shipPlaybooks = getShips();
+  $scope.FTLs = getFTL();
+  $scope.shipBays = getShipBays();
+  $scope.shipModules = getShipModules();
+  $scope.shipFuses = getShipFuses();
 });
 
 function getShipFuses() {
@@ -93,6 +42,26 @@ function getShipFuses() {
         ]
       }
     ],
+    getPaidPrompt: [
+      {text: "When "},
+      {class: "font-bold", text: "your Crew successfully completes a Contract and collects their pay"},
+      {text: " from the client or contact, roll+Contract Rating."}
+    ],
+    getPaidHolds: [
+      [
+        {class: "font-bold", text: "On a 13+, "},
+        {text: "you did exceptionally well, choose 4."}
+      ],[
+        {class: "font-bold", text: "On a 10-12, "},
+        {text: "you get a great deal, choose 3."}
+      ],[
+        {class: "font-bold", text: "On a 7-9, "},
+        {text: "you you get what you excepted, choose 2."}
+      ],[
+        {class: "font-bold", text: "On a 6-, "},
+        {text: "you get a raw deal or it is a set up. You may either walk away with a token payment and choose 1, or choose 2 but deal with an enemy that's found you and wants to settle things now."}
+      ]
+    ],
     getPaidChoices: [
       "You make a payment to your Creditor, reduce Payments by 1 and reset the Debt Clock.",
       "You pay to maintain your ship, clear Maintenance Past Due and reset the Maintenance Clock.",
@@ -102,6 +71,7 @@ function getShipFuses() {
       "You fill the Ship's cargo hold with lucrative goods for slae elsewhere, roll Lucrative Exports to determine what Cargo is available.",
       "You divide the spoils for some walking around money, each crew member rolls on Hey Big Spender."
     ],
+    getPaidAftermath: "After you've made your selections and resolved any consequent moves, you need to find more work.",
     rows: [
       [
         {
@@ -182,6 +152,26 @@ function getShipFuses() {
         ]
       }
     ],
+    getPaidPrompt: [
+      {text: "When "},
+      {class: "font-bold", text: "your Crew successfully completes a Mission and is debriefed by their superiors,"},
+      {text: " roll+Rank."}
+    ],
+    getPaidHolds: [
+      [
+        {class: "font-bold", text: "On a 13+, "},
+        {text: "your superiors are extremely impressed, choose 4."}
+      ],[
+        {class: "font-bold", text: "On a 10-12, "},
+        {text: "you are commended for your service, choose 3."}
+      ],[
+        {class: "font-bold", text: "On a 7-9, "},
+        {text: "your work is recognized, choose 2."}
+      ],[
+        {class: "font-bold", text: "On a 6-, "},
+        {text: "your failures are focused on or someone else steals your glory. Choose 1 or confront that rival within your Organization to choose 2."}
+      ]
+    ],
     getPaidChoices: [
       "You make the right connections within your Organization, increase Duty by 1.",
       "You put your Ship in for a service, and reset the Maintenance Fuse.",
@@ -190,6 +180,7 @@ function getShipFuses() {
       "You requisition a new Vehicle.",
       "You collect your Salary and have off-duty time to spend it, each crew member rolls on Hey Big Spender."
     ],
+    getPaidAftermath: "After you've made your selections and resolved any consequent moves, You've used up your off-duty time, and another mission awaits.",
     rows: [
       [
         {
@@ -273,6 +264,26 @@ function getShipFuses() {
         ]
       }
     ],
+    getPaidPrompt: [
+      {text: "When "},
+      {class: "font-bold", text: "your Crew successfully completes a Contract or a Raid and sells their spoils or collects their pay,"},
+      {text: " roll+Contract Rating."}
+    ],
+    getPaidHolds: [
+      [
+        {class: "font-bold", text: "On a 13+, "},
+        {text: "you make out like bandits, choose 4."}
+      ],[
+        {class: "font-bold", text: "On a 10-12, "},
+        {text: "you get a great deal, choose 3."}
+      ],[
+        {class: "font-bold", text: "On a 7-9, "},
+        {text: "you get what you expected, choose 2."}
+      ],[
+        {class: "font-bold", text: "On a 6-, "},
+        {text: "it's a raw deal or a set up. You may either walk away with a token payment and choose 1, or choose 2 but a rival or the authorities show up to ruin your day."}
+      ]
+    ],
     getPaidChoices: [
       "You pay Fines or frame someone else for your crimes, uncheck Infamous and reset the Crime Fuse.",
     "You pay the bills, you pay the maintenance costs for your ship, and reset the Maintenance Fuse.",
@@ -282,6 +293,7 @@ function getShipFuses() {
     "You fill your ship’s cargo hold with lucrative goods for sale elsewhere, roll Lucrative Exports to determine what Cargo is available.",
     "You divide the spoils for some walking around money, each crew member rolls on Hey Big Spender."
     ],
+    getPaidAftermath: "After you've made your selections and resolved any consequent moves, you're broke again and need to find more prey.",
     rows: [
       [
         {

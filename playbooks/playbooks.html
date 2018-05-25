@@ -75,12 +75,11 @@
           <span class="h4 font-bold">Harm</span>
           <span class="h7 text-justify inline-block" style="position: absolute; left: 55px; right: 1px; bottom: 1px;">When <span class="font-bold">you are directed to mark Harm,</span> mark off one Harm box for each harm inflicted.</span>
         </div>
-        
       </div>
       
       <div class="keep-together" ng-repeat="harmBox in harmBoxes track by $index" style="{{harmBox.style}}">
         <div>
-          <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+          <div class="float-left float-margins">
             <span ng-repeat="symbol in harmBox.symbols"><span class="h5 symbol empty clickable" ng-repeat="n in repeatNTimes( symbol.count )"></span></span>
             <span class="h5 font-bold">{{harmBox.label}}</span>
           </div>
@@ -139,7 +138,7 @@
     </div>
     <div class="auto-column-2">
       <div class="keep-together margin-top margin-bottom" ng-repeat="move in playbook.moves track by $index">
-        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <div class="float-left float-margins">
           <span class="clickable symbol empty h5 {{move.symbolClass}}"></span>
           <span class="h5 font-bold">{{move.label}}</span>
         </div>
@@ -176,7 +175,7 @@
       </div>
 
       <div class="keep-together">
-        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <div class="float-left float-margins">
           <span class="h5 font-bold">Name:</span>
         </div>
         <p class="no-top character-creation-details">Choose a name or make up your own:</p>
@@ -184,7 +183,7 @@
       </div>
 
       <div class="keep-together">
-        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <div class="float-left float-margins">
           <span class="h5 font-bold">Look:</span>
         </div>
         <p class="no-top character-creation-details">Choose a pronoun and up to 4:</p>
@@ -193,7 +192,7 @@
       </div>
 
       <div class="keep-together">
-        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <div class="float-left float-margins">
           <span class="h5 font-bold">Stats:</span>
         </div>
         <p class="no-top character-creation-details">
@@ -203,21 +202,21 @@
       </div>
 
       <div class="keep-together">
-        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <div class="float-left float-margins">
           <span class="h5 font-bold">Moves:</span>
         </div>
         <p class="no-top character-creation-details">Choose 2 {{playbook.trope}} moves and 1 move from any playbook.</p>
       </div>
 
       <div class="keep-together">
-        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <div class="float-left float-margins float-margins">
           <span class="h5 font-bold">Foibles:</span>
         </div>
         <p class="no-top character-creation-details">Create 1 to 3 Foibles. If you don't accept a foible very often, consider replacing it.</p>
       </div>
 
       <div class="keep-together">
-        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+        <div class="float-left float-margins">
           <span class="h5 font-bold">Gear:</span>
         </div>
         <p class="no-top character-creation-details">{{playbook.gearInstructions}}</p>
@@ -227,6 +226,20 @@
         </div>
       </div>
 
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="basicMoves">
+    <div class="keep-together column-span">
+      <div class="float-left float-margins">
+        <span class="h4 font-bold">Basic Moves</span>
+      </div>
+      <p class="no-top basic-move-details">Every character has access to these moves.</p>
+    </div>
+
+    <div ng-repeat="move in moves.basic" class="keep-together long-text margin-top margin-bottom">
+      <div class="h5 font-bold capitalize">{{move.label}}</div>
+      <div ng-init="FEAT = move" ng-include="'playbookLongText'"></div>
     </div>
   </script>
 <!-----------------------------------------------------------------------------
@@ -331,11 +344,19 @@
     <div class="page landscape flex-row" ng-show="uniqueInputModel.controls.showMoveReference">
 
       <div class="flex-2 padding-left padding-right">
+
+        <div class="auto-column-2">
+          <div class="margin-top margin-bottom" ng-include="'basicMoves'"></div>
+        </div>
+
         
+
       </div>
 
       <div class="flex-2 padding-left padding-right">
+
         
+
       </div>
 
     </div>
