@@ -33,7 +33,7 @@ function getBasicMoves() {
         type: "p",
         list: [
           {text: "When "},
-          {class: "font-bold", text: "help or interfere with someone making a move,"},
+          {class: "font-bold", text: "you help or interfere with someone making a move,"},
           {text: " establish what kind of move you are using to meddle, and roll+[its stat]. On a hit, choose 1:"}
         ]
       },{
@@ -367,6 +367,34 @@ function getStat_smarts() {
 
 function getPeripheralMoves() {
   var ret = [];
+
+  ret.push({
+    label: "Negotiate Terms",
+    type: "commerce",
+    children: [
+      {
+        type: "p",
+        list: [
+          {text: "When "},
+          {class: "font-bold", text: "you commit to a Contract or Mission and meet with your contact to negotiate the terms,"},
+          {text: " roll+Disposition or +Rank if you know your Client, or roll+Sharp at Disadvantage if you don't. "},
+          {class: "font-bold", text: "On a 10+,"},
+          {text: " your strong relationship or negotiating skills are top notch, choose 2. "},
+          {class: "font-bold", text: "On a 7-9,"},
+          {text: " you manage to get a small concession, choose 1. "},
+          {class: "font-bold", text: "On a miss,"},
+          {text: " you get stonewalled, or there's just nothing else they can give you."},
+        ]
+      },{
+        type: "ul",
+        list: [
+          [{text: "You negotiate a better payment upon completion. When you complete this Contract, roll your ship payment move at advantage."}],
+          [{text: "You gain some useful information from your contact, the MC will reveal a hidden detail of the Contract."}],
+          [{text: "You get an up-front expenses payment or resource provided. Each Crew Member makes a roll on Hey Big Spender, at Disadvantage."}]
+        ]
+      }
+    ]
+  });
 
   return ret;
 }
