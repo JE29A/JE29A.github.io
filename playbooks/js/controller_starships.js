@@ -991,7 +991,7 @@ function getShipModules() {
     name: "Lasers",
     symbolClass: "empty",
     symbolCount: 1,
-    hasDischarged: true,
+    hasDischarged: false,
     tags: "1 Damage, Near/Close/Far, Discharge",
     children: [
       {
@@ -1009,7 +1009,7 @@ function getShipModules() {
   ret.push({
     name: "Missiles",
     symbolClass: "empty",
-    symbolCount: 1,
+    symbolCount: 2,
     hasDischarged: false,
     tags: "2 Damage, Close/Far/Extreme",
     children: [
@@ -1029,7 +1029,7 @@ function getShipModules() {
     name: "Plasma Cannon",
     symbolClass: "empty",
     symbolCount: 2,
-    hasDischarged: true,
+    hasDischarged: false,
     tags: "3 Damage, Close/Far",
     children: [
       {

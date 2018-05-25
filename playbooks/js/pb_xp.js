@@ -112,8 +112,8 @@ function getFoibles() {
       label: "Intimate",
       text: "When you put your friend ___________ ahead of the mission."
     },{
-      label: "Masochistic",
-      text: "When you suffer one or more harm."
+      label: "Martyr",
+      text: "When you needlessly expose yourself to harm to protect someone else."
     },{
       label: "Network",
       text: "When your membership in ___________ hinders the mission."

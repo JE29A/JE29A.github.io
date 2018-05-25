@@ -254,10 +254,10 @@
           <p>When <span class="font-bold">your Ship takes Damage and there are no unchecked options to mark off</span>, your Ship is destroyed.</p>
           <p>When you <span class="font-bold">perform Spot Repairs on your Ship</span>, check the Spot Repairs option for the Damage you are repairing, and apply the appropriate effect.</p>
         </div>
-        <hr/>
+        <div><hr/></div>
         <div class="long-text">
           <div>
-            <span class="clickable symbol empty h5"></span>
+            <span class="clickable symbol empty h5" ng-repeat="n in repeatNTimes(1)"></span>
             <span class="h5 font-bold">Superficial Damage</span>
           </div>
           <p>Your armor took the damage for you, absorbing some of the damage without compromising the ship. Superficial Damage makes your ship look uglier, but it doesn't have any additional negative effects. You can't Spot Repair Superficial Damage. Some ships have extra armor, allowing additional Superficial Damage to be absorbed.</p>
@@ -267,7 +267,8 @@
                   ng-repeat="n in repeatNTimes(10)"></span>
           </div>
         </div>
-        <hr/>
+        <!--
+        <div><hr/></div>
         <div class="long-text">
           <div class="flex-row">
             <div class="flex-1">
@@ -283,21 +284,7 @@
           <p>One of your Ship's systems has been hit! Fill in which one. Any roll using that Ship System is at Disadvantage.</p>
           <p>When <span class="font-bold">you perform Spot Repairs on a System Hit</span>, you restore normal operation, negate Disadvantage from <span class="font-italic">this</span> System Damage.</p>
         </div>
-        <div class="long-text margin-top fade">
-          <div class="flex-row">
-            <div class="flex-1">
-              <span class="clickable symbol empty h5"></span>
-              <span class="h5 font-bold">System Hit</span>
-            </div>
-            <div>
-              <span class="clickable symbol empty h6"></span>
-              <span class="h6 font-bold">Spot Repairs</span>
-            </div>
-          </div>
-          <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(12) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
-        </div>
-        <!--
-        <div class="long-text margin-top fade">
+        <div class="long-text margin-top fade" ng-repeat="n in repeatNTimes(1)">
           <div class="flex-row">
             <div class="flex-1">
               <span class="clickable symbol empty h5"></span>
@@ -311,7 +298,8 @@
           <div><span class="h6 font-bold">System</span> <span class="font-underline" ng-repeat="n in repeatNTimes(12) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
         </div>
         -->
-        <hr/>
+        
+        <div><hr/></div>
         <div class="long-text">
           <div class="flex-row">
             <div class="flex-1">
@@ -326,7 +314,7 @@
           <p>The deck shudders and panels flicker. Any roll using a Ship System is at Disadvantage.</p>
           <p>When <span class="font-bold">you perform Spot Repairs on a Direct Hit</span>, you restore normal operation, negate Disadvantage from Direct Hit.</p>
         </div>
-        <hr/>
+        <div><hr/></div>
         <div class="long-text">
           <div class="flex-row">
             <div class="flex-1">
@@ -341,7 +329,7 @@
           <p>A hole is blasted in the side of your ship and one or more sections are exposed to vacuum.</p>
           <p>When <span class="font-bold">you perform Spot Repairs on a Hull Breach</span>, you restore atmosphere to the vented sections, but you are dangerously low on Life Support, any rolls that require physical exertion are at Disadvantage.</p>
         </div>
-        <hr/>
+        <div><hr/></div>
         <div class="long-text">
           <div class="flex-row">
             <div class="flex-1">
@@ -368,7 +356,7 @@
           <p>When <span class="font-bold">you performs spot repairs on your ship to patch over Damage</span>, describe how you do it. <span class="font-bold">If there are no immediate pressures and you have plenty of time</span>, you do it with little complication. Apply Spot Repairs to one Damage option. <span class="font-bold">If you are under immediate danger or time is limited</span>, <span class="font-bold">act under pressure</span> to complete the repairs, unless you have a move better suited to the job.</p>
         </div>
 
-        <hr/>
+        <div><hr/></div>
 
         <div class="long-text">
           <div>
@@ -383,7 +371,7 @@
           <p>On a miss, prepare for the worst.</p>
         </div>
 
-        <hr/>
+        <div><hr/></div>
 
         <div class="long-text">
           <div>
@@ -399,7 +387,7 @@
           </ul>
         </div>
 
-        <hr/>
+        <div><hr/></div>
 
         <div class="long-text">
           <div>
@@ -429,7 +417,7 @@
           <p>After you've made your selections and resolved any consequent moves, you need to find more work.</p>
         </div>
 
-        <hr/>
+        <div><hr/></div>
 
         <div class="long-text">
           <div>
@@ -463,7 +451,7 @@
           <p>Your ship starts with 4 Upgrade points to buy your starting Modules and may have up to 10 Modules installed. Modules without a box to mark do not count against your maximum Modules.</p>
           <p>When you buy an Upgrade for your ship, check an upgrade box. Unless a Module says otherwise, you need to fill all of the Upgrade boxes before that Module is fully installed and functional in your ship.</p>
           <p>If you are the maximum number of Modules, you have to pull out a Module before you can start installing a new one. You do not get a refund on Upgrade Points.</p>
-          <hr/>
+          <div><hr/></div>
         </div>
 
         <div class="keep-together padding-left padding-right"

@@ -79,12 +79,6 @@ a {
   text-decoration: inherit;
 }
 
-
-::placeholder,
-:-ms-input-placeholder,
-::-ms-input-placeholder {
-  opacity: 50%;
-}
 input, textarea {
   background: #DDD;
   border: 0px;
@@ -101,6 +95,11 @@ input.resizing {
   min-width: 5px;
   padding: 1px;
 }
+
+option {
+  min-height: 0em;
+}
+
 ul, menu, dir {
   display: block;
   list-style-type: disc;
@@ -322,7 +321,7 @@ hr {
 }
 .long-text p + p,
 .long-text ul + p {
-  text-indent: 1em;
+  //text-indent: 1em;
 }
 p {
   -webkit-margin-before: 0.25em;

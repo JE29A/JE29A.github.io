@@ -11,8 +11,8 @@ function getPBDef_brick() {
   ].sort().join(', ') + ".";
 
   var gear = [
-    "Pistol (2 harm, near/close, loud, discharge)",
-    "Assault Rifle (2 harm, close/far, autofire, loud, discharge)",
+    "Pistol (2 harm, near/close, loud)",
+    "Assault Rifle (2 harm, close/far, autofire, loud)",
     "Shotgun (3 harm, close, loud, messy)",
     "Bladed Weapon (2 harm, near, silent)",
     "Tactical Armor (1 armor)",
@@ -155,7 +155,7 @@ function getPBDef_brick() {
             }
           ],[
             {
-              text: "Plasma Cannon (3 harm, close, dangerous, messy, discharge)."
+              text: "Plasma Cannon (4 harm, close, dangerous, messy)."
             }
           ],[
             {

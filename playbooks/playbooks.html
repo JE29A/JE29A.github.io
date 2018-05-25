@@ -97,8 +97,8 @@
       <div class="anchor margin-top margin-bottom border" ng-repeat="n in repeatNTimes(3) track by $index">
         <select class="h7 width-100"
                 ng-model="uniqueInputModel.playbooks[playbook.trope2].foibles[$index]">
-          <option class="h6 font-normal font-no-bold" value="">Create your own</option>
-          <option class="h6 font-normal font-no-bold"
+          <option class="h7 font-normal font-no-bold" value="">Create your own</option>
+          <option class="h7 font-normal font-no-bold"
                   ng-repeat="foible in foibles"
                   value="{{foible.text}}">{{foible.label}}: {{foible.text}}</option>
         </select>
@@ -193,7 +193,7 @@
       <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
         <span class="h5 font-bold">Foibles:</span>
       </div>
-      <p class="no-top" style="padding-top: 5px;">Create a Foible or two.</p>
+      <p class="no-top" style="padding-top: 5px;">Create 1 to 3 Foibles. If you don't accept a foible very often, consider replacing it.</p>
     </div>
   </script>
 <!-----------------------------------------------------------------------------
