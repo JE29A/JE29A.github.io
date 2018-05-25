@@ -79,7 +79,7 @@ function getHarmRules() {
         count: 1
       }
     ],
-    text: "Your journey is over, you pass away, unmourned and unnoticed by the universe."
+    text: "Your journey took a bad turn, if nothing changes, you will be one more dead spacer."
   });
 
   return ret;

@@ -24,48 +24,27 @@ function getStat_charm() {
         type: "basic",
         children: [
           {
-            class: "",
-            text: "When you try to MANIPULATE, BLUFF, FAST-TALK, OR LIE TO SOMEONE, tell them what you want them to do, give them a reason, and roll+Charm. For NPCs:"
+            type: "p",
+            list: [
+              {text: "When you try to MANIPULATE, BLUFF, FAST-TALK, OR LIE TO SOMEONE, tell them what you want them to do, give them a reason, and roll+Charm. For NPCs:"}
+            ]
           },{
-            class: "li",
-            text: "10+, they’ll go along with you, unless or until some fact or action betrays the reason you gave them."
-          },{
-            class: "li",
-            text: "On a 7-9, they’ll go along with you, but they need some concrete assurance, corroboration, or evidence first."
-          },{
-            class: "",
-            text: "For PCs: on a 10+, both. On a 7-9, choose 1:"
-          },{
-            class: "li",
-            text: "If they go along with you, they mark experience."
-          },{
-            class: "li",
-            text: "If they refuse, erase one of their stat highlights for the remainder of the session."
-          },{
-            text: "What they do then is up to them."
-          },{
-            class: "basic-move-miss"
-          },{
-            class: "advanced-move first",
-            text: "On a 12+, only if they’re an NPC, they do it, and furthermore you change their nature. Choose one of the following; tell the MC to erase their threat type altogether and write it in instead."
-          },{
-            class: "li",
-            text: "ally: friend (impulse: to back you up)"
-          },{
-            class: "li",
-            text: "ally: lover (impulse: to give you shelter & comfort)"
-          },{
-            class: "li",
-            text: "ally: right hand (impulse: to follow through on your intentions)"
-          },{
-            class: "li",
-            text: "ally: representative (impulse: to pursue your interests in your absence)"
-          },{
-            class: "li",
-            text: "ally: guardian (impulse: to intercept danger)"
-          },{
-            class: "li",
-            text: "ally: confidante (impulse: to give you advice, perspective, or absolution.)"
+            type: "ul",
+            list: [
+              [
+                {class: "font-bold", text: "On a 13+,"},
+                {text: " they do it and you change their nature. Choose one of the following; tell the MC to erase their threat type altogether and write it in instead."}
+              ],[
+                {class: "font-bold", text: "10+,"},
+                {text: " they’ll go along with you, unless or until some fact or action betrays the reason you gave them."}
+              ],[
+                {class: "font-bold", text: "On a 7-9,"},
+                {text: " they’ll go along with you, but they need some concrete assurance, corroboration, or evidence first."}
+              ],[
+                {class: "font-bold", text: "On a miss,"},
+                {text: " be prepared for the worst!"}
+              ]
+            ]
           }
         ]
       }
@@ -81,25 +60,68 @@ function getStat_cool() {
         type: "basic",
         children: [
           {
-            class: "",
-            text: "When you want to ACT UNDER PRESSURE, roll+Cool."
+            type: "p",
+            list: [
+              {text: "When "},
+              {class: "font-bold", text: "you act under pressure,"},
+              {text: " roll+Cool."}
+            ]
           },{
-            class: "li",
-            text: "10+, you do it."
-          },{
-            class: "li",
-            text: "7-9, you flinch, hesitate, or stall: the MC can offer you a worse outcome, a hard bargain, or an ugly choice."
-          },{
-            class: "basic-move-miss"
-          },{
-            class: "advanced-move first",
-            text: "On a 12+, you transcend the danger, the pressure, the possibility of harm. You do what you set out to do, and the MC will offer you a better outcome, true beauty, or a moment of grace."
+            type: "ul",
+            list: [
+              [
+                {class: "font-bold", text: "On a 13+,"},
+                {text: " you transcend the danger, the pressure, the possibility of harm. You do what you set out to do, and the MC will offer you a better outcome, true beauty, or a moment of grace."}
+              ],[
+                {class: "font-bold", text: "10+,"},
+                {text: " you do it."}
+              ],[
+                {class: "font-bold", text: "On a 7-9,"},
+                {text: " you flinch, hesitate, or stall: the MC can offer you a worse outcome, a hard bargain, or an ugly choice."}
+              ],[
+                {class: "font-bold", text: "On a miss,"},
+                {text: " be prepared for the worst!"}
+              ]
+            ]
           }
         ]
       },{
         label: "recover",
         type: "basic",
         children: [
+          {
+            type: "p",
+            list: [
+              {text: "When "},
+              {class: "font-bold", text: "you're out of direct danger and take a moment to gather yourself,"},
+              {text: " roll+Cool. "},
+              {class: "font-bold", text: "On a hit,"},
+              {text: " choose 2. "},
+              {class: "font-bold", text: "On a 13+,"},
+              {text: " you finish quickly and have a +1 forward. "},
+              {class: "font-bold", text: "On a 7-9,"},
+              {text: " you took a little too long, and your enemy gets a chance to get into a better position or prepare themselves."},
+              {class: "font-bold", text: "On a miss,"},
+              {text: " you should prepare for the worst!"}
+            ]
+          },{
+            type: "ul",
+            list: [
+              [
+                {class: "font-bold", text: "Refresh: "},
+                {text: "ready a Move or piece of Gear that has been Discharged."}
+              ],[
+                {class: "font-bold", text: "First Aid: "},
+                {text: "spend 1 use of a Tactical Pack to heal \"I'm kncoked out\" on an ally."}
+              ],[
+                {class: "font-bold", text: "Shrug It Off: "},
+                {text: "heal \"Just a scratch\" or \"I'm rattled\" on yourself."}
+              ],[
+                {class: "font-bold", text: "Stabilize Someone: "},
+                {text: "spend 1 use of a Tactical Pack to prevent someone with \"I can't go on\" from dying, for now."}
+              ]
+            ]
+          }
         ]
       },{
         label: "subterfuge moves",
@@ -118,31 +140,30 @@ function getStat_sharp() {
         type: "basic",
         children: [
           {
-            text: "When you ASSESS A CHARGED SITUATION, roll+Sharp. On a hit, you can ask the MC questions. Whenever you act on one of the MC’s answers, take +1. On a 10+, ask 3. On a 7-9, ask 1:"
+            type: "p",
+            list: [
+              {text: "When "},
+              {class: "font-bold", text: "you assess a situation,"},
+              {text: " roll+Sharp. You will gain a number of holds to spend on questions. Whenever you act on one of the MC's answers, take +1 forward. "},
+              {class: "font-bold", text: "On a 10+,"},
+              {text: " hold 3. "},
+              {class: "font-bold", text: "On a 7-9,"},
+              {text: " hold 1. "},
+              {class: "font-bold", text: "On a miss,"},
+              {text: " hold 1 and spend it immediately, but be prepared for the worst! "},
+              {class: "font-bold", text: "On a 13+,"},
+              {text: " spend a hold to ask any question you want about the scene, otherwise choose from the following:"}
+            ]
           },{
-            class: "li",
-            text: "Where's my best escape route / way in / way past?"
-          },{
-            class: "li",
-            text: "Which enemy is most vulnerable to me?"
-          },{
-            class: "li",
-            text: "Which enemy is the biggest threat?"
-          },{
-            class: "li",
-            text: "What should I be on the lookout for?"
-          },{
-            class: "li",
-            text: "What's my enemy's true position?"
-          },{
-            class: "li",
-            text: "Who's in control here?"
-          },{
-            class: "basic-move-miss",
-            text: "On a miss, ask 1 anyway, but be prepared for the worst!"
-          },{
-            class: "advanced-move first",
-            text: "On a 12+, ask any 3 questions you want about the scene."
+            type: "ul",
+            list: [
+              [{text: "Where's my best escape route / way in / way past?"}],
+              [{text: "Which enemy is most vulnerable to me?"}],
+              [{text: "Which enemy is the biggest threat?"}],
+              [{text: "What should I be on the lookout for?"}],
+              [{text: "What's my enemy's true position?"}],
+              [{text: "Who's in control here?"}]
+            ]
           }
         ]
       },{
@@ -150,74 +171,36 @@ function getStat_sharp() {
         type: "basic",
         children: [
           {
-            text: "When you read a person in a charged interaction, roll+Sharp. On a 10+, hold 3. On a 7-9, hold 1. While you’re interacting with them, spend your hold to ask questions from this list:"
+            type: "p",
+            list: [
+              {text: "When "},
+              {class: "font-bold", text: "you read a person,"},
+              {text: " roll+Sharp. You will gain a number of holds to spend on questions. "},
+              {class: "font-bold", text: "On a 10+,"},
+              {text: " hold 3. "},
+              {class: "font-bold", text: "On a 7-9,"},
+              {text: " hold 1. "},
+              {class: "font-bold", text: "On a miss,"},
+              {text: " hold 1 and spend it immediately, and prepare for the worst! "},
+              {class: "font-bold", text: "On a 13+,"},
+              {text: " spend a hold to ask any question you want of the person, otherwise choose from the following:"}
+            ]
           },{
-            class: "li",
-            text: "Is your character telling the truth?"
-          },{
-            class: "li",
-            text: "What’s your character really feeling?"
-          },{
-            class: "li",
-            text: "What does your character intend to do?"
-          },{
-            class: "li",
-            text: "What does your character wish I’d do?"
-          },{
-            class: "li",
-            text: "How could I get your character to —?"
-          },{
-            class: "basic-move-miss",
-            text: "On a miss, ask 1 anyway, but be prepared for the worst!"
-          },{
-            class: "advanced-move first",
-            text: "On a 12+, ask any 3 questions you want about this person."
+            type: "ul",
+            list: [
+              [{text: "Is your character telling the truth?"}],
+              [{text: "What’s your character really feeling?"}],
+              [{text: "What does your character intend to do?"}],
+              [{text: "What does your character wish I’d do?"}],
+              [{text: "How could I get your character to —?"}]
+            ]
           }
         ]
       }
     ]
   };
 }
-function getStat_smarts_old() {
-  return {
-    label: "Smarts",
-    moves: [
-      {
-        label: "ponder",
-        type: "basic",
-        children: [
-          {
-            text: "When you take the time to PONDER a location, roll+Smarts. On a 10+, hold 3. On a 7-9, hold 1. Spend your hold to ask questions from this list:"
-          },{
-            class: "li",
-            text: "What happened here?"
-          },{
-            class: "li",
-            text: "How long ago did this happen?"
-          },{
-            class: "li",
-            text: "What is out of place?"
-          },{
-            class: "li",
-            text: "What is broken?"
-          },{
-            class: "li",
-            text: "Where could things be hidden?"
-          },{
-            class: "li",
-            text: "What could do this?"
-          },{
-            class: "basic-move-miss",
-            text: "On a miss, ask 1 anyway, but be prepared for the worst!"
-          },{
-            class: "advanced-move first",
-            text: "On a 12+, ask any 3 questions about the location."
-          }
-        ]
-      }
-    ]
-  };
-}
+
 function getStat_tough() {
   return {
     label: "Tough",
@@ -227,34 +210,50 @@ function getStat_tough() {
         type: "basic",
         children: [
           {
-            class: "",
-            text: "When you THREATEN SOMEONE WITH VIOLENCE, roll+Tough. On a 10+, they have to choose:"
+            type: "p",
+            list: [
+              {text: "When "},
+              {class: "font-bold", text: "you threat someone with violence,"},
+              {text: " roll+Tough."}
+            ]
           },{
-            class: "li",
-            text: "Force your hand and accept the threatened violence."
+            type: "p",
+            list: [
+              {class: "font-bold", text: "On a 13+,"},
+              {text: " they have to cave and do what you want. You've overwhelmed them; they can't possibly bring themselves to force your hand. "}
+            ]
           },{
-            class: "li",
-            text: "Cave and do what you want."
+            type: "p",
+            list: [
+              {class: "font-bold", text: "On a 10-12,"},
+              {text: " they have to choose:"}
+            ]
           },{
-            class: "",
-            text: "On a 7-9, they can choose 1 of the above, or 1 of the following:"
+            type: "ul",
+            list: [
+              [{text: "Force your hand and accept the threatened violence."}],
+              [{text: "Cave and do what you want."}]
+            ]
           },{
-            class: "li",
-            text: "Get out of your way."
+            type: "p",
+            list: [
+              {class: "font-bold", text: "On a 7-9,"},
+              {text: " they can choose 1 of the above, or 1 of the following:"}
+            ]
           },{
-            class: "li",
-            text: "Barricade themselves securely in."
+            type: "ul",
+            list: [
+              [{text: "Get out of your way."}],
+              [{text: "Barricade themselves securely in."}],
+              [{text: "Give you something they think you want, or tell you what you want to hear."}],
+              [{text: "Back off calmly, hands where you can see."}]
+            ]
           },{
-            class: "li",
-            text: "Give you something they think you want, or tell  you want you want to hear."
-          },{
-            class: "li",
-            text: "Back off calmly, hands where you can see."
-          },{
-            class: "basic-move-miss"
-          },{
-            class: "advanced-move first",
-            text: "On a 12+, they have to cave and do what you want. You've overwhelmed them; they can't possibly bring themselves to force your hand."
+            type: "p",
+            list: [
+              {class: "font-bold", text: "On a miss,"},
+              {text: " prepare for the worst!"}
+            ]
           }
         ]
       },{
@@ -265,27 +264,39 @@ function getStat_tough() {
     ]
   };
 }
+
 function getStat_smarts() {
   return {
     label: "Smarts",
     moves: [
       {
-        label: "intuit",
+        label: "use computer",
         type: "basic",
         children: [
           {
-            text: "When you RELY ON YOUR INTUITION, roll+Smarts. On a hit, the MC tells you something new and interesting about the current situation, and might ask you a question or two; answer them."
+            type: "p",
+            list: [
+              {text: "When "},
+              {class: "font-bold", text: "you use a computer with credentials,"},
+              {text: " roll+Smarts."}
+            ]
           },{
-            class: "li",
-            text: "On a 10+, the MC gives you good detail."
-          },{
-            class: "li",
-            text: "On a 7-9, the MC gives you an impression. If you already know all there is to know, the MC will tell you that."
-          },{
-            class: "basic-move-miss"
-          },{
-            class: "advanced-move first",
-            text: "On a 12+, your imagination offers unconventional ideas that border on prescience."
+            type: "ul",
+            list: [
+              [
+                {class: "font-bold", text: "On a 13+,"},
+                {text: " you speed through menus and command lines and evade detection to do what you set out to do, and the MC will offer you a better outcome."}
+              ],[
+                {class: "font-bold", text: "10-12,"},
+                {text: " you accomplish your task."}
+              ],[
+                {class: "font-bold", text: "7-9,"},
+                {text: " it takes a while: the MC can offer you a worse outcome, a hard bargain, or an ugly choice."}
+              ],[
+                {class: "font-bold", text: "On a miss,"},
+                {text: " be prepared for the worst!"}
+              ]
+            ]
           }
         ]
       }
@@ -312,7 +323,7 @@ function getStat_weird() {
             class: "basic-move-miss"
           },{
             class: "advanced-move first",
-            text: "On a 12+, your imagination offers unconventional ideas that border on prescience."
+            text: "On a 13+, your imagination offers unconventional ideas that border on prescience."
           }
         ]
       }
