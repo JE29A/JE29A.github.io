@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/playbooks.css" />
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/utility.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="js/pb_moves.js"></script>
   <script src="js/pb_xp.js"></script>
@@ -67,21 +68,18 @@
       <div class="keep-together auto-column-span width-100">
         <div class="anchor">
           <span class="h4 font-bold">Harm</span>
-          <span class="h7 text-justify inline-block" style="position: absolute; left: 55px; right: 1px; bottom: 1px;">When <span class="font-bold">you are directed to mark Harm,</span> mark off one of the Harm options or 1 Stress for each Harm you receive. <span class="font-bold">When you have 5 Stress,</span> clear your Stress track and take a Calamity.</span>
+          <span class="h7 text-justify inline-block" style="position: absolute; left: 55px; right: 1px; bottom: 1px;">When <span class="font-bold">you are directed to mark Harm,</span> mark off one of the Harm box.</span>
         </div>
         
       </div>
-
-      <div class="text-left h4 keep-together margin-top margin-bottom">
-        <span class="h5 font-bold">Stress</span>
-        <span class="h5 symbol empty clickable" ng-repeat="n in repeatNTimes(5)"></span>
-      </div>
       
-      <div class="keep-together" ng-repeat="harmBox in harmBoxes track by $index">
+      <div class="keep-together" ng-repeat="harmBox in harmBoxes track by $index" style="{{harmBox.style}}">
         <div>
-          <span class="h5 symbol empty clickable"></span>
-          <span class="h5 font-bold">{{harmBox.label}}</span>
-          <p>{{harmBox.text}}</p>
+          <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+            <span ng-repeat="symbol in harmBox.symbols"><span class="h5 symbol empty clickable" ng-repeat="n in repeatNTimes( symbol.count )"></span></span>
+            <span class="h5 font-bold">{{harmBox.label}}</span>
+          </div>
+          <p style="padding-top: 5px;">{{harmBox.text}}</p>
         </div>
       </div>
   </script>
@@ -90,15 +88,24 @@
     <div class="long-text">
       <div class="anchor">
         <span class="h4 font-bold">Foibles</span>
-        <span class="h7 text-justify inline-block" style="position: absolute; bottom: 0px; right: 1px; left: 69px;">When you choose to gain a Foible, write it below. <span class="font-bold">When a Foible applies to the current situation,</span> choose 1:</p>
+        <span class="h7 text-justify inline-block" style="position: absolute; bottom: 0px; right: 1px; left: 69px;">Foibles are your motivations and habits that you have trouble ignoring. When you choose to gain a Foible, write it below. <span class="font-bold">When a Foible applies to the current situation,</span> choose 1:</p>
       </div>
       <ul>
         <li>Decline the offer to apply your Foible, and continue playing as normal.</li>
         <li>Apply your Foible. You have Disadvantage going forward.</li>
       </ul>
-      <div class="anchor" ng-repeat="n in repeatNTimes(3) track by $index">
-        <textarea class="margin-top margin-bottom border width-100 h7" rows="3" style="text-indent: 39px;"></textarea>
-        <span class="h7 font-bold" style="position: absolute; top: 4px; left: 3px;">Foible {{$index+1}}</span>
+      <div class="anchor margin-top margin-bottom border" ng-repeat="n in repeatNTimes(3) track by $index">
+        <select class="h7 width-100"
+                ng-model="uniqueInputModel.playbooks[playbook.trope2].foibles[$index]">
+          <option class="h6 font-normal font-no-bold" value="">Create your own</option>
+          <option class="h6 font-normal font-no-bold"
+                  ng-repeat="foible in foibles"
+                  value="{{foible.text}}">{{foible.label}}: {{foible.text}}</option>
+        </select>
+        <!--
+        ng-show="uniqueInputModel.playbooks[playbook.trope2].foibles[$index] == ''"
+        -->
+        <textarea class="width-100 h7" rows="3" ng-value="uniqueInputModel.playbooks[playbook.trope2].foibles[$index]"></textarea>
       </div>
     </div>
   </script>
@@ -158,6 +165,7 @@
 
       <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
         <span class="h5 font-bold">Look:</span>
+
       </div>
       <p class="no-top" style="padding-top: 5px;">Choose a pronoun and up to 4:</p>
       <p class="text-left">Him, Her, Them, It, Em, Zim, Per, Sir, Ver, [name].</p>
@@ -198,7 +206,7 @@
 <body>
 
   <div ng-repeat="playbook in playbooks track by $index"
-       ng-init="uniqueInputModel.playbooks[playbook.trope2] = {name: '', trope: playbook.trope};">
+       ng-init="uniqueInputModel.playbooks[playbook.trope2] = {name: '', trope: playbook.trope, foibles: ['', '', '']};">
 
     <div class="page landscape flex-row" pb-side="a">
 
@@ -207,8 +215,9 @@
         <div class="flex-row">
           <div class="flex-1 margin-right">
             <div class="margin-top margin-bottom">
-              <div>
-                <input type="text" class="border-bottom font-bold h4 text-center width-100" placeholder="Name" />
+              <div class="anchor">
+                <input type="text" class="border-bottom font-bold h4 text-center width-100" />
+                <span class="h6 font-bold" style="position: absolute; top: 0px; left: 1px;">Name:</span>
               </div>
               <div class="text-center">
                 <span class="h4 font-bold capitalize">The </span>
@@ -219,7 +228,7 @@
               <textarea class="width-100 h6"
                         style="text-indent: 44px;"
                         rows="4"></textarea>
-              <span class="h5 font-bold"
+              <span class="h6 font-bold"
                     style="position: absolute; top: 0px; left: 3px;">Look:</span>
             </div>
           </div>
@@ -257,23 +266,26 @@
 
       </div>
 
-      <div class="flex-2 padding-left padding-right flex-col">
+      <div class="flex-1 padding-left padding-right flex-col">
         <div>
           <span class="h4 font-bold capitalize">{{playbook.trope}} Moves</span>
         </div>
         <div ng-include="'playbookMoves'"></div>
-        <div class="flex-1 margin-top margin-bottom flex-col border">
-          <div>
+        <div class="anchor flex-1 margin-top margin-bottom flex-col border">
+          <div style="position: absolute; left: 2px; top: 0px;">
             <span class="h5 font-bold">Other Moves</span>
           </div>
-          <textarea class="flex-1 width-100 h6"></textarea>
+          <textarea class="flex-1 width-100 h6" style="text-indent: 98px;"></textarea>
         </div>
       </div>
 
-      
+      <div class="flex-1 padding-left padding-right flex-col">
+        <div class="margin-top margin-bottom" ng-include="'playbookCreation'"></div>
+      </div>
 
     </div>
 
+    <!--
     <div class="page landscape flex-row" pb-side="b">
       <div class="flex-2 padding-left padding-right">
         
@@ -287,6 +299,7 @@
         <div class="margin-top margin-bottom" ng-include="'playbookCreation'"></div>
       </div>
     </div>
+    -->
 
   </div>
 </body>

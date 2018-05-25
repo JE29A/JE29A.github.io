@@ -78,6 +78,13 @@ a {
   color: blue;
   text-decoration: inherit;
 }
+
+
+::placeholder,
+:-ms-input-placeholder,
+::-ms-input-placeholder {
+  opacity: 50%;
+}
 input, textarea {
   background: #DDD;
   border: 0px;

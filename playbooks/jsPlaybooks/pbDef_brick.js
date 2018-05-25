@@ -125,6 +125,7 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
+        class: "h6",
         list: [
           {
             text: "Whenever you inflict harm, inflict +1 harm.",
