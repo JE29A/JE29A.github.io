@@ -521,7 +521,7 @@ function getFTL() {
       ],[
         {
           class: "font-bold",
-          text: "Translation Trauama:"
+          text: "Translation Trauma:"
         },{
           class: "",
           text: " When "
