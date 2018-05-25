@@ -7,7 +7,10 @@ $(document).ready(function() {
 var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) {
   //local models
   $scope.uniqueInputModel = {
-    playbooks: {}
+    playbooks: {},
+    controls: {
+      showMoveReference: false
+    }
   };
   //functions
   $scope.firstLetterIsAVowel = firstLetterIsAVowel_def;

@@ -52,13 +52,24 @@
   width: 10.5in;
   height: 8.0in;
 }
-.page::before {
+.page.page-count::before {
   position: absolute;
   top: 0px;
   right: 1px;
   text-align: right;
   counter-increment: pageNumber;
   content: counter(pageNumber);
+}
+.control-width {
+  width: 10.5in;
+  max-height: 4in;
+  min-height: 1in;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1px;
+  overflow: auto;
+  column-count: 3;
+  background: #EEE;
 }
 
 .keep-together {
@@ -79,6 +90,10 @@ a {
   text-decoration: inherit;
 }
 
+input[type=checkbox] {
+  margin-right: 0px;
+  margin-left: 0px;
+}
 input, textarea {
   background: #DDD;
   border: 0px;
@@ -123,17 +138,32 @@ table {
   border-collapse: collapse;
 }
 
-hr {
+hr, vr {
   display: block;
   unicode-bidi: isolate;
-  -webkit-margin-before: 0.25em;
-  -webkit-margin-after: 0.25em;
-  -webkit-margin-start: auto;
-  -webkit-margin-end: auto;
   overflow: hidden;
   border-style: inset;
   border-width: 1px;
   border-color: #888;
+}
+hr {
+  -webkit-margin-before: 0.20em;
+  -webkit-margin-after: 0.00em;
+  -webkit-margin-start: auto;
+  -webkit-margin-end: auto;
+}
+vr {
+  -webkit-margin-before: 1px;
+  -webkit-margin-after: 1px;
+  flex: 1;
+}
+div.vr {
+  display: flex !important;
+  flex-direction: column;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .block {
@@ -493,4 +523,8 @@ tr > *:first-child {
 }
 tr > *:last-child {
   padding-right: 0px;
+}
+
+.move-details-block {
+    padding-top: 5px;
 }

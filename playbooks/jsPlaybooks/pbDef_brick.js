@@ -27,7 +27,6 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
-        class: "h6",
         list: [
           {
             text: "When "
@@ -47,7 +46,6 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
-        class: "h6",
         list: [
           {
             text: "When ",
@@ -67,7 +65,6 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
-        class: "h6",
         list: [
           {
             text: "When "
@@ -105,7 +102,6 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
-        class: "h6",
         list: [
           {
             text: "When ",
@@ -125,7 +121,6 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
-        class: "h6",
         list: [
           {
             text: "Whenever you inflict harm, inflict +1 harm.",
@@ -140,7 +135,6 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
-        class: "h6",
         list: [
           {
             text: "You have a special weapon that doesn't count against your gear, choose 1:"
@@ -176,15 +170,14 @@ function getPBDef_brick() {
     children: [
       {
         type: "p",
-        class: "h6",
         list: [
           {
             text: "When "
           },{
             class: "font-bold",
-            text: "you rely on intuition during battle,"
+            text: "you assess a situation during battle,"
           },{
-            text: " roll+Tough instead of +Smarts."
+            text: " roll+Tough instead of +Sharp."
           }
         ]
       }

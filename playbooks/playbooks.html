@@ -47,8 +47,8 @@
 
   <script type="text/ng-template" id="playbookStatTable">
     <div class="anchor">
-      <span class="h4 font-bold">Stats</span>
-      <span class="h7 text-right inline-block" style="position: absolute; right: 1px; bottom: 1px;">{{stats.instructions}}</span>
+      <span class="h4 font-bold float-left" style="margin-right: 6px;">Stats</span>
+      <span class="h7 inline-block" style="padding-top: 9px;">{{stats.instructions}}</span>
     </div>
     <div>
       <table class="width-100">
@@ -128,12 +128,24 @@
   </script>
 
   <script type="text/ng-template" id="playbookMoves">
-    <div class="keep-together margin-top margin-bottom" ng-repeat="move in playbook.moves track by $index">
-      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
-        <span class="clickable symbol empty h5 {{move.class}}"></span>
-        <span class="h5 font-bold">{{move.label}}</span>
+    <div class="anchor">
+      <span class="h4 float-left font-bold capitalize" style="margin-right: 6px;">{{playbook.trope}} Moves</span>
+      <span class="h7 text-justify inline-block" style="padding-top: 9px;">Choose 2 {{playbook.trope}} moves and 1 more from any playbook.</span>
+    </div>
+    <div class="auto-column-2">
+      <div class="keep-together margin-top margin-bottom" ng-repeat="move in playbook.moves track by $index">
+        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+          <span class="clickable symbol empty h5 {{move.class}}"></span>
+          <span class="h5 font-bold">{{move.label}}</span>
+        </div>
+        <div ng-init="FEAT = move" ng-include="'playbookLongText'" class="move-details-block"></div>
       </div>
-      <div ng-init="FEAT = move" ng-include="'playbookLongText'" style="padding-top: 1px;"></div>
+    </div>
+    <div class="anchor flex-1 margin-top margin-bottom flex-col">
+      <div style="position: absolute; left: 2px; top: 0px;">
+        <span class="h5 font-bold">Other Moves</span>
+      </div>
+      <textarea class="flex-1 width-100 h6" style="text-indent: 98px;"></textarea>
     </div>
   </script>
 
@@ -153,47 +165,60 @@
   </script>
 
   <script type="text/ng-template" id="playbookCreation">
-    <div class="long-text">
-      <div>
+    <div class="long-text auto-column-2">
+      <div style="column-span: all;">
         <span class="h4 font-bold">Making a <span class="capitalize">{{playbook.trope}}</span></span>
       </div>
-      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
-        <span class="h5 font-bold">Name:</span>
-      </div>
-      <p class="no-top" style="padding-top: 5px;">Choose a name or make up your own:</p>
-      <p class="text-left">{{playbook.names}}</p>
 
-      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
-        <span class="h5 font-bold">Look:</span>
-
-      </div>
-      <p class="no-top" style="padding-top: 5px;">Choose a pronoun and up to 4:</p>
-      <p class="text-left">Him, Her, Them, It, Em, Zim, Per, Sir, Ver, [name].</p>
-      <p class="text-left">{{playbook.looks}}</p>
-
-      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
-        <span class="h5 font-bold">Stats:</span>
-      </div>
-      <p class="no-top" style="padding-top: 5px;">Assign your stats.</p>
-
-      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
-        <span class="h5 font-bold">Gear:</span>
-      </div>
-      <p class="no-top" style="padding-top: 5px;">You start with 3 Gear slots. Choose 5 Gear from the list below to start with:</p>
-      <div ng-repeat="g in playbook.gear track by $index">
-        <span class="h6 clickable symbol empty"></span>
-        <span class="h7">{{g}}</span>
+      <div class="keep-together">
+        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+          <span class="h5 font-bold">Name:</span>
+        </div>
+        <p class="no-top" style="padding-top: 5px;">Choose a name or make up your own:</p>
+        <p class="text-left">{{playbook.names}}</p>
       </div>
 
-      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
-        <span class="h5 font-bold">Moves:</span>
+      <div class="keep-together">
+        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+          <span class="h5 font-bold">Look:</span>
+        </div>
+        <p class="no-top" style="padding-top: 5px;">Choose a pronoun and up to 4:</p>
+        <p class="text-left">Him, Her, Them, It, Em, Zim, Per, Sir, Ver, [name].</p>
+        <p class="text-left">{{playbook.looks}}</p>
       </div>
-      <p class="no-top" style="padding-top: 5px;">Choose 2 of your {{playbook.trope}} moves and 1 move from anywhere.</p>
 
-      <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
-        <span class="h5 font-bold">Foibles:</span>
+      <div class="keep-together">
+        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+          <span class="h5 font-bold">Stats:</span>
+        </div>
+        <p class="no-top" style="padding-top: 5px;">Assign your stats.</p>
       </div>
-      <p class="no-top" style="padding-top: 5px;">Create 1 to 3 Foibles. If you don't accept a foible very often, consider replacing it.</p>
+
+      <div class="keep-together">
+        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+          <span class="h5 font-bold">Moves:</span>
+        </div>
+        <p class="no-top" style="padding-top: 5px;">Choose 2 {{playbook.trope}} moves and 1 move from any playbook.</p>
+      </div>
+
+      <div class="keep-together">
+        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+          <span class="h5 font-bold">Foibles:</span>
+        </div>
+        <p class="no-top" style="padding-top: 5px;">Create 1 to 3 Foibles. If you don't accept a foible very often, consider replacing it.</p>
+      </div>
+
+      <div class="keep-together">
+        <div class="float-left" style="margin-right: 6px; margin-bottom: -5px;">
+          <span class="h5 font-bold">Gear:</span>
+        </div>
+        <p class="no-top" style="padding-top: 5px;">You start with 3 Gear slots. Choose 5 Gear from the list below to start with:</p>
+        <div ng-repeat="g in playbook.gear track by $index">
+          <span class="h6 clickable symbol empty"></span>
+          <span class="h7">{{g}}</span>
+        </div>
+      </div>
+
     </div>
   </script>
 <!-----------------------------------------------------------------------------
@@ -205,10 +230,23 @@
 
 <body>
 
+  <div class="do-not-print border control-width">
+    <div class="text-center h6 font-italic auto-column-span">This section is not printed.</div>
+
+    <div class="h6">
+      <input type="checkbox"
+             ng-model="uniqueInputModel.controls.showMoveReference"
+             ng-value="uniqueInputModel.controls.showMoveReference" />
+      <span>Include Basic Move Reference Sheet Between Playbooks (recommended for double sided printing)</span>
+    </div>
+  </div>
+
   <div ng-repeat="playbook in playbooks track by $index"
        ng-init="uniqueInputModel.playbooks[playbook.trope2] = {name: '', trope: playbook.trope, foibles: ['', '', '']};">
 
-    <div class="page landscape flex-row" pb-side="a">
+    <div class="page landscape page-count flex-row"
+         pb-side="a"
+         id="playbook-{{playbook.trope2}}">
 
       <div class="flex-2 padding-left padding-right flex-col">
 
@@ -266,27 +304,36 @@
 
       </div>
 
-      <div class="flex-1 padding-left padding-right flex-col">
-        <div>
-          <span class="h4 font-bold capitalize">{{playbook.trope}} Moves</span>
-        </div>
-        <div ng-include="'playbookMoves'"></div>
-        <div class="anchor flex-1 margin-top margin-bottom flex-col border">
-          <div style="position: absolute; left: 2px; top: 0px;">
-            <span class="h5 font-bold">Other Moves</span>
-          </div>
-          <textarea class="flex-1 width-100 h6" style="text-indent: 98px;"></textarea>
-        </div>
+      <div class="vr"><vr/></div>
+
+      <div class="flex-2 padding-left padding-right flex-col">
+        <div class="flex-1 flex-col" ng-include="'playbookMoves'"></div>
+        <div><hr/></div>
+        <div class="margin-top margin-bottom" ng-include="'playbookCreation'"></div>
       </div>
 
+      <!--
       <div class="flex-1 padding-left padding-right flex-col">
         <div class="margin-top margin-bottom" ng-include="'playbookCreation'"></div>
+      </div>
+      -->
+
+    </div>
+
+    <div class="page landscape flex-row" ng-show="uniqueInputModel.controls.showMoveReference">
+
+      <div class="flex-2 padding-left padding-right">
+        
+      </div>
+
+      <div class="flex-2 padding-left padding-right">
+        
       </div>
 
     </div>
 
     <!--
-    <div class="page landscape flex-row" pb-side="b">
+    <div class="page landscape page-count flex-row" pb-side="b">
       <div class="flex-2 padding-left padding-right">
         
       </div>
