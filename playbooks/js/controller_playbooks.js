@@ -24,7 +24,8 @@ var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) 
   $scope.foibles = getFoibles();
   $scope.playbooks = getPlaybookDefinitions();
   $scope.moves = {
-    basic: getBasicMoves()
+    basic: getBasicMoves(),
+    commerce: getMoves_Commerce()
   };
   console.log( $scope.moves.basic );
 });

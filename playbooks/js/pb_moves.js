@@ -365,7 +365,7 @@ function getStat_smarts() {
   };
 }
 
-function getPeripheralMoves() {
+function getMoves_Commerce() {
   var ret = [];
 
   ret.push({
@@ -391,6 +391,130 @@ function getPeripheralMoves() {
           [{text: "You negotiate a better payment upon completion. When you complete this Contract, roll your ship payment move at advantage."}],
           [{text: "You gain some useful information from your contact, the MC will reveal a hidden detail of the Contract."}],
           [{text: "You get an up-front expenses payment or resource provided. Each Crew Member makes a roll on Hey Big Spender, at Disadvantage."}]
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    label: "Hey Big Spender",
+    type: "commerce",
+    children: [
+      {
+        type: "p",
+        list: [
+          {text: "When "},
+          {class: "font-bold", text: "you're flush with Currency and go looking for something to spend your ill gotten gains on,"},
+          {text: " roll+Disposition (default +0) with the local vendors or contacts to see what you can find. "},
+          {class: "font-bold", text: "On a 10+,"},
+          {text: " you can find your heart's desire, spend big, and live life to the fullest. Purchase 1 item from the Specialist or Black Market list, or choose 3 from below. "}
+          ,{class: "font-bold", text: "On a 7-9,"},
+          {text: " you've got plenty of time and money, choose 2."},
+          {class: "font-bold", text: "On a 6-,"},
+          {text: " you only have access to the basics, choose 1."}
+        ]
+      },{
+        type: "ul",
+        list: [
+          [{text: "Heal all Harm you have suffered with a few days rough but competent treatment."}],
+          [{text: "Mark 1 Tick on a personal project."}],
+          [{text: "Make 1 purchase on the Advanced Gear list."}],
+          [{text: "Make 2 purchases on the Basic Gear list."}]
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    label: "Test Drive",
+    type: "commerce",
+    children: [
+      {
+        type: "p",
+        list: [
+          {class: "font-bold", text: "When you go to the scrap dealers and vendors of vehicles looking for a deal on particular type of Vehicle,"},
+          {text: " say what you're looking for and either take it as-is or roll+Sharp."},
+          {class: "font-bold", text: "On a 12+,"},
+          {text: " you find a superb example of engineering, or get a customized vehicle. Make 2 enhancements. "},
+          {class: "font-bold", text: "On a 10+,"},
+          {text: " it's better than average, make 1 enhancement. "},
+          {class: "font-bold", text: "On a 7-9, "},
+          {text: "it's serviceable, take it as-is. "},
+          {class: "font-bold", text: "On a 6-,"},
+          {text: " you had to take what you could get, make 1 Compromise."}
+        ]
+      },{
+        type: "p",
+        list: [
+          {text: "When you make an Enhancement, add a +Strength, or remove a -Weakness, as established."},
+          {text: "When you make a Compromise, remove a +Strength, or add a -Weakness, as established."}
+        ]
+      },{
+        type: "ul",
+        class: "font-italic",
+        list: [
+          [{text: "Speeder: 1 Hit, +Responsive, +Speedy, -Fragile, -Cramped."}],
+          [{text: "Passenger Vehicle: 1 Hit, +Reliable, +Inconspicuous, +Spacious, -Fragile."}],
+          [{text: "Military Vehicle: 2 Hits, +Reliable +Armored, +Equipped 1, -Sluggish."}],
+          [{text: "Shuttle: 2 Hits, +Spacious, +Armored, +Spacefaring, -Ponderous."}],
+          [{text: "Fighter: 3 Hits, +Responsive, +Speedy, +Spacefaring, +Equipped 1, -Cramped."}],
+          [{text: "Armature: 3 Hits, +Responsive, +Spacefaring, +Equipped 2, -Ponderous -Cramped."}]
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    label: "Lucrative Exports",
+    type: "commerce",
+    children: [
+      {
+        type: "p",
+        list: [
+          {text: "When "},
+          {class: "font-bold", text: "your Crew hits the markets and exchanges with plenty of money, and go looking for cargo to purchase and transport for sale elsewhere,"},
+          {text: " roll+Disposition (default +0) with the local vendors and contacts."}
+        ]
+      },{
+        type: "ul",
+        list: [
+          [
+            {class: "font-bold", text: "On a 10+,"},
+            {text: " there's plenty to choose from. Choose 1 and describe it: Valuable Cargo, Contraband Cargo, or Cheap Cargo."}
+          ],[
+            {class: "font-bold", text: "On a 7-9,"},
+            {text: " there's an OK selection. Choose 1 and describe it: Contraband Cargo or Cheap Cargo."}
+          ],[
+            {class: "font-bold", text: "On a miss,"},
+            {text: " it's slim pickings. You manage to buy some Cheap Cargo, describe it."}
+          ]
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    label: "Merchantile",
+    type: "commerce",
+    children: [
+      {
+        type: "p",
+        list: [
+          {text: "When you dock in a systemw ith your cargo hold full of goods to sell, roll 2d6. If you are selling Contraband Cargo, add +1 to the roll. If you are selling Valuable Cargo, you have Advantage."}
+        ]
+      },{
+        type: "ul",
+        list: [
+          [
+            {class: "font-bold", text: "On a 10+,"},
+            {text: " it's a good sale, choose 1 from your Ship Payment Move."}
+          ],[
+            {class: "font-bold", text: "On a 7-9,"},
+            {text: " you can only get paid in kind. Roll Lucrative Exports."}
+          ],[
+            {class: "font-bold", text: "On a miss,"},
+            {text: " it's a net loss. Either the market was unfavorable or someone blew the profits."}
+          ]
         ]
       }
     ]

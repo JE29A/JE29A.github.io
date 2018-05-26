@@ -201,6 +201,7 @@ function getShipFuses() {
           riderType: "number",
           riderClass: "border h6 no-spinner text-center float-right",
           riderStyle: "width: 40px;",
+
           riderMin: -1,
           riderMax: 3
         },{
@@ -322,7 +323,7 @@ function getShipFuses() {
             class: "font-bold",
             text: "your Crime Clock is full"
           },{
-            text: ", make Infamous."
+            text: ", mark Infamous."
           }
         ]
       },{
@@ -336,6 +337,11 @@ function getShipFuses() {
         ],
         text: "Infamous",
         textClass: "h5 font-bold"
+      },{
+        type: "p",
+        list: [
+          {text: "When you roll The Crew Is Back In Town while Infamous is checked, you have Disadvantage."}
+        ]
       }
     ]
   });

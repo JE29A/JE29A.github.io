@@ -242,6 +242,21 @@
       <div ng-init="FEAT = move" ng-include="'playbookLongText'"></div>
     </div>
   </script>
+
+  <script type="text/ng-template" id="otherMoves">
+    <div class="keep-together column-span">
+      <div class="float-left float-margins">
+        <span class="h4 font-bold">{{otherMoveObj.label}}</span>
+      </div>
+      <p ng-if="otherMoveObj.instruction"
+         class="no-top basic-move-details">{{otherMoveObj.instruction}}</p>
+    </div>
+
+    <div ng-repeat="move in moves[otherMoveObj.key]" class="keep-together long-text margin-top margin-bottom">
+      <div class="h5 font-bold capitalize">{{move.label}}</div>
+      <div ng-init="FEAT = move" ng-include="'playbookLongText'"></div>
+    </div>
+  </script>
 <!-----------------------------------------------------------------------------
 -------------------------------------------------------------------------------
   End of NG-TEMPLATES
@@ -349,13 +364,15 @@
           <div class="margin-top margin-bottom" ng-include="'basicMoves'"></div>
         </div>
 
-        
-
       </div>
+
+      <div class="vr"><vr/></div>
 
       <div class="flex-2 padding-left padding-right">
 
-        
+        <div class="auto-column-2">
+          <div class="margin-top margin-bottom" ng-include="'otherMoves'" ng-init="otherMoveObj = {label: 'Commerce Moves', key: 'commerce'}"></div>
+        </div>
 
       </div>
 
