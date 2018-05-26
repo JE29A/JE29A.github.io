@@ -127,6 +127,9 @@ ul, menu, dir {
 ul.li-none {
   list-style-type: none;
 }
+ul.li-numbered {
+  list-style-type: decimal;
+}
 .no-bottom {
   -webkit-margin-after: 0;
 }

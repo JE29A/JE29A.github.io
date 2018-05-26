@@ -365,6 +365,37 @@ function getStat_smarts() {
   };
 }
 
+function getMoves_special() {
+  var ret = [];
+
+  ret.push({
+    label: "Previously On",
+    type: "special",
+    children: [
+      {
+        type: "p",
+        list: [
+          {text: "When "},
+          {class: "font-bold", text: "your group starts a new Episode,"},
+          {text: " go through the following list:"}
+        ]
+      },{
+        type: "ul",
+        class: "li-numbered font-italic",
+        list: [
+          [{text: "Briefly go over what happened in the last session, mentioning any highlights."}],
+          [{text: "List each Crew Member’s Foibles. Players may take this opportunity to change their Foibles or write new ones."}],
+          [{text: "Set the scene for the beginning of this session and begin playing."}]
+        ]
+      }
+    ]
+  });
+
+  
+
+  return ret;
+}
+
 function getMoves_Commerce() {
   var ret = [];
 
@@ -489,6 +520,65 @@ function getMoves_Commerce() {
             {text: " it's slim pickings. You manage to buy some Cheap Cargo, describe it."}
           ]
         ]
+      },{
+        type: "p",
+        class: "h6 font-bold",
+        list: [
+          {text: "Valuable Cargo"}
+        ]
+      },{
+        type: "p",
+        list: [
+          {text: "Valuable Cargo is worth a lot to someone. It's worth so much that someone might try to steal it, or kill you for it. When "},
+          {class: "font-bold", text: "you sell Valuable Cargo in a different system than where you bought it,"},
+          {text: " roll Merchantile with Advantage."}
+        ]
+      },{
+        type: "p",
+        class: "text-center font-italic",
+        list: [
+          {text: "Luxury items or goods, rare antiques or artifacts, high quality goods, parts, or supplies, a rare animal, sensitive or valuable information."}
+        ]
+      },{
+        type: "p",
+        class: "h6 font-bold",
+        list: [
+          {text: "Contraband Cargo"}
+        ]
+      },{
+        type: "p",
+        list: [
+          {text: "Contraband Cargo is illegal. When "},
+          {class: "font-bold", text: "you are caught with Contraband Cargo by authorities,"},
+          {text: " may arrest, fine, or attack you, depending on their laws and the kind of Contraband you are carrying. Contraband can only be sold to criminal contacts, but "},
+          {class: "font-bold", text: "when you sell your Contraband Cargo to a criminal contact,"},
+          {text: " take +1 to your Mercantile roll."}
+        ]
+      },{
+        type: "p",
+        class: "text-center font-italic",
+        list: [
+          {text: "Illicit drugs or software, stolen or looted goods, illegal Modifications or weapons, dirty money or illegally obtained secrets, slaves, stolen or illicit information."}
+        ]
+      },{
+        type: "p",
+        class: "h6 font-bold",
+        list: [
+          {text: "Cheap Cargo"}
+        ]
+      },{
+        type: "p",
+        list: [
+          {text: "Cheap Cargo is the standard, ubiquitous stuff you can get just about anywhere It's boring, but no one is likely to kill you for it. When "},
+          {class: "font-bold", text: "you sell Cheap Cargo in a different system than where you bought it,"},
+          {text: " roll Mercantile."}
+        ]
+      },{
+        type: "p",
+        class: "text-center font-italic",
+        list: [
+          {text: "Common goods, supplies, or parts. Simple industrial machinery, cheap disposable devices or products, civilian correspondence."}
+        ]
       }
     ]
   });
@@ -522,4 +612,5 @@ function getMoves_Commerce() {
 
   return ret;
 }
+
 
