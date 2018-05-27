@@ -171,7 +171,10 @@
   <script type="text/ng-template" id="playbookCreation">
     <div class="long-text auto-column-2">
       <div style="column-span: all;">
-        <span class="h4 font-bold">Making a <span class="capitalize">{{playbook.trope}}</span></span>
+        <div class="float-left float-margins">
+          <span class="h4 font-bold">Making a <span class="capitalize">{{playbook.trope}}</span></span>
+        </div>
+        <p class="no-top" style="padding-top: 9px;">Fold your sheet so these two facing pages are the inside of your playbook.</p>
       </div>
 
       <div class="keep-together">
@@ -229,6 +232,25 @@
     </div>
   </script>
 
+  <script type="text/ng-template" id="blurbSection">
+    <div class="text-center h2 font-bold capitalize column-span">The <span class="h1 font-bold">{{playbook.trope}}</span></div>
+    
+    <div class="keep-together">
+      <div class="h5 font-bold">Campaign Setting Questions?</div>
+      <p class="no-top"></p>
+    </div>
+
+    <div class="keep-together">
+      <div class="h5 font-bold">Something Else?</div>
+      <p class="no-top"></p>
+    </div>
+
+    <div class="keep-together">
+      <div class="h5 font-bold">Player Agenda</div>
+      <p class="no-top"></p>
+    </div>
+  </script>
+
   <script type="text/ng-template" id="basicMoves">
     <div class="keep-together column-span">
       <div class="float-left float-margins">
@@ -266,6 +288,7 @@
 
 <body>
 
+  <!--
   <div class="do-not-print border control-width">
     <div class="text-center h6 font-italic auto-column-span">This section is not printed.</div>
 
@@ -276,9 +299,36 @@
       <span>Include Basic Move Reference Sheet Between Playbooks (recommended for double sided printing)</span>
     </div>
   </div>
+  -->
 
   <div ng-repeat="playbook in playbooks track by $index"
        ng-init="uniqueInputModel.playbooks[playbook.trope2] = {name: '', trope: playbook.trope, foibles: ['', '', '']};">
+
+    <div class="page landscape flex-row">
+
+      <div class="flex-2 padding-left padding-right">
+
+        <div class="auto-column-2">
+          <div class="margin-top margin-bottom" ng-include="'basicMoves'"></div>
+          <!--
+          <div class="margin-top margin-bottom" ng-include="'otherMoves'" ng-init="otherMoveObj = {label: 'Commerce Moves', key: 'commerce'}"></div>
+
+          -->
+        </div>
+
+      </div>
+
+      <div class="vr"><vr/></div>
+
+      <div class="flex-2 padding-left padding-right">
+
+        <div class="auto-column-2">
+          <div class="margin-top margin-bottom" ng-include="'blurbSection'"></div>
+        </div>
+
+      </div>
+
+    </div>
 
     <div class="page landscape page-count flex-row"
          pb-side="a"
@@ -355,44 +405,6 @@
       -->
 
     </div>
-
-    <div class="page landscape flex-row" ng-show="uniqueInputModel.controls.showMoveReference">
-
-      <div class="flex-2 padding-left padding-right">
-
-        <div class="auto-column-2">
-          <div class="margin-top margin-bottom" ng-include="'basicMoves'"></div>
-        </div>
-
-      </div>
-
-      <div class="vr"><vr/></div>
-
-      <div class="flex-2 padding-left padding-right">
-
-        <div class="auto-column-2">
-          <div class="margin-top margin-bottom" ng-include="'otherMoves'" ng-init="otherMoveObj = {label: 'Commerce Moves', key: 'commerce'}"></div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!--
-    <div class="page landscape page-count flex-row" pb-side="b">
-      <div class="flex-2 padding-left padding-right">
-        
-      </div>
-
-      <div class="flex-1 padding-left padding-right">
-        <div class="margin-top margin-bottom" ng-include="'playbookCalamity'"></div>
-      </div>
-
-      <div class="flex-1 padding-left padding-right">
-        <div class="margin-top margin-bottom" ng-include="'playbookCreation'"></div>
-      </div>
-    </div>
-    -->
 
   </div>
 </body>
