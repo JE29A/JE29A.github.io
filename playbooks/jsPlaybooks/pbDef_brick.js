@@ -22,6 +22,12 @@ function getPBDef_brick() {
     "Vacsuit"
   ];
 
+  var blurbs = [
+    {text: "The frontiers can be a mean, ugly, violent place. Law and society aren't a given everywhere. In those places, what's yours is yours only while you can hold it. Or as long as you have a brick backing you up."},
+    {text: "Bricks aren't soldiers (at least, not any more); they are mercenaries loaded for bear. Or whatever tough large predator is found on a planet. The point is that \"reasonable response\" and \"appropriate restraint\" aren't in their vocabulary."},
+    {class: "font-italic", text: "Bricks are the baddest of asses. Their moves are simple, direct, and violent. If you want to answer affirmatively to, \"Tell me you brought the grenades,\" play a brick. Warning: if things are going well, you might not be using your special moves. Interesting relationships can keep you in the scene."}
+  ];
+
   moves.push({
     label: "\"You And What Army?\"",
     class: "",
@@ -194,6 +200,7 @@ function getPBDef_brick() {
   return {
     trope: trope,
     trope2: trope.toLowerCase().replace(/ /g, '_'),
+    blurbs: blurbs,
     names: names,
     looks: looks,
     gearInstructions: gearInstructions,
