@@ -375,9 +375,16 @@ p {
   text-align: justify;
 }
 p + p {
-  -webkit-margin-before: 0.5em;
+  -webkit-margin-before: 0.25em;
+}
+p.cover-sheet-paragraphs {
+  -webkit-margin-before: 0;
+}
+p.cover-sheet-paragraphs + p.cover-sheet-paragraphs {
+  -webkit-margin-before: 0.25em;
 }
 .blurb-paragraph,
+.cover-sheet-paragraphs,
 .h6 {
   font-size: 12px;
 }
