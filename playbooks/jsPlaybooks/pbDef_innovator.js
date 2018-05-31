@@ -1,5 +1,5 @@
-function getPBDef_engineer() {
-  var trope = "engineer";
+function getPBDef_innovator() {
+  var trope = "innovator";
   var moves = [], calamities = [];
 
   var names = [
@@ -20,11 +20,12 @@ function getPBDef_engineer() {
   ];
 
   var blurbs = [
-    {text: "When only an impossible solution can set things right, people turn to the engineer. They might not have discovered hyperspace, but they figured out how to avoid having a ship get ripped apart by competing gravity (before too many killed themselves sailing into them anyway)."},
-    {text: "Any ship setting off for parts unknown probably has at least one engineer onboard."},
-    {class: "font-italic", text: "Engineers are the zany inventors. They can fix things, but they really shine when they are pushing the bounds of what is possible. Play a engineer if you want to be instrumental in specific circumstances. Warning: your workspace depends on resources, and lots of them, so make friends with everyone you can."}
+    {text: "When only an impossible solution can set things right, people turn to the innovator. They might not have discovered hyperspace, but they figured out how to avoid having a ship get ripped apart by competing gravity (before too many killed themselves sailing into them anyway)."},
+    {text: "Any ship setting off for parts unknown probably has at least one innovator onboard."},
+    {class: "font-italic", text: "Innovators are the zany inventors. They can fix things, but they really shine when they are pushing the bounds of what is possible. Play a innovator if you want to be instrumental in specific circumstances. Warning: your workspace depends on resources, and lots of them, so make friends with everyone you can."}
   ];
 
+  /*
   moves.push({
     label: "Bonefeel",
     symbolClass: "",
@@ -38,6 +39,7 @@ function getPBDef_engineer() {
       }
     ]
   });
+  */
 
   moves.push({
     label: "Focused Intensity",
@@ -55,7 +57,7 @@ function getPBDef_engineer() {
   });
 
   moves.push({
-    label: "Thinks Speak",
+    label: "Things Speak",
     symbolClass: "",
     children: [
       {

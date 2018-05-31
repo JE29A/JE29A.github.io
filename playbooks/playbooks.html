@@ -11,7 +11,7 @@
   <script src="js/pb_moves.js"></script>
   <script src="js/pb_xp.js"></script>
   <script src="jsPlaybooks/pbDef_brick.js"></script>
-  <script src="jsPlaybooks/pbDef_engineer.js"></script>
+  <script src="jsPlaybooks/pbDef_innovator.js"></script>
   <script src="jsPlaybooks/pbDef_psion_esper.js"></script>
   <script src="jsPlaybooks/pbDef_psion_porter.js"></script>
   <script src="jsPlaybooks/pbDef_psion_pusher.js"></script>
@@ -236,7 +236,7 @@
 
   <script type="text/ng-template" id="blurbSection">
     <div class="column-span flex-1">
-      <div class="text-center h2 font-bold capitalize">The <span class="h1 font-bold">{{playbook.trope}}</span></div>
+      <div class="text-center h2 font-bold">The <span class="h1 font-bold title-string">{{playbook.trope}}</span></div>
 
       <p ng-repeat="b in playbook.blurbs track by $index" class="cover-sheet-paragraphs {{b.class}}" style="{{b.style}}">{{b.text}}</p>
     </div>
@@ -336,18 +336,18 @@
           <div class="flex-1 margin-right">
             <div class="margin-top margin-bottom">
               <div class="anchor">
-                <input type="text" class="border-bottom font-bold h4 text-center width-100" />
-                <span class="h6 font-bold" style="position: absolute; top: 0px; left: 1px;">Name:</span>
+                <input type="text" class="border font-bold h4 text-center width-100" />
+                <span class="h6 font-bold" style="position: absolute; top: 0px; left: 3px;">Name:</span>
               </div>
               <div class="text-center">
                 <span class="h4 font-bold capitalize">The </span>
-                <span class="h3 font-bold uppercase">{{playbook.trope}}</span>
+                <span class="h3 font-bold title-string">{{playbook.trope}}</span>
               </div>
             </div>
             <div class="margin-top margin-bottom border anchor">
               <textarea class="width-100 h6"
                         style="text-indent: 44px;"
-                        rows="4"></textarea>
+                        rows="3"></textarea>
               <span class="h6 font-bold"
                     style="position: absolute; top: 0px; left: 3px;">Look:</span>
             </div>
