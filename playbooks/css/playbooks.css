@@ -240,6 +240,9 @@ div.vr {
 .auto-column-4 {
   column-count: 4;
 }
+.auto-column-5 {
+  column-count: 5;
+}
 
 .text-center {
   text-align: center;
@@ -377,13 +380,9 @@ p {
 p + p {
   -webkit-margin-before: 0.25em;
 }
-p.cover-sheet-paragraphs {
-  -webkit-margin-before: 0;
-}
-p.cover-sheet-paragraphs + p.cover-sheet-paragraphs {
-  -webkit-margin-before: 0.25em;
-}
 .blurb-paragraph,
+.cover-sheet-paragraphs p,
+.cover-sheet-paragraphs li,
 .cover-sheet-paragraphs,
 .h6 {
   font-size: 12px;

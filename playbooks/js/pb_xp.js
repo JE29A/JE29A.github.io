@@ -194,3 +194,77 @@ function getLooks(tropes) {
 
   return ret.sort().join(", ") +".";
 }
+
+function getFrontText() {
+  var ret = [];
+
+  ret.push({
+    label: "Campaign Questions",
+    class: "auto-column-2",
+    children: [
+      {
+        type: "ul",
+        text: "What kind of faster-than-light travel exists? Any special details?",
+        containerClass: "keep-together padding-top",
+        list: [
+          [{text: "None (period)"}],
+          [{text: "Wormholes or Gates"}],
+          [{text: "Jump Drive (transit time?)"}],
+          [{text: "Warp Drive"}],
+          [{text: "Hyperspace (single layer, multiple?)"}],
+          [{text: "Magical or psionic"}]
+        ]
+      },{
+        type: "ul",
+        text: "What is the home base for the campaign?",
+        containerClass: "keep-together padding-top",
+        list: [
+          [{text: "Starship (cast is the crew)"}],
+          [{text: "Big ship (cast are a portion of the crew, maybe with their own smaller ship"}],
+          [{text: "Station, Planet, or Colony"}]
+        ]
+      },{
+        type: "ul",
+        text: "What is the scope the story can be expected to span in the campaign?",
+        containerClass: "keep-together padding-top",
+        list: [
+          [{text: "Local to the home base"}],
+          [{text: "Local to one system"}],
+          [{text: "Multiple star systems"}]
+        ]
+      },{
+        type: "ul",
+        text: "How pulpy versus \"realistic\" is this campaign?",
+        containerClass: "keep-together padding-top",
+        list: [
+          [{text: "Small crews with automated ships (Pulpy)"}],
+          [{text: "Large crews (Realistic)"}]
+        ]
+      }
+    ]
+  });
+
+  ret.push({
+    label: "Player Agenda",
+    children: [
+      {
+        type: "ul",
+        list: [
+          [{text: "Act like you're the protagonist in this story."}],
+          [{text: "Play your character like they are a real person."}],
+          [{text: "Play to find out what happens."}],
+          [
+            {text: "The story is advanced by making "},
+            {class: "font-bold", text: "moves"},
+            {text: ". The most basic rule for moves is "},
+            {class: "font-bold", text: "to do it, you must do it"},
+            {text: "."},
+            {text: " Negative consequences sometimes happen; it would make for a boring story if everything went the protagonists' way."}
+          ]
+        ]
+      }
+    ]
+  });
+  
+  return ret;
+}

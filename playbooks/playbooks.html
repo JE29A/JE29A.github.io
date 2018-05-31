@@ -21,9 +21,10 @@
   Start of NG-TEMPLATES
 ------------------------------------------------------------------------------->
   <script type="text/ng-template" id="playbookLongText">
-    <div ng-repeat="child in FEAT.children track by $index">
-      <p ng-if="child.type == 'p'" class="{{child.class}}"><span ng-repeat="s in child.list track by $index" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span></p>
-      <ul ng-if="child.type == 'ul'" class="{{child.class}}">
+    <div ng-repeat="child in FEAT.children track by $index" class="{{child.containerClass}}">
+      <p ng-if="child.text" class="{{child.textClass}}" style="{{child.textStyle}}">{{child.text}}</p>
+      <p ng-if="child.type == 'p'" class="{{child.class}}" style="{{child.style}}"><span ng-repeat="s in child.list track by $index" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span></p>
+      <ul ng-if="child.type == 'ul'" class="{{child.class}}" style="{{child.style}}">
         <li ng-repeat="l in child.list track by $index"><span ng-repeat="s in l track by $index" class="{{s.class}}" style="{{s.style}}">{{s.text}}</span></li>
       </ul>
       <textarea ng-if="child.type == 'textarea'"
@@ -233,25 +234,15 @@
   </script>
 
   <script type="text/ng-template" id="blurbSection">
-    <div class="column-span">
+    <div class="column-span flex-1">
       <div class="text-center h2 font-bold capitalize">The <span class="h1 font-bold">{{playbook.trope}}</span></div>
 
       <p ng-repeat="b in playbook.blurbs track by $index" class="cover-sheet-paragraphs {{b.class}}" style="{{b.style}}">{{b.text}}</p>
     </div>
     
-    <div class="keep-together">
-      <div class="h5 font-bold">Campaign Setting</div>
-      <p class="cover-sheet-paragraphs"></p>
-    </div>
-
-    <div class="keep-together">
-      <div class="h5 font-bold">Something Else?</div>
-      <p class="cover-sheet-paragraphs"></p>
-    </div>
-
-    <div class="keep-together">
-      <div class="h5 font-bold">Player Agenda</div>
-      <p class="cover-sheet-paragraphs">Pretend to be your character. The story is advanced by making <span class="font-bold">moves</span>. The most basic rule for moves is <span class="font-bold font-italic">to do it, do it</span>, so don't hedge to cover your ass. It is fine for there to be negative consequences because only the most boring stories have everything go the protagonists' way.</p>
+    <div class="keep-together" ng-repeat="block in frontTextBlocks track by $index">
+      <div class="h5 font-bold">{{block.label}}</div>
+      <div ng-init="FEAT = block" ng-include="'playbookLongText'" class="cover-sheet-paragraphs {{block.class}}"></div>
     </div>
   </script>
 
@@ -324,11 +315,9 @@
 
       <div class="vr"><vr/></div>
 
-      <div class="flex-2 padding-left padding-right">
+      <div class="flex-2 padding-left padding-right flex-col">
 
-        <div class="auto-column-2">
-          <div class="margin-top margin-bottom" ng-include="'blurbSection'"></div>
-        </div>
+        <div class="margin-top margin-bottom flex-1 flex-col" ng-include="'blurbSection'"></div>
 
       </div>
 

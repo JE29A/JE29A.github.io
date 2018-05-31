@@ -23,6 +23,7 @@ var app = angular.module('myApp',[]).controller("myPlaybooks", function($scope) 
   $scope.harmBoxes = getHarmRules();
   $scope.foibles = getFoibles();
   $scope.playbooks = getPlaybookDefinitions();
+  $scope.frontTextBlocks = getFrontText();
   $scope.moves = {
     basic: getBasicMoves(),
     commerce: getMoves_Commerce()
