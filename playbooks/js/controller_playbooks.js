@@ -35,7 +35,7 @@ function getPlaybookDefinitions() {
   var ret = [];
 
   ret.push( getPBDef_brick() );
-
+  ret.push( getPBDef_engineer() );
   ret.push( getPBDef_psion_esper() );
   ret.push( getPBDef_psion_porter() );
   ret.push( getPBDef_psion_pusher() );

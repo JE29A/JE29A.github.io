@@ -11,6 +11,7 @@
   <script src="js/pb_moves.js"></script>
   <script src="js/pb_xp.js"></script>
   <script src="jsPlaybooks/pbDef_brick.js"></script>
+  <script src="jsPlaybooks/pbDef_engineer.js"></script>
   <script src="jsPlaybooks/pbDef_psion_esper.js"></script>
   <script src="jsPlaybooks/pbDef_psion_porter.js"></script>
   <script src="jsPlaybooks/pbDef_psion_pusher.js"></script>
@@ -297,9 +298,10 @@
   -->
 
   <div ng-repeat="playbook in playbooks track by $index"
-       ng-init="uniqueInputModel.playbooks[playbook.trope2] = {name: '', trope: playbook.trope, foibles: ['', '', '']};">
+       ng-init="uniqueInputModel.playbooks[playbook.trope2] = {name: '', trope: playbook.trope, foibles: ['', '', '']};"
+       id="playbook-{{playbook.trope2}}">
 
-    <div class="page landscape flex-row">
+    <div class="page page-count landscape flex-row">
 
       <div class="flex-2 padding-left padding-right">
 
@@ -323,7 +325,7 @@
 
     </div>
 
-    <div class="page landscape page-count flex-row"
+    <div class="page landscape flex-row"
          pb-side="a"
          id="playbook-{{playbook.trope2}}">
 

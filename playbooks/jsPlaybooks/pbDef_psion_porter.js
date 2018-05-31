@@ -19,6 +19,12 @@ function getPBDef_psion_porter() {
     "Vacsuit"
   ];
 
+  var blurbs = [
+    {text: "Psions are the practiced psychics of known space, and they look like anyone else. People with power over time and space are called porters."},
+    {text: "Often confused with tekes, porters don't actually move things, they bend time and space around things. Porters are known to be able to pull and push items forward in time, teleporting from place, and sometimes even call future versions of themselves back in time temporarily."},
+    {class: "font-italic", text: "Warning: Some porter moves require you to know the history of a place."}
+  ];
+
   moves.push({
     label: "Apportation",
     symbolClass: "checked",
@@ -137,6 +143,7 @@ function getPBDef_psion_porter() {
   return {
     trope: trope,
     trope2: trope.toLowerCase().replace(/ /g, '_'),
+    blurbs: blurbs,
     names: names,
     looks: looks,
     gearInstructions: gearInstructions,

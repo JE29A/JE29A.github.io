@@ -19,6 +19,12 @@ function getPBDef_psion_shaper() {
     "Vacsuit"
   ];
 
+  var blurbs = [
+    {text: "Psions are the practiced psychics of known space, and they look like anyone else. The ones that can control their own bodies on a microscopic level are called shapers."},
+    {text: "Shapers are the only psions that focus their power more internally. They can go without food or water, heal quickly, bend their bio energy into a weapon, and even phase matter. As a result, they tend to attract less stigma than the other kinds."},
+    {class: "font-italic", text: "Shapers are the oddest of the psions because their power is focused internally. Their moves are powerful, but not entirely outside the range of what other characters can accomplish."}
+  ];
+
   moves.push({
     label: "Bio-mastery",
     symbolClass: "checked",
@@ -102,6 +108,7 @@ function getPBDef_psion_shaper() {
   return {
     trope: trope,
     trope2: trope.toLowerCase().replace(/ /g, '_'),
+    blurbs: blurbs,
     names: names,
     looks: looks,
     gearInstructions: gearInstructions,

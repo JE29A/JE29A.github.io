@@ -19,6 +19,12 @@ function getPBDef_psion_pusher() {
     "Vacsuit"
   ];
 
+  var blurbs = [
+    {text: "Psions are the practiced psychics of known space, and they look like anyone else. People with telepathy are called pushers because they can push messages or even actions into other people's minds."},
+    {text: "Pushers are the most disturbing of the psions. Shapers can adjust their own bodies, tekes can move things, and espers can dig into people's deepest secrets, but pushers can make other people do things."},
+    {class: "font-italic", text: "Pushers are spooky and really fun to play. Their moves are powerful, but not entirely outside the range of what other characters can accomplish."}
+  ];
+
   moves.push({
     label: "Telepathy",
     symbolClass: "checked",
@@ -138,6 +144,7 @@ function getPBDef_psion_pusher() {
   return {
     trope: trope,
     trope2: trope.toLowerCase().replace(/ /g, '_'),
+    blurbs: blurbs,
     names: names,
     looks: looks,
     gearInstructions: gearInstructions,

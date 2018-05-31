@@ -18,6 +18,12 @@ function getPBDef_psion_teke() {
     "Vacsuit"
   ];
 
+  var blurbs = [
+    {text: "Psions are the practiced psychics of known space, and they look like anyone else. People with telekinesis are called tekes ('teeks')."},
+    {text: "Not as unnerving as espers or pusher, tekes are not immune to stigma. At best they are asked to perform tricks: knock over an empty can, float a commlink, whatever. At worst they are viewed like a person with a weapon. Which is to be expected since many factions have trained tekes in their military or security services."},
+    {class: "font-italic", text: "Tekes are like psychic bricks, with a few different tricks. Warning: Like bricks, when things are going well, you might be juggling the contents of your pockets. So try to keep yourself involved and come up with "}
+  ];
+
   moves.push({
     label: "TK",
     symbolClass: "checked",
@@ -122,6 +128,7 @@ function getPBDef_psion_teke() {
   return {
     trope: trope,
     trope2: trope.toLowerCase().replace(/ /g, '_'),
+    blurbs: blurbs,
     names: names,
     looks: looks,
     gearInstructions: gearInstructions,

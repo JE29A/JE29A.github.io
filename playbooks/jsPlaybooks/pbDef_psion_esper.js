@@ -19,6 +19,12 @@ function getPBDef_psion_esper() {
     "Vacsuit"
   ];
 
+  var blurbs = [
+    {text: "Psions are the practiced psychics of known space, and they look like anyone else. People with Extra Sensory Perception are called espers, and 'extra' doesn't give what they perceive justice."},
+    {text: "Being an esper isn't a walk in the park. Mundies think their lives are loud? Try being open to the feelings, or even the thoughts, of everyone around you. So you have your own baggage and the impressions of everyone around you's baggage. On top of that, nearly every faction has strict regulations that apply to psions; ranging from mandatory conscription to total criminality. No one likes the idea of someone being able to snoop on their private thoughts."},
+    {class: "font-italic", text: "Espers are spooky. If you want to be in on everyone else's private business, play an esper. Their moves extend what other characters can do to add range or discretion. Warning: you are empath if not more, so expect to make people uncomfortable."}
+  ];
+
   moves.push({
     label: "ESP",
     symbolClass: "checked",
@@ -101,6 +107,7 @@ function getPBDef_psion_esper() {
   return {
     trope: trope,
     trope2: trope.toLowerCase().replace(/ /g, '_'),
+    blurbs: blurbs,
     names: names,
     looks: looks,
     gearInstructions: gearInstructions,
