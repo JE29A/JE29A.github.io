@@ -52,12 +52,14 @@
   width: 10.5in;
   height: 8.0in;
 }
+.increment-page-count {
+  counter-increment: pageNumber;
+}
 .page.page-count::before {
   position: absolute;
   top: 0px;
   right: 1px;
   text-align: right;
-  counter-increment: pageNumber;
   content: counter(pageNumber);
 }
 .control-width {

@@ -243,7 +243,7 @@
     
     <div class="keep-together" ng-repeat="block in frontTextBlocks track by $index">
       <div class="h5 font-bold">{{block.label}}</div>
-      <div ng-init="FEAT = block" ng-include="'playbookLongText'" class="cover-sheet-paragraphs {{block.class}}"></div>
+      <div ng-init="FEAT = block" ng-include="'playbookLongText'" class="cover-sheet-paragraphs {{block.class}}" style="{{block.style}}"></div>
     </div>
   </script>
 
@@ -299,7 +299,8 @@
 
   <div ng-repeat="playbook in playbooks track by $index"
        ng-init="uniqueInputModel.playbooks[playbook.trope2] = {name: '', trope: playbook.trope, foibles: ['', '', '']};"
-       id="playbook-{{playbook.trope2}}">
+       id="playbook-{{playbook.trope2}}"
+       class="increment-page-count">
 
     <div class="page page-count landscape flex-row">
 

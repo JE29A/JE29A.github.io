@@ -201,6 +201,7 @@ function getFrontText() {
   ret.push({
     label: "Campaign Questions",
     class: "auto-column-2",
+    //style: "width: 50%;",
     children: [
       {
         type: "ul",
