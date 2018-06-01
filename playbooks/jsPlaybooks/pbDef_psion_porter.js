@@ -56,34 +56,6 @@ function getPBDef_psion_porter() {
   });
 
   moves.push({
-    label: "Duplicate",
-    class: "",
-    children: [
-      {
-        type: "p",
-        list: [
-          {
-            text: "(Requires Apportation) When "
-          },{
-            class: "font-bold",
-            text: "you want to pull version of yourself from the future,"
-          },{
-            text: " roll+Smarts. On a hit, \"you\" show up for 20 seconds (max 2 moves performed). On a 10+, choose 2. On a 7-9, choose 1:"
-          }
-        ]
-      },{
-        type: "ul",
-        list: [
-          [{ text: "Your future self is inclined to help." }],
-          [{ text: "Your future self didn't need a reason to already be in the area." }],
-          [{ text: "Your future self planned for this moment and has a handy item." }],
-          [{ text: "Your future self stays long enough to do two extra moves." }]
-        ]
-      }
-    ]
-  });
-
-  moves.push({
     label: "Teleport",
     class: "",
     children: [
@@ -135,6 +107,34 @@ function getPBDef_psion_porter() {
           [{ text: "You go exactly as you intended. You have a +1 forward on your next " },
            { class: "font-bold", text: "act under pressure, threaten with vioelnce or battle move."}
           ]
+        ]
+      }
+    ]
+  });
+
+  moves.push({
+    label: "Duplicate",
+    class: "",
+    children: [
+      {
+        type: "p",
+        list: [
+          {
+            text: "(Requires Apportation) When "
+          },{
+            class: "font-bold",
+            text: "you want to pull version of yourself from the future,"
+          },{
+            text: " roll+Smarts. On a hit, \"you\" show up for 20 seconds (max 2 moves performed). On a 10+, choose 2. On a 7-9, choose 1:"
+          }
+        ]
+      },{
+        type: "ul",
+        list: [
+          [{ text: "Your future self is inclined to help." }],
+          [{ text: "Your future self didn't need a reason to already be in the area." }],
+          [{ text: "Your future self planned for this moment and has a handy item." }],
+          [{ text: "Your future self stays long enough to do two extra moves." }]
         ]
       }
     ]

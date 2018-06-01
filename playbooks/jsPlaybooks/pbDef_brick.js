@@ -31,6 +31,7 @@ function getPBDef_brick() {
   moves.push({
     label: "\"You And What Army?\"",
     class: "",
+    symbolClass: "checked",
     children: [
       {
         type: "p",

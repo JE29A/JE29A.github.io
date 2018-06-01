@@ -25,7 +25,45 @@ function getPBDef_innovator() {
     {class: "font-italic", text: "Innovators are the zany inventors. They can fix things, but they really shine when they are pushing the bounds of what is possible. Play a innovator if you want to be instrumental in specific circumstances. Warning: your workspace depends on resources, and lots of them, so make friends with everyone you can."}
   ];
 
-  /*
+  moves.push({
+    label: "Workshop",
+    symbolClass: "checked",
+    children: [
+      {
+        type: "ul",
+        text: "Choose which of the following your workspace includes. Choose 3:",
+        list: [
+          [{text: "Machining tools"}],
+          [{text: "Scrap pile"}],
+          [{text: "Controlled environment"}],
+          [{text: "Proving range"}],
+          [{text: "Material fabricator"}],
+          [{text: "Prototype from a previous job"}],
+          [{text: "Booby traps"}]
+        ]
+      },{
+        type: "ul",
+        text: "When you go into your workspace and dedicate yourself to making a thing, or to getting to the bottom of something, decide waht and tell the MC. The MC will tell you 1-4 of the following complications:",
+        list: [
+          [{text: "How long it will take to work out/through."}],
+          [{text: "First you'll have to get/build/fix/figure out ___."}],
+          [{text: "You're going to need ____ to help you with it."}],
+          [{text: "It's going to cost you a lot of barter."}],
+          [{text: "The best you'll be able to do is a weak or unreliable version."}],
+          [{text: "It's going to mean exposing yourself (plus colleagues) to serious danger."}],
+          [{text: "You're going to have to add _____ to your workplace first."}],
+          [{text: "It's going to take multiple tries."}],
+          [{text: "You're going to have to take ____ apart to do it."}]
+        ]
+      },{
+        type: "p",
+        list: [
+          {text: "The MC might connect them all with \"and,\" or might make it easier with an \"or.\" Once you've accomplished the necessaries, you can go ahead and accomplish the thing itself. The MC will stat it up, explain, or whatever it calls for."}
+        ]
+      }
+    ]
+  });
+
   moves.push({
     label: "Bonefeel",
     symbolClass: "",
@@ -39,7 +77,6 @@ function getPBDef_innovator() {
       }
     ]
   });
-  */
 
   moves.push({
     label: "Focused Intensity",
@@ -116,7 +153,7 @@ function getPBDef_innovator() {
     looks: looks,
     gearInstructions: gearInstructions,
     gear: gear,
-    statAdvice: "Charm is your main stat.",
+    statAdvice: "Smarts is your main stat.",
     moves: moves,
     moveCreation: [
       ""

@@ -12,6 +12,7 @@
   <script src="js/pb_xp.js"></script>
   <script src="jsPlaybooks/pbDef_brick.js"></script>
   <script src="jsPlaybooks/pbDef_innovator.js"></script>
+  <script src="jsPlaybooks/pbDef_medtech.js"></script>
   <script src="jsPlaybooks/pbDef_psion_esper.js"></script>
   <script src="jsPlaybooks/pbDef_psion_porter.js"></script>
   <script src="jsPlaybooks/pbDef_psion_pusher.js"></script>
@@ -136,7 +137,7 @@
   <script type="text/ng-template" id="playbookMoves">
     <div class="anchor">
       <span class="h4 float-left font-bold capitalize" style="margin-right: 6px;">{{playbook.trope}} Moves</span>
-      <span class="h7 text-justify inline-block" style="padding-top: 9px;">Choose 2 {{playbook.trope}} moves and 1 more from any playbook.</span>
+      <span class="h7 text-justify inline-block" style="padding-top: 9px;">Choose 1 additional {{playbook.trope}} move and 1 more from any playbook.</span>
     </div>
     <div class="auto-column-2">
       <div class="keep-together margin-top margin-bottom" ng-repeat="move in playbook.moves track by $index">
@@ -210,7 +211,7 @@
         <div class="float-left float-margins">
           <span class="h5 font-bold">Moves:</span>
         </div>
-        <p class="no-top character-creation-details">Choose 2 {{playbook.trope}} moves and 1 move from any playbook.</p>
+        <p class="no-top character-creation-details">Choose 1 additional {{playbook.trope}} move and 1 move from any playbook.</p>
       </div>
 
       <div class="keep-together">
