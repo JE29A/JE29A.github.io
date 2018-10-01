@@ -122,127 +122,163 @@ var coords = [
   {system: "Zyron", x: 19.21, y: 1.12, z: -30}
 ];
 
-$(document).ready(function() {
-  function unpackData(arr, key, condition) {
-    var ret = [], el, i, skip;
-    for(i = 0; i < arr.length; i++) {
-      el = arr[i];
-      skip = false;
-      if (condition) {
-        for(k in condition) {
-          if (el[k] != condition[k]) {
-            skip = true;
-            break;
-          }
+function unpackData(arr, key, condition) {
+  var ret = [], el, i, skip;
+  for(i = 0; i < arr.length; i++) {
+    el = arr[i];
+    skip = false;
+    if (condition) {
+      for(k in condition) {
+        if (el[k] != condition[k]) {
+          skip = true;
+          break;
         }
       }
-      if (!skip) {
-        ret.push( el[key] );
-      }
     }
-    return ret;
-  }
-  
-  function padNumber(str, len) {
-    while (str.length < len) {
-      str = '0'+ String(str);
+    if (!skip) {
+      ret.push( el[key] );
     }
-    return str;
   }
-  function generateHexColor(arr, condition) {
-    var ret = [], i, el;
-    var c, r, g, b, skip = false;
-    g = 22;
-    for(i = 0; i < arr.length; i++) {
-      skip = false;
-      el = arr[i];
-      if (condition) {
-        for(k in condition) {
-          if (el[k] != condition[k]) {
-            skip = true;
-            break;
-          }
+  return ret;
+}
+function padNumber(str, len) {
+  while (str.length < len) {
+    str = '0'+ String(str);
+  }
+  return str;
+}
+function generateHexColor(arr, condition) {
+  var ret = [], i, el;
+  var c, r, g, b, skip = false;
+  g = 22;
+  for(i = 0; i < arr.length; i++) {
+    skip = false;
+    el = arr[i];
+    if (condition) {
+      for(k in condition) {
+        if (el[k] != condition[k]) {
+          skip = true;
+          break;
         }
       }
-      if (!skip) {
-        r = parseInt((el.z + 50) * 2.35 + 20, 10);
-        b = 255 - r;
-        c = '#'+ padNumber( Number(r).toString(16), 2 )
-               + padNumber( Number(g).toString(16), 2 )
-               + padNumber( Number(b).toString(16), 2 );
-        ret.push(c);
-      }
     }
-    return ret;
+    if (!skip) {
+      r = parseInt((el.z + 50) * 2.35 + 20, 10);
+      b = 255 - r;
+      c = '#'+ padNumber( Number(r).toString(16), 2 )
+             + padNumber( Number(g).toString(16), 2 )
+             + padNumber( Number(b).toString(16), 2 );
+      ret.push(c);
+    }
   }
-
-  function calculateSize(arr, condition) {
-    var ret = [], r, i;
-    for(i = 0; i < arr.length; i++) {
-      skip = false;
-      el = arr[i];
-      if (condition) {
-        for(k in condition) {
-          if (el[k] != condition[k]) {
-            skip = true;
-            break;
-          }
+  return ret;
+}
+function calculateSize(arr, condition) {
+  var ret = [], r, i;
+  for(i = 0; i < arr.length; i++) {
+    skip = false;
+    el = arr[i];
+    if (condition) {
+      for(k in condition) {
+        if (el[k] != condition[k]) {
+          skip = true;
+          break;
         }
       }
-      if (!skip) {
-        r = (el.majorSystem ? 8 : 6)
-        ret.push( r );
-      }
     }
-    return ret;
+    if (!skip) {
+      r = (el.majorSystem ? 8 : 6)
+      ret.push( r );
+    }
   }
+  return ret;
+}
 
-  var condition = undefined;
-  var systems3d = {
-    type: 'scatter3d',
-    x: unpackData(coords, 'x', condition),
-    y: unpackData(coords, 'y', condition),
-    z: unpackData(coords, 'z', condition),
-    text: unpackData(coords, 'system', condition),
-    //hoverinfo: 'text+x+y+z',
-    mode: 'markers',
-    marker: {
-      symbol: 'circle',
-      color: generateHexColor(coords, condition),
-      size: calculateSize(coords, condition),
-      opacity: 0.5,
-      line: {
-        color: '#000',
-        width: 1
-      }
+function assignCoordsTo3dObject(obj, coords) {
+  obj.x = unpackData(coords, 'x');
+  obj.y = unpackData(coords, 'y');
+  obj.z = unpackData(coords, 'z');
+  return obj;
+}
+
+var condition = undefined;
+var systems3d = {
+  type: 'scatter3d',
+  mode: 'markers',
+  x: unpackData(coords, 'x', condition),
+  y: unpackData(coords, 'y', condition),
+  z: unpackData(coords, 'z', condition),
+  text: unpackData(coords, 'system', condition),
+  //hoverinfo: 'text+x+y+z',
+  marker: {
+    symbol: 'circle',
+    color: generateHexColor(coords, condition),
+    size: calculateSize(coords, condition),
+    opacity: 0.5,
+    line: {
+      color: '#000',
+      width: 1
     }
-  };
+  }
+};
 
-  var data = [ systems3d ];
-  var layout = {
-    dragmode: true,
-    width: 700,
-    height: 700,
-    margin: {
-      l: 0, r: 0, b: 0, t: 0
+var systemRoute = [];
+var systemRoute3d = {
+  type: 'scatter3d',
+  mode: 'lines',
+  opacity: 0.5,
+  line: {
+    width: 3,
+    color: 'rgb(55, 200, 80)'
+  }
+};
+
+var layout = {
+  dragmode: true,
+  width: 700,
+  height: 700,
+  margin: {
+    l: 0, r: 0, b: 0, t: 0
+  },
+  scene: {
+    xaxis: {
+      type: 'linear',
+      range: [-50, 50],
+      nticks: 11
     },
-    scene: {
-      xaxis: {
-        type: 'linear',
-        range: [-50, 50],
-        nticks: 11
-      },
-      yaxis: {
-        type: 'linear',
-        range: [-50, 50],
-        nticks: 11
-      },
-      zaxis: {
-        type: 'linear',
-        range: [-50, 50],
-        nticks: 11
+    yaxis: {
+      type: 'linear',
+      range: [-50, 50],
+      nticks: 11
+    },
+    zaxis: {
+      type: 'linear',
+      range: [-50, 50],
+      nticks: 11
+    }
+  }
+};
+
+$(document).ready(function() {
+  var data = [ systems3d ];
+  Plotly.newPlot('map-holder', data, layout);
+  
+  var myMapHolder = document.getElementById('map-holder');
+  /*
+  myMapHolder.on('plotly_click', function(data) {
+    var i, newLine;
+    if (data.points.length > 0) {
+        for(i = 0; i < data.points.length; i++) {
+          systemRoute.push({
+            x: data.points[0].x,
+            y: data.points[0].y,
+            z: data.points[0].z
+          });
+          systemRoute3d = assignCoordsTo3dObject(systemRoute3d, systemRoute);
+          
+          Plotly.update('map-holder', [systems3d], layout);
       }
     }
-  };
-  Plotly.newPlot('map-holder', data, layout);
+  });
+  */
 });
