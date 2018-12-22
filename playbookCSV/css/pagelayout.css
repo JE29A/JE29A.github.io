@@ -1,0 +1,76 @@
+@media print {
+  @page {
+    orientation: landscape;
+    margin: 0.20in;
+  }
+  body {
+    margin: 0px !important;
+  }
+  .page {
+    page-break-inside: avoid;
+    page-break-after: always;
+    margin: 0px !important;
+    overflow: hidden;
+    border-width: 0px !important;
+  }
+  input, textarea {
+    background: white !important;
+  }
+  a {
+    color: black;
+    text-decoration: inherit;
+  }
+  .do-not-print {
+    display: none !important;
+  }
+}
+@media screen {
+  body {
+    background: #DDD;
+  }
+  .print-only {
+    display: none !important;
+  }
+}
+
+.page {
+  padding: 0cm;
+  background: white;
+  border: 0px solid black;
+  margin-top: 0.2cm;
+  margin-bottom: 0.2cm;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.page,
+.page.portrait {
+  overflow: hidden;
+  width: 8.0in;
+  height: 10.5in;
+}
+.page.landscape {
+  width: 10.5in;
+  height: 8.0in;
+}
+.increment-page-count {
+  counter-increment: pageNumber;
+}
+.page.page-count::before {
+  position: absolute;
+  top: 0px;
+  right: 1px;
+  text-align: right;
+  content: counter(pageNumber);
+}
+.control-width {
+  width: 10.5in;
+  max-height: 4in;
+  min-height: 1in;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1px;
+  overflow: auto;
+  // column-count: 3;
+  background: #EEE;
+}
