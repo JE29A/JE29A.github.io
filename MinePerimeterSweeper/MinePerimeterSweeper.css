@@ -7,7 +7,7 @@ th {
 }
 
 th, td {
-	padding: 5px;
+	padding: 2px;
 	min-height: 25px;
 	min-width: 25px;
 }
@@ -22,9 +22,10 @@ td {
 	cursor: pointer;
 }
 
-td[row] {
+th > div, td > div {
 	width: 50px;
 	height: 50px;
+	background: none;
 }
 
 td.active {

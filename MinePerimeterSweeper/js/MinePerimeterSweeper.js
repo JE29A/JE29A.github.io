@@ -38,12 +38,12 @@ class MinePerimeterSweeper {
 		
 		tds.push('<th></th>');
 		for (c = 0; c < this.table_columns; c++) {
-			tds.push('<th column="'+ c +'"></th>');
+			tds.push('<th column="'+ c +'"><div></div></th>');
 		}
 		trs.push('<tr>\n' + tds.join('\n') +'</tr>');
 		for (r = 0; r < this.table_rows; r++) {
 			rows = [];
-			tds = ['<th row="'+ r +'">'];
+			tds = ['<th row="'+ r +'"><div></div></th>'];
 			mode = 0;
 			for (c = 0; c < this.table_columns; c++) {
 				if (this.toggleMarking()) {
@@ -51,7 +51,7 @@ class MinePerimeterSweeper {
 				}
 				v = (mode % 2) ? 1 : 0;
 				rows.push(v);
-				tds.push('<td row="'+ r +'" column="'+ c +'" onclick="My_Game.testCell($(this))" value="'+ v +'">' + '</td>');
+				tds.push('<td row="'+ r +'" column="'+ c +'" onclick="My_Game.testCell($(this))" value="'+ v +'"><div></div></td>');
 			}
 			trs.push('<tr>\n'+ tds.join("\n") +'</tr>\n');
 			this.map.push(rows);
@@ -86,7 +86,7 @@ class MinePerimeterSweeper {
 			} else if (counts.length == 0) {
 				counts = [0];
 			}
-			$('th[row="'+ r +'"]').text(counts.join(', '));
+			$('th[row="'+ r +'"] > div').text(counts.join(', '));
 		}
 		// top edge
 		for (c = 0; c < this.table_columns; c++) {
@@ -109,7 +109,7 @@ class MinePerimeterSweeper {
 			} else if (counts.length == 0) {
 				counts = [0];
 			}
-			$('th[column="'+ c +'"]').text(counts.join(', '));
+			$('th[column="'+ c +'"] > div').text(counts.join(', '));
 		}
 	}
 	
