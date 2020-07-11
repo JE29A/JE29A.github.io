@@ -61,15 +61,6 @@ function star_onclick(g) {
     s = { system: mru.attr('system'), x: Number(mru.attr('x')), y: Number(mru.attr('y')), z: Number(mru.attr('z')) };
     delta = calcDistance(s, d);
 
-    /*
-    newLine = $(document.createElementNS('http://www.w3.org/2000/svg', 'line')).attr({
-      x1: scaleX(s.x).toFixed(2),
-      y1: scaleY(s.y).toFixed(2),
-      x2: scaleX(d.x).toFixed(2),
-      y2: scaleY(d.y).toFixed(2)
-    });
-    $('#travel-path').prepend( newLine );
-    */
   }
   $('g.solar-system').each(function() {
     var s = {

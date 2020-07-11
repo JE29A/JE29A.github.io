@@ -47,84 +47,10 @@
       <div class="flex-row">
         <div class="flex-1"></div>
         <div id="map-holder">
-          <!--
-          <svg id="solar-system-map" style="background: black;">
-            <g class="master-translate">
-              <g class="axis">
-                <line x1="0" x2="0" y1="-270" y2="270"></line>
-                <g style="opacity: 0.3;">
-                  <g ng-repeat="n in getNumber(9) track by $index" ng-init="nS = (1 + n) * 30">
-                    <line class="tick long"
-                          x1="-240" x2="240" y1="{{0 - nS}}" y2="{{0 - nS}}"></line>
-                    <line class="tick long"
-                          x1="-240" x2="240" y1="{{0 + nS}}" y2="{{0 + nS}}"></line>
-                  </g>
-                  <g ng-repeat="n in getNumber(8) track by $index" ng-init="nS = (1 + n) * 30">
-                    <line class="tick"
-                          x1="{{0 - nS}}" x2="{{0 - nS}}" y1="-270" y2="270"></line>
-                    <line class="tick"
-                          x1="{{0 + nS}}" x2="{{0 + nS}}" y1="-270" y2="270"></line>
-                  </g>
-                </g>
-                <g ng-repeat="n in getNumber(9) track by $index" ng-init="nS = (1 + n) * 30">
-                  <line class="tick"
-                        x1="-5" x2="5" y1="{{0 - nS}}" y2="{{0 - nS}}"></line>
-                  <line class="tick"
-                        x1="-5" x2="5" y1="{{0 + nS}}" y2="{{0 + nS}}"></line>
-                </g>
-                <line x1="-240" x2="240" y1="0" y2="0"></line>
-                
-                <g ng-repeat="n in getNumber(8) track by $index" ng-init="nS = (1 + n) * 30">
-                  <line class="tick"
-                        x1="{{0 - nS}}" x2="{{0 - nS}}" y1="-5" y2="5"></line>
-                  <line class="tick"
-                        x1="{{0 + nS}}" x2="{{0 + nS}}" y1="-5" y2="5"></line>
-                </g>
-                
-              </g>
-              <g id="travel-path"></g>
-              <g class="solar-systems">
-                <g class="solar-system"
-                   ng-repeat="s in systems track by $index"
-                   style="transform: translate({{scaleX(s.x)}}px, {{scaleY(s.y)}}px);"
-                   system="{{s.system}}"
-                   x="{{s.x}}"
-                   y="{{s.y}}"
-                   z="{{s.z}}"
-                   onclick="star_onclick( $(this) );">
-                  <circle cx="0" cy="0" style="fill: {{colorZ(s.z)}};"></circle>
-                </g>
-              </g>
-            </g>
-          </svg>
-          -->
         </div>
         <div class="flex-1"></div>
       </div>
       <div class="flex-1"></div>
-    </div>
-    <!--
-    <div class="legend flex-col" style="background: white;">
-      <div>
-        <div style="text-align: center;"><button onclick="clearRoute();">Clear Route</button></div>
-        <table>
-          <thead>
-            <tr>
-              <th class="system-name">System</th>
-              <th class="system-coord x">X</th>
-              <th class="system-coord y">Y</th>
-              <th class="system-coord z">Z</th>
-              <th class="system-delta">D</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="flex-1">
-        <table>
-          <tbody id="system-click-target"></tbody>
-        </table>
-      </div>
-      -->
     </div>
   </div>
   

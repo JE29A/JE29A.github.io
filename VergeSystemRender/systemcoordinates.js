@@ -264,21 +264,4 @@ $(document).ready(function() {
   Plotly.newPlot('map-holder', data, layout);
   
   var myMapHolder = document.getElementById('map-holder');
-  /*
-  myMapHolder.on('plotly_click', function(data) {
-    var i, newLine;
-    if (data.points.length > 0) {
-        for(i = 0; i < data.points.length; i++) {
-          systemRoute.push({
-            x: data.points[0].x,
-            y: data.points[0].y,
-            z: data.points[0].z
-          });
-          systemRoute3d = assignCoordsTo3dObject(systemRoute3d, systemRoute);
-          
-          Plotly.update('map-holder', [systems3d], layout);
-      }
-    }
-  });
-  */
 });
