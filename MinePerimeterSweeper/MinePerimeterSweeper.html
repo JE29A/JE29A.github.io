@@ -1,0 +1,72 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Perimeter Mine Sweeper</title>
+  <link rel="stylesheet" href="MinePerimeterSweeper.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./js/MinePerimeterSweeper.js"></script>
+</head>
+
+<body>
+  <h1>Perimeter Mine Sweeper</h1>
+  
+  <div class="flex flex-row">
+	<div style="flex: 1;"></div>
+	<div>
+	  <table style="border: 1px black solid;">
+	    <tr>
+		  <th><button onclick="My_Game.initialize();">Rebuild Map</button></th>
+		  <th></th>
+		  <th>Rows: <input name="row_count" type="number" min="5" max="20" step="1" value="5" /></th>
+		  <th>Columns: <input name="column_count" type="number" min="5" max="20" step="1" value="5" /></th>
+		  <th>Threshold: <input name="threshold" type="number" min="0.3" max="1.0" step="0.05" value="0.7" /></th>
+		  <th><button onclick="UpdateRowsColumns();">Update</button></th>
+		</tr>
+	  </table>
+	</div>
+	<div style="flex: 1;"></div>
+  </div>
+  
+  <div class="flex flex-row">
+	<div style="flex: 1;"></div>
+	<div>
+	  <table id="play-field" style="border-spacing: 8px;">
+	  </table>
+	</div>
+	<div style="flex: 1;"></div>
+  </div>
+  
+  <div class="flex flex-row">
+	<div style="flex: 1;"></div>
+	<div>
+	  <div>
+	    <button onclick="My_Game.revealMap()">Reveal</button>
+	  </div>
+
+	</div>
+	<div style="flex: 1;"></div>
+  </div>
+  
+  <hr/>
+  
+  <h2>How to Play</h3>
+  
+  <div class="flex flex-row">
+    <div style="flex: 1;"></div>
+	<div>
+	  <ul>
+	    <li>The numbers along the top and side indicate the length of continous safe squares.</li>
+		<li>There maybe 0 or more unsafe squares before or after the listed groups</li>
+		<li>If more than one number is listed, it means there is at least 1 unsafe square between groups.</li>
+		<li>Clicking a square marks it yellow, clicking it a second time removes the color.</li>
+		<li>Click "Reveal" below the map to show the answer and see how you did.</li>
+		<li>Here is a revealed sample map:<br/><img src="./SampleMap.png" /></li>
+	  </ul>
+	  
+	</div>
+	<div style="flex: 1;"></div>
+  </div>
+  
+</body>
+
+</html>
