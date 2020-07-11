@@ -26,7 +26,7 @@ class MinePerimeterSweeper {
 		this.table_columns = this.boundValue(columns, 5, 20);
 	}
 	setThresholdValue(threshold_value) {
-		this.threshold_value = this.boundValue(threshold_value, 0.5, 1.0);
+		this.threshold_value = this.boundValue(threshold_value, 0.15, 0.95);
 	}
 
 	makeMap() {
@@ -115,7 +115,7 @@ class MinePerimeterSweeper {
 	
 	toggleMarking() {
 		var r = Math.random();
-		return r >= this.threshold_value;
+		return r < this.threshold_value;
 	}
 	
 	testCell(cell) {
@@ -126,7 +126,7 @@ class MinePerimeterSweeper {
 	}
 	
 	revealMap() {
-		$('td[value]').addClass('reveal');
+		$('td[value]').toggleClass('reveal');
 	}
 }
 
@@ -140,8 +140,9 @@ function UpdateRowsColumns() {
 	My_Game.initialize();
 }
 
-My_Game = new MinePerimeterSweeper(5, 5, 0.7);
+My_Game = new MinePerimeterSweeper(5, 5, 0.4);
 
 $(document).ready(function() {
 	My_Game.initialize();
+	UpdateRowsColumns();
 });

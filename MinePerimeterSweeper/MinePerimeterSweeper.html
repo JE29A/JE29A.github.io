@@ -19,7 +19,7 @@
 		  <th></th>
 		  <th>Rows: <input name="row_count" type="number" min="5" max="20" step="1" value="5" /></th>
 		  <th>Columns: <input name="column_count" type="number" min="5" max="20" step="1" value="5" /></th>
-		  <th>Threshold: <input name="threshold" type="number" min="0.3" max="1.0" step="0.05" value="0.7" /></th>
+		  <th>Threshold: <input name="threshold" type="number" min="0.15" max="0.95" step="0.05" value="0.4" /></th>
 		  <th><button onclick="UpdateRowsColumns();">Update</button></th>
 		</tr>
 	  </table>
@@ -61,6 +61,13 @@
 		<li>Clicking a square marks it yellow, clicking it a second time removes the color.</li>
 		<li>Click "Reveal" below the map to show the answer and see how you did.</li>
 		<li>Here is a revealed sample map:<br/><img src="./SampleMap.png" /></li>
+		<li>Customizing the map:
+		  <ul>
+		    <li>Rows and Columns control the number of each (5 to 20).</li>
+			<li>Threshold determines the likelihood of switching from "safe" to "unsafe" and back.<br/>
+			Higher is more likely.</li>
+		  </ul>
+		</li>
 	  </ul>
 	  
 	</div>
